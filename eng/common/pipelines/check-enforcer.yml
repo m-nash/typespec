@@ -4,3 +4,4 @@ pr: none
 steps:
   - pwsh: |
       Write-Host "This is a check-enforcer pipeline."
+      Write-Host "More stuff."
