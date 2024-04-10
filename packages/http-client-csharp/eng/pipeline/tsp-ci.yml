@@ -1,0 +1,10 @@
+trigger: none
+pr: none
+
+pool:
+  name: azsdk-pool-mms-ubuntu-2204-general
+  vmImage: ubuntu-22.04
+
+steps:
+  - pwsh: |
+      Write-Host "This is the tsp-ci."
