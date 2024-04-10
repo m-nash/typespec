@@ -1,7 +1,11 @@
 parameters:
-  - name: StageCondidion
+  - name: Condition
     type: string
     default: true
+parameters:
+  - name: Dependencies
+    type: object
+    default: []
 
 stages:
   - template: /eng/emitters/pipelines/templates/stages/emitter-stages.yml
@@ -16,4 +20,5 @@ stages:
           file: typespec-http-client-csharp-*.tgz
           type: npm
       UnitTestArgs: -UnitTests
-      StageCondidion: ${{ parameters.StageCondidion }}
+      Condition: ${{ parameters.StageCondidion }}
+      DependsOn: ${{ parameters.DependsOn }}

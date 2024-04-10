@@ -49,9 +49,13 @@ parameters:
   - name: PackagePath
     type: string
 
-  - name: StageCondition
+  - name: Condition
     type: string
     default: true
+
+  - name: DependsOn
+    type: object
+    default: []
 
 stages:
   # Build stage
@@ -62,7 +66,8 @@ stages:
   #   overrides.json: Contains npm package version overrides for the emitter and generator
   #   packages/: Contains the packages to publish
   - stage: Build
-    condition: ${{ parameters.StageCondition }}
+    condition: and(succeeded(), ${{ parameters.Condition }})
+    dependsOn: ${{ parameters.DependsOn }}
     variables:
       selfRepositoryPath: $(Build.SourcesDirectory)
     jobs:
@@ -115,8 +120,9 @@ stages:
   #                              be placed in the `/eng` folder of the sdk repository.
   - ${{ if ne(parameters.Publish, 'none') }}:
       - stage: Publish
-        condition: and(succeeding(), ${{ parameters.StageCondition }})
+        condition: and(succeeded(), ${{ parameters.Condition }})
         dependsOn:
+          - ${{ parameters.DependsOn }}
           - Build
           - ${{ if and(parameters.PublishDependsOnTest, ne(length(parameters.TestMatrix), 0)) }}:
               - Test
@@ -170,8 +176,10 @@ stages:
   # The contents of the artifact `build_artifacts` are available under the path `$(buildArtifactsPath)`.
   - ${{ if or(parameters.UnitTestArgs, ne(length(parameters.TestMatrix), 0)) }}:
       - stage: Test
-        condition: and(succeeding(), ${{ parameters.StageCondition }})
-        dependsOn: Build
+        condition: and(succeeded(), ${{ parameters.Condition }})
+        dependsOn:
+          - ${{ parameters.DependsOn }}
+          - Build
         variables:
           selfRepositoryPath: $(Build.SourcesDirectory)
           buildArtifactsPath: $(Pipeline.Workspace)/build_artifacts
