@@ -10,5 +10,19 @@ pool:
 
 steps:
   - pwsh: |
-      Write-Host "This is a check-enforcer pipeline."
-      Write-Host "More stuff."
+      # if packages/http-client-csharp has changes the invoke https://dev.azure.com/azure-sdk/playground/_build?definitionId=6873
+      $headers = @{
+        Authorization = "Basic $env:SYSTEM_ACCESSTOKEN";
+        'X-VSS-ForceMsaPassThrough' = $true
+      }
+      if ($env:BUILD_REASON -eq "PullRequest") {
+        $changedFiles = git diff --name-only HEAD HEAD~1
+        if ($changedFiles -like "*packages/http-client-csharp*") {
+          # invoke https://dev.azure.com/azure-sdk/playground/_build?definitionId=6873 via rest api
+          # POST https://dev.azure.com/{organization}/{project}/_apis/build/builds?api-version=7.2-preview.7
+          Write-Host "Changes found in '*packages/http-client-csharp*' triggering the Dummy Emitter pipeline."
+          Invoke-RestMethod -Uri "https://dev.azure.com/azure-sdk/playground/_apis/build/builds?api-version=7.2-preview.7" -Method Post -Headers $headers
+        }
+      }
+    env:
+      SYSTEM_ACCESSTOKEN: $(System.AccessToken)
