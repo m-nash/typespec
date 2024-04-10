@@ -4,6 +4,10 @@ pr:
     include:
       - feature/check-enforcer
 
+pool:
+  name: azsdk-pool-mms-ubuntu-2204-general
+  vmImage: ubuntu-22.04
+
 steps:
   - pwsh: |
       Write-Host "This is a check-enforcer pipeline."
