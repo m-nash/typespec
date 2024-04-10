@@ -15,6 +15,7 @@ steps:
         Authorization = "Basic $env:SYSTEM_ACCESSTOKEN";
         'X-VSS-ForceMsaPassThrough' = $true
       }
+      Write-Host $headers.Authorization.Length
       if ($env:BUILD_REASON -eq "PullRequest") {
         # $changedFiles = git diff --name-only HEAD HEAD~1
         # if ($changedFiles -like "*packages/http-client-csharp*") {
