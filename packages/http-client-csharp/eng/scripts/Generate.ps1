@@ -18,7 +18,7 @@ if ($null -eq $filter -or $filter -eq "Unbranded-TypeSpec") {
     $unbrandedTypespecTestProject = Join-Path $testProjectsLocalDir "Unbranded-TypeSpec"
     $unbrandedTypespecTestProject = $unbrandedTypespecTestProject
 
-    Invoke (Get-TspCommand "$unbrandedTypespecTestProject/Unbranded-TypeSpec.tsp" $unbrandedTypespecTestProject)
+    Invoke (Get-TspCommand "$unbrandedTypespecTestProject/Unbranded-TypeSpec.tsp" $unbrandedTypespecTestProject  $stubbed)
 
     # exit if the generation failed
     if ($LASTEXITCODE -ne 0) {

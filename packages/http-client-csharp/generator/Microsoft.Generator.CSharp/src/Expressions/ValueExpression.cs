@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.Generator.CSharp.Primitives;
 using Microsoft.Generator.CSharp.Snippets;
+using Microsoft.Generator.CSharp.Statements;
 
 namespace Microsoft.Generator.CSharp.Expressions
 {
@@ -117,6 +118,9 @@ namespace Microsoft.Generator.CSharp.Expressions
         public ValueExpression AndExpr(ValueExpression other) => new BinaryOperatorExpression("and", this, other);
 
         public ValueExpression NullConditional() => new NullConditionalExpression(this);
+
+        private MethodBodyStatement? _terminated;
+        public MethodBodyStatement Terminate() => _terminated ??= new ExpressionStatement(this);
 
         private string GetDebuggerDisplay()
         {
