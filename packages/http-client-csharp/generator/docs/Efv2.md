@@ -235,52 +235,52 @@ This solution allows us to still depend on the language specific tooling while s
 ```json
 
 {
-	"folders": [
-		{
-			"name": "src",
-			"files": [
-				{
-					"name": "Model.cs",
-                    "kind": "model",
-					"classes": [
-						{
-							"name": "Model",
-							"properties": [
-							],
-							"methods": [
-							]
-						}
-					]
-				},
-                {
-					"name": "Model.serialization.cs",
-                    "kind": "model-serialization",
-					"classes": [
-						{
-							"name": "Model",
-							"properties": [
-							],
-							"methods": [
-							]
-						}
-					]
-				},
-                {
-					"name": "Client.cs",
-                    "kind": "client",
-					"classes": [
-						{
-							"name": "Client",
-							"properties": [
-							],
-							"methods": [
-							]
-						}
-					]
-				}
-			]
-		}
-	]
+  "folders": [
+    {
+      "name": "src",
+      "files": [
+        {
+          "name": "Model.cs",
+          "kind": "model",
+          "classes": [
+            {
+              "name": "Model",
+              "properties": [
+              ],
+              "methods": [
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Model.serialization.cs",
+          "kind": "model-serialization",
+          "classes": [
+            {
+              "name": "Model",
+              "properties": [
+              ],
+              "methods": [
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Client.cs",
+          "kind": "client",
+          "classes": [
+            {
+              "name": "Client",
+              "properties": [
+              ],
+              "methods": [
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
 
 ```
