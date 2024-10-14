@@ -199,7 +199,7 @@ We will need to inspect the last GA contract in order to determine what to gener
 The main gap we have when considering the goals [here](https://loop.cloud.microsoft/p/eyJ1IjoiaHR0cHM6Ly9taWNyb3NvZnQuc2hhcmVwb2ludC5jb20vc2l0ZXMvNGI4Y2Q1NmItNmQ0MC00YWIzLWJlYTUtMTc0NGQ0ZDczY2RmP25hdj1jejBsTWtaemFYUmxjeVV5UmpSaU9HTmtOVFppTFRaa05EQXROR0ZpTXkxaVpXRTFMVEUzTkRSa05HUTNNMk5rWmlaa1BXSWxNakZ2Y1dWcE5VTmtVMm93VTBKb01VSnVMVkZRVGpKeFN6QllWbkJQYVdGR1VHaHpaMUJVYUVkU1RuUnZORE5qTTFKTE1VMDVVWEEwVDFaeFpsVjNiMlZwSm1ZOU1ERlZVVmRGV1ZCTlFVSlRTRmRRVFVKRFJGSkZNbE5TTTBGWVFWY3lRVFpDVlNaalBTVXlSaVpoUFV4dmIzQkJjSEFtY0QwbE5EQm1iSFZwWkhnbE1rWnNiMjl3TFhCaFoyVXRZMjl1ZEdGcGJtVnlKbmc5SlRkQ0pUSXlkeVV5TWlVelFTVXlNbFF3VWxSVlNIaDBZVmRPZVdJelRuWmFibEYxWXpKb2FHTnRWbmRpTW14MVpFTTFhbUl5TVRoWmFVWjJZMWRXY0U1VlRtdFZNbTkzVlRCS2IwMVZTblZNVmtaUlZHcEtlRk42UWxsV2JrSlFZVmRHUjFWSGFIcGFNVUpWWVVWa1UxUnVVblpPUkU1cVRURktURTFWTURWVldFRXdWREZhZUZwc1ZqTmlNbFp3WmtSQmVGWldSbGhTVm14UlZGVmFTVlF4WkVST1JYaFlWbXh2TVZGVmJFWldlbVJOVXpCMFQxSkZPVTlVZWtrbE0wUWxNaklsTWtNbE1qSnBKVEl5SlROQkpUSXlZV1UxWVRCbU9UTXRPRGhtTlMwMFpXVmhMV0ZpTkRrdE16bGtPV1ZrTkdRNE5UQmpKVEl5SlRkRSJ9?ct=1728577817115&&LOF=1) is that a customer who learns
 how to extend or compose their customizations in one language would not be able to directly apply those learnings to doing the same task in another language.  Ensuring that all emitters produce alloy components and utilize EFv2 to emit those into code files will allow us provide this consistency across languages.
 
-The main challenge for non javascript languages is we rely heavily on language specific tools and re-writing those tools would introduce a significant implementation and maintenance cost.
+The main challenge for non javascript languages is we rely heavily on language specific tools and re-writing those tools in javascript would introduce a significant implementation and maintenance cost.
 
 One solution to this would be to modify the existing out of proc generator to instead of emitting code files to disk write an alloy component representation to disk.  This could then be loaded back in by the emitter, used to construct all the alloy components in memory, and finally send that to EFv2 to write out the *.cs files.  Anyone composing or extending would be able to do so as if there was no out of proc step.
 
@@ -214,12 +214,13 @@ sequenceDiagram
     B->>C: createSdkContext(context)
     C->>B: SdkPackage
     Note right of B: Client centric typegraph
-    B->>B: codeModel.json
-    Note right of B: Serialize SdkPackage to disk
+    B->>B: Save codeModel.json to disk
+    Note right of B: Serialize SdkPackage typegraph
     B->>E: dotnet run mgc.dll
-    E->>E: Deserialize codeModel.json
-    E->>E: Convert input to dotnet centric representation
-    E->>E: alloy-components.json
+    E->>E: Deserialize codeModel.json to InputTypes
+    E->>E: Convert InputTypes to dotnet idiomatic OutputTypes
+    Note right of E: 85% of the logic to create the library is here
+    E->>E: Save alloy-components.json to disk
     Note right of E: Write an alloy representation to disk
     E->>B: success
     B->>B: Construct alloy components from file
