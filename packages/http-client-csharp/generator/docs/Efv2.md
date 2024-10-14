@@ -245,10 +245,8 @@ This solution allows us to still depend on the language specific tooling while s
 						{
 							"name": "Model",
 							"properties": [
-                                //...
 							],
 							"methods": [
-                                //...
 							]
 						}
 					]
@@ -260,10 +258,8 @@ This solution allows us to still depend on the language specific tooling while s
 						{
 							"name": "Model",
 							"properties": [
-                                //...
 							],
 							"methods": [
-                                //...
 							]
 						}
 					]
@@ -275,10 +271,8 @@ This solution allows us to still depend on the language specific tooling while s
 						{
 							"name": "Client",
 							"properties": [
-                                //...
 							],
 							"methods": [
-                                //...
 							]
 						}
 					]
