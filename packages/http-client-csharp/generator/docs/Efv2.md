@@ -221,7 +221,7 @@ sequenceDiagram
     E->>E: Convert InputTypes to dotnet idiomatic OutputTypes
     Note right of E: 85% of the logic to create the library is here
     E->>E: Save alloy-components.json to disk
-    Note right of E: Write an alloy representation to disk
+    Note right of E: Write an alloy representation of the OutputTypes
     E->>B: success
     B->>B: Construct alloy components from file
     B->>D: Emit alloy components
