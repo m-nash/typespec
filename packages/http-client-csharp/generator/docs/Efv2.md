@@ -197,7 +197,7 @@ We will need to inspect the last GA contract in order to determine what to gener
 # Solution to explore
 
 The main gap we have when considering the goals [here](https://loop.cloud.microsoft/p/eyJ1IjoiaHR0cHM6Ly9taWNyb3NvZnQuc2hhcmVwb2ludC5jb20vc2l0ZXMvNGI4Y2Q1NmItNmQ0MC00YWIzLWJlYTUtMTc0NGQ0ZDczY2RmP25hdj1jejBsTWtaemFYUmxjeVV5UmpSaU9HTmtOVFppTFRaa05EQXROR0ZpTXkxaVpXRTFMVEUzTkRSa05HUTNNMk5rWmlaa1BXSWxNakZ2Y1dWcE5VTmtVMm93VTBKb01VSnVMVkZRVGpKeFN6QllWbkJQYVdGR1VHaHpaMUJVYUVkU1RuUnZORE5qTTFKTE1VMDVVWEEwVDFaeFpsVjNiMlZwSm1ZOU1ERlZVVmRGV1ZCTlFVSlRTRmRRVFVKRFJGSkZNbE5TTTBGWVFWY3lRVFpDVlNaalBTVXlSaVpoUFV4dmIzQkJjSEFtY0QwbE5EQm1iSFZwWkhnbE1rWnNiMjl3TFhCaFoyVXRZMjl1ZEdGcGJtVnlKbmc5SlRkQ0pUSXlkeVV5TWlVelFTVXlNbFF3VWxSVlNIaDBZVmRPZVdJelRuWmFibEYxWXpKb2FHTnRWbmRpTW14MVpFTTFhbUl5TVRoWmFVWjJZMWRXY0U1VlRtdFZNbTkzVlRCS2IwMVZTblZNVmtaUlZHcEtlRk42UWxsV2JrSlFZVmRHUjFWSGFIcGFNVUpWWVVWa1UxUnVVblpPUkU1cVRURktURTFWTURWVldFRXdWREZhZUZwc1ZqTmlNbFp3WmtSQmVGWldSbGhTVm14UlZGVmFTVlF4WkVST1JYaFlWbXh2TVZGVmJFWldlbVJOVXpCMFQxSkZPVTlVZWtrbE0wUWxNaklsTWtNbE1qSnBKVEl5SlROQkpUSXlZV1UxWVRCbU9UTXRPRGhtTlMwMFpXVmhMV0ZpTkRrdE16bGtPV1ZrTkdRNE5UQmpKVEl5SlRkRSJ9?ct=1728577817115&&LOF=1) is that a customer who learns
-how to extend or compose their customizations in one language would not be able to directly apply those learnings to doing the same task in another language.  Ensuring that all emitters produce alloy components and utilize EFv2 to emit those into code files will allow us provide this consistency across languages.
+how to extend or compose their customizations in one language would not be able to directly apply those learnings to doing the same task in another language.  Ensuring that all emitters produce alloy components and utilize EFv2 to emit those into code files will allow us to provide this consistency across languages.
 
 The main challenge for non javascript languages is we rely heavily on language specific tools and re-writing those tools in javascript would introduce a significant implementation and maintenance cost.
 
@@ -228,4 +228,79 @@ sequenceDiagram
     D->>D: Write *.cs files to disk
     D->>B: success
     B->>A: success
+```
 
+This solution allows us to still depend on the language specific tooling while still accomplishing the goals of having a consistent story for all languages.  The format of the alloy-components.json file would look something like this.
+
+```json
+{
+	"folders": [
+		{
+			"name": "src",
+			"files": [
+				{
+					"name": "Model.cs",
+                    "kind": "model",
+					"classes": [
+						{
+							"name": "Model",
+							"properties": [
+                                ...
+							],
+							"methods": [
+                                ...
+							]
+						}
+					]
+				},
+                {
+					"name": "Model.serialization.cs",
+                    "kind": "model-serialization",
+					"classes": [
+						{
+							"name": "Model",
+							"properties": [
+                                ...
+							],
+							"methods": [
+                                ...
+							]
+						}
+					]
+				},
+                {
+					"name": "Client.cs",
+                    "kind": "client",
+					"classes": [
+						{
+							"name": "Client",
+							"properties": [
+                                ...
+							],
+							"methods": [
+                                ...
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
+```
+
+Each component would be represented by an object in the json structure which would make this easy to convert back into actual alloy components in the emitter like this.
+
+```js
+  return (
+    <ay.Output namePolicy={csNamePolicy}>
+      <cs.SourceDirectory directories={alloy.folders}>
+        <cs.File files={alloy.files}>
+          <cs.Model models={alloy.files.filter((m) => m.kind === "model")} />
+          <cs.ModelSerialization models={alloy.files.filter((m) => m.kind === "model-serialization")} />
+          <cs.Client models={alloy.files.filter((m) => m.kind === "model")} />
+        </cs.File>
+      </cs.SourceDirectory>
+    </ay.Output>
+  );
+```
