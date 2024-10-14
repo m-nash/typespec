@@ -233,6 +233,7 @@ sequenceDiagram
 This solution allows us to still depend on the language specific tooling while still accomplishing the goals of having a consistent story for all languages.  The format of the alloy-components.json file would look something like this.
 
 ```json
+
 {
 	"folders": [
 		{
@@ -281,11 +282,13 @@ This solution allows us to still depend on the language specific tooling while s
 		}
 	]
 }
+
 ```
 
 Each component would be represented by an object in the json structure which would make this easy to convert back into actual alloy components in the emitter like this.
 
 ```js
+
   return (
     <ay.Output namePolicy={csNamePolicy}>
       <cs.SourceDirectory directories={alloy.folders}>
@@ -297,4 +300,5 @@ Each component would be represented by an object in the json structure which wou
       </cs.SourceDirectory>
     </ay.Output>
   );
+
 ```
