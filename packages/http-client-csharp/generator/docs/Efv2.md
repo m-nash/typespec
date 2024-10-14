@@ -227,4 +227,5 @@ sequenceDiagram
     B->>D: Emit alloy components
     D->>D: Write *.cs files to disk
     D->>B: success
+    B->>A: success
 
