@@ -235,46 +235,34 @@ This solution allows us to still depend on the language specific tooling while s
 ```json
 
 {
-  "folders": [
-    {
+  "directories": [ {
       "name": "src",
-      "files": [
-        {
-          "name": "Model.cs",
+      "types": [ {
+          "fileName": "Model.cs",
           "kind": "model",
-          "classes": [
-            {
-              "name": "Model",
-              "properties": [
-              ],
-              "methods": [
-              ]
+          "name": "Model",
+          "autoProperties": [ {
+              "name": "X",
+              "type": "string",
+              "hasSet": true
             }
-          ]
-        },
-        {
-          "name": "Model.serialization.cs",
-          "kind": "model-serialization",
-          "classes": [
-            {
-              "name": "Model",
-              "properties": [
-              ],
-              "methods": [
-              ]
-            }
-          ]
+          ],
         },
         {
           "name": "Client.cs",
           "kind": "client",
-          "classes": [
-            {
-              "name": "Client",
-              "properties": [
-              ],
-              "methods": [
-              ]
+          "name": "Client",
+            "methods": [ {
+              "name": "DoSomething",
+              "signature": {
+                  "returnType": "ClientResult<Foo>",
+                  "parameters": [ {
+                    "name": "x",
+                    "type": "int"
+                  }
+                ],
+              },
+              "body": "var request = CreateRequest(x);\nreturn request.Send();"
             }
           ]
         }
@@ -291,14 +279,106 @@ Each component would be represented by an object in the json structure which wou
 
   return (
     <ay.Output namePolicy={csNamePolicy}>
-      <cs.SourceDirectory directories={alloy.folders}>
-        <cs.File files={alloy.files}>
-          <cs.Model models={alloy.files.filter((m) => m.kind === "model")} />
-          <cs.ModelSerialization models={alloy.files.filter((m) => m.kind === "model-serialization")} />
-          <cs.Client models={alloy.files.filter((m) => m.kind === "model")} />
-        </cs.File>
-      </cs.SourceDirectory>
+      <cs.Directory directories={alloy.folders}>
+        <cs.Type type={alloy.types}/>
+        <cs.Enum enum={alloy.enums}/>
+      </cs.Directory>
     </ay.Output>
   );
+
+```
+
+## Customization using only alloy
+
+One of the goals with this proposal is someone should be able to extend our emitter via js / alloy only.  To demonstrate how this could work we will take the scenario of someone wanting to wrap each service method with some tracing code.
+
+TODO: Fill in example
+
+## Proposed alloy components
+
+The design of the alloy components has two main considerations.
+
+1. We need the components to be granular enough such that the extension points for customers are reasonable.  If we have a component which is an entire class a customer who wanted to customize the xml docs for a method would need to write a parser to find the method in the string, find the xml docs above the method and then insert their comments inline.  If instead we have a method sub component in the class and a doc comments component for the method they could directly find the doc comment component and modify its contents.
+2. We need some degree of consistency across languages in order to realize the goal of learning how to customize in one language does not require relearning if you want to do the same thing in another language.  If one language had a method component with no sub components and another language had a method signature subcomponent and a method body subcomponent this would miss the mark on the stated goal.
+
+The following is a proposed breakdown of what the components would look like for csharp.  This isn't exhaustive but a representation of the direction.
+
+```xml
+
+<Directory name: string>
+    <Directory/>
+    <Type name: string, isStruct: bool, fileName: string>
+        <Field name: string, type: string/>
+        <AutoProperty name: string, type: string, hasSet: bool, hasInit: bool />
+        <Property name: string, type: string>
+            <Attribute type: string>
+                <Initializer param: string, value: string>
+            </Attribute>
+            <Get>
+                <Body content: string/>
+                <Expression content: string/>
+            </Get>
+            <Set>
+                <Body content: string/>
+                <Expression content: string/>
+            </Set>
+            <Docs>
+                <Summary content: string/>
+                <Parameter paramName: string, content: string/>
+                <Remarks content: string/>
+                <Returns content: string/>
+                <Throws exceptionType: string, content: string/>
+            </Docs>
+        </Property>
+        <Method name: string>
+            <Attribute type: string>
+                <Initializer param: string, value: string>
+            </Attribute>
+            <MethodSignature returnType: string>
+                <Parameter name: string, type: string/>
+                <WhereClause/>
+                <BaseInitializer param: string, value: string/>
+            </Signature>
+            <Body content: string/>
+            <Expression content: string/>
+            <Docs>
+                <Summary content: string/>
+                <Parameter paramName: string, content: string/>
+                <Remarks content: string/>
+                <Returns content: string/>
+                <Throws exceptionType: string, content: string/>
+            </Docs>
+        </Method>
+        <Constructor>
+            <Attribute type: string>
+                <Initializer param: string, value: string>
+            </Attribute>
+            <CtorSignature>
+                <Parameter name: string, type: string/>
+                <WhereClause/>
+                <BaseInitializer param: string, value: string/>
+            </CtorSignature>
+            <Body content: string/>
+            <Expression content: string/>
+            <Docs>
+                <Summary content: string/>
+                <Parameter paramName: string, content: string/>
+                <Remarks content: string/>
+                <Returns content: string/>
+                <Throws exceptionType: string, content: string/>
+            </Docs>
+        </Constructor>
+        <Attribute type: string>
+            <Initializer param: string, value: string>
+        </Attribute>
+        <InterfaceImplementation type: string/>
+        <Class ... />
+        <Enum ... />
+    </Class>
+    <Enum>
+        <EnumMember name: string, value: string/>
+        <UnderlyingType type: string/>
+    </Enum>
+</Directory>
 
 ```
