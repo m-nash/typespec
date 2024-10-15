@@ -277,22 +277,19 @@ Each component would be represented by an object in the json structure which wou
 
 ```js
 
-  return (
-    <ay.Output namePolicy={csNamePolicy}>
-      <cs.Directory directories={alloy.folders}>
-        <cs.Type type={alloy.types}/>
-        <cs.Enum enum={alloy.enums}/>
-      </cs.Directory>
-    </ay.Output>
-  );
+const alloyComponents = getComponentsFromJson();
+const types = alloyComponents.types.map(t => <cs.Type type={t} />);
+const enums = alloyComponents.enums.map(e => <cs.Enum enum={e} />);
+return (
+  <ay.Output namePolicy={csNamePolicy}>
+    <cs.Directory directories={alloy.folders}>
+      {types},
+      {enums}
+    </cs.Directory>
+  </ay.Output>
+);
 
 ```
-
-## Customization using only alloy
-
-One of the goals with this proposal is someone should be able to extend our emitter via js / alloy only.  To demonstrate how this could work we will take the scenario of someone wanting to wrap each service method with some tracing code.
-
-TODO: Fill in example
 
 ## Proposed alloy components
 
@@ -306,7 +303,7 @@ The following is a proposed breakdown of what the components would look like for
 ```xml
 
 <Directory name: string>
-    <Directory/>
+    <Directory ... />
     <Type name: string, isStruct: bool, fileName: string>
         <Field name: string, type: string/>
         <AutoProperty name: string, type: string, hasSet: bool, hasInit: bool />
@@ -382,3 +379,9 @@ The following is a proposed breakdown of what the components would look like for
 </Directory>
 
 ```
+
+## Customization using only alloy
+
+One of the goals with this proposal is someone should be able to extend our emitter via js / alloy only.  To demonstrate how this could work we will take the scenario of someone wanting to wrap each service method with some tracing code.
+
+TODO: Fill in example
