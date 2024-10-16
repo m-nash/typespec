@@ -347,6 +347,8 @@ The following is a proposed breakdown of what the components would look like for
 5. <a name="work5"></a>Replace capability to reflect over runtime dependencies of emitted libraries during generation and use the rich type information to inform the generation.
 6. <a name="work6"></a>Create dotnet alloy components
 7. <a name="work7"></a>Create the logic to write the alloy components into formatted code files using EFv2
+8. <a name="work8"></a>Replace roslyn reduce capability
+9. <a name="work9"></a>Replace roslyn format capability
 
 If we can split this work into a few different phases we can achieve many of the goals up front for a lot less work.
 
@@ -354,7 +356,9 @@ If we can split this work into a few different phases we can achieve many of the
 
 T-shirt Estimate XL
 
-In this phase we modify the existing out of proc generator to instead of emitting code files to disk write an alloy component representation to disk.  This could then be loaded back in by the emitter, used to construct all the alloy components in memory, and finally send that to EFv2 to write out the *.cs files.  Anyone composing or extending would be able to do so as if there was no out of proc step.  This phase would eliminate Gap [1](#gap1) and [2](#gap2) while only requiring us to do Work [6](#work6) and [7](#work7).
+In this phase we modify the existing out of proc generator to instead of emitting code files to disk write an alloy component representation to disk.  This could then be loaded back in by the emitter, used to construct all the alloy components in memory, and finally send that to EFv2 to write out the *.cs files.  Anyone composing or extending would be able to do so as if there was no out of proc step.  This phase would eliminate Gap [1](#gap1) and [2](#gap2) while only requiring us to do Work [6](#work6), [7](#work7), and [9](#work9).
+
+One caveat with 9 is that since alloy lets you drop strings of any format in any slot we can't know exactly what was dropped in and would fall back to garbage in garbage out for those sections of the code.
 
 ```mermaid
 sequenceDiagram
@@ -453,7 +457,7 @@ return (
 
 T-shirt Estimate XXXL
 
-In this phase the main goal would be to tackle Gap [3](#gap3).  This would require us to finish Work [2](#work2) and [5](#work5).  Once we have that work done we can run in the playground only using the javascript portion of the emitter.  Since using custom code in a playground scenario is not a big use case nor would it be common to want to pull in the latest contract as a backwards compatibility check we can safely skip these steps in that mode.  When running on a development machine however we would utilize these steps still depending on an out of proc step using Roslyn.
+In this phase the main goal would be to tackle Gap [3](#gap3).  This would require us to finish Work [2](#work2), [5](#work5), and [8](#work8).  Once we have that work done we can run in the playground only using the javascript portion of the emitter.  Since using custom code in a playground scenario is not a big use case nor would it be common to want to pull in the latest contract as a backwards compatibility check we can safely skip these steps in that mode.  When running on a development machine however we would utilize these steps still depending on an out of proc step using Roslyn.
 
 ```mermaid
 sequenceDiagram
