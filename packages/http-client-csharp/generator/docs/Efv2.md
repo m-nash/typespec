@@ -487,8 +487,12 @@ sequenceDiagram
     B->>A: success
 ```
 
-## Phase 3
+## Phase 3+
 
 T-shirt Estimate XXXXL
 
 If we make it this far and still find reasons to get to the north star we can start to look at how to replace Roslyn with alternative approaches.
+
+Replacing TCGC is another independent decision we can make depending on how that has evolved during phase 1 and phase 2.
+
+Given that all gaps should be covered after phase 2 it may not be worth going farther unless we identify additional gaps along the way.
