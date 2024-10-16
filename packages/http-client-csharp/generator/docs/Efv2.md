@@ -356,7 +356,7 @@ If we can split this work into a few different phases we can achieve many of the
 
 ## Phase 1
 
-T-shirt Estimate XL
+T-shirt Estimate XXL
 
 In this phase we modify the existing out of proc generator to instead of emitting code files to disk write an alloy component representation to disk.  This could then be loaded back in by the emitter, used to construct all the alloy components in memory, and finally send that to EFv2 to write out the *.cs files.  Anyone composing or extending would be able to do so as if there was no out of proc step.  This phase would eliminate Gap [1](#gap1) and [2](#gap2) while only requiring us to do Work [6](#work6), [7](#work7), and [9](#work9).
 
