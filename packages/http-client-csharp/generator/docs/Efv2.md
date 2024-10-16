@@ -9,6 +9,8 @@ All three of these views get combined using various logic to create the final pr
 
 # Scenarios
 
+Java has documented quite a few scenarios [here](https://gist.github.com/srnagar/c59e8053436fc604078c532e2e31209b) which I did not want to duplicate but I do list a few others that I think are interesting below.
+
 ## Spec Only
 
 This scenario will show a very simple spec only generation.
