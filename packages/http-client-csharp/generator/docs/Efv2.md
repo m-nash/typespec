@@ -196,12 +196,165 @@ We will need to inspect the last GA contract in order to determine what to gener
 
 # Solution to explore
 
-The main gap we have when considering the goals [here](https://loop.cloud.microsoft/p/eyJ1IjoiaHR0cHM6Ly9taWNyb3NvZnQuc2hhcmVwb2ludC5jb20vc2l0ZXMvNGI4Y2Q1NmItNmQ0MC00YWIzLWJlYTUtMTc0NGQ0ZDczY2RmP25hdj1jejBsTWtaemFYUmxjeVV5UmpSaU9HTmtOVFppTFRaa05EQXROR0ZpTXkxaVpXRTFMVEUzTkRSa05HUTNNMk5rWmlaa1BXSWxNakZ2Y1dWcE5VTmtVMm93VTBKb01VSnVMVkZRVGpKeFN6QllWbkJQYVdGR1VHaHpaMUJVYUVkU1RuUnZORE5qTTFKTE1VMDVVWEEwVDFaeFpsVjNiMlZwSm1ZOU1ERlZVVmRGV1ZCTlFVSlRTRmRRVFVKRFJGSkZNbE5TTTBGWVFWY3lRVFpDVlNaalBTVXlSaVpoUFV4dmIzQkJjSEFtY0QwbE5EQm1iSFZwWkhnbE1rWnNiMjl3TFhCaFoyVXRZMjl1ZEdGcGJtVnlKbmc5SlRkQ0pUSXlkeVV5TWlVelFTVXlNbFF3VWxSVlNIaDBZVmRPZVdJelRuWmFibEYxWXpKb2FHTnRWbmRpTW14MVpFTTFhbUl5TVRoWmFVWjJZMWRXY0U1VlRtdFZNbTkzVlRCS2IwMVZTblZNVmtaUlZHcEtlRk42UWxsV2JrSlFZVmRHUjFWSGFIcGFNVUpWWVVWa1UxUnVVblpPUkU1cVRURktURTFWTURWVldFRXdWREZhZUZwc1ZqTmlNbFp3WmtSQmVGWldSbGhTVm14UlZGVmFTVlF4WkVST1JYaFlWbXh2TVZGVmJFWldlbVJOVXpCMFQxSkZPVTlVZWtrbE0wUWxNaklsTWtNbE1qSnBKVEl5SlROQkpUSXlZV1UxWVRCbU9UTXRPRGhtTlMwMFpXVmhMV0ZpTkRrdE16bGtPV1ZrTkdRNE5UQmpKVEl5SlRkRSJ9?ct=1728577817115&&LOF=1) is that a customer who learns
-how to extend or compose their customizations in one language would not be able to directly apply those learnings to doing the same task in another language.  Ensuring that all emitters produce alloy components and utilize EFv2 to emit those into code files will allow us to provide this consistency across languages.
+There are a few gaps we have when considering the goals [here](https://loop.cloud.microsoft/p/eyJ1IjoiaHR0cHM6Ly9taWNyb3NvZnQuc2hhcmVwb2ludC5jb20vc2l0ZXMvNGI4Y2Q1NmItNmQ0MC00YWIzLWJlYTUtMTc0NGQ0ZDczY2RmP25hdj1jejBsTWtaemFYUmxjeVV5UmpSaU9HTmtOVFppTFRaa05EQXROR0ZpTXkxaVpXRTFMVEUzTkRSa05HUTNNMk5rWmlaa1BXSWxNakZ2Y1dWcE5VTmtVMm93VTBKb01VSnVMVkZRVGpKeFN6QllWbkJQYVdGR1VHaHpaMUJVYUVkU1RuUnZORE5qTTFKTE1VMDVVWEEwVDFaeFpsVjNiMlZwSm1ZOU1ERlZVVmRGV1ZCTlFVSlRTRmRRVFVKRFJGSkZNbE5TTTBGWVFWY3lRVFpDVlNaalBTVXlSaVpoUFV4dmIzQkJjSEFtY0QwbE5EQm1iSFZwWkhnbE1rWnNiMjl3TFhCaFoyVXRZMjl1ZEdGcGJtVnlKbmc5SlRkQ0pUSXlkeVV5TWlVelFTVXlNbFF3VWxSVlNIaDBZVmRPZVdJelRuWmFibEYxWXpKb2FHTnRWbmRpTW14MVpFTTFhbUl5TVRoWmFVWjJZMWRXY0U1VlRtdFZNbTkzVlRCS2IwMVZTblZNVmtaUlZHcEtlRk42UWxsV2JrSlFZVmRHUjFWSGFIcGFNVUpWWVVWa1UxUnVVblpPUkU1cVRURktURTFWTURWVldFRXdWREZhZUZwc1ZqTmlNbFp3WmtSQmVGWldSbGhTVm14UlZGVmFTVlF4WkVST1JYaFlWbXh2TVZGVmJFWldlbVJOVXpCMFQxSkZPVTlVZWtrbE0wUWxNaklsTWtNbE1qSnBKVEl5SlROQkpUSXlZV1UxWVRCbU9UTXRPRGhtTlMwMFpXVmhMV0ZpTkRrdE16bGtPV1ZrTkdRNE5UQmpKVEl5SlRkRSJ9?ct=1728577817115&&LOF=1).
 
-The main challenge for non javascript languages is we rely heavily on language specific tools and re-writing those tools in javascript would introduce a significant implementation and maintenance cost.
+<a name="gap1"></a>1. The first is that a customer who learns how to extend or compose their customizations in one language would not be able to directly apply those learnings to doing the same task in another language.  Ensuring that all emitters produce alloy components and utilize EFv2 to emit those into code files will allow us to provide this consistency across languages.
 
-One solution to this would be to modify the existing out of proc generator to instead of emitting code files to disk write an alloy component representation to disk.  This could then be loaded back in by the emitter, used to construct all the alloy components in memory, and finally send that to EFv2 to write out the *.cs files.  Anyone composing or extending would be able to do so as if there was no out of proc step.
+<a name="gap2"></a>2. Another gap is that we aren't creating or using EFv2 components that can be reused by the community to build 3p emitters.  This means the barrier to entry for starting your own dotnet emitter using EFv2 would be very high.  If we had a baseline set of components that could work with dotnet it would make it much easier for the community to use and contribute to.
+
+<a name="gap3"></a>3. Another gap is around currently we rely on out of proc calls to dotnet components in order to complete the generation.  This introduces challenges when we want to run the emitter fully in the web.  If the emitters were written completely in javascript this wouldn't be an issue.
+
+The main challenge for mitigating these gaps for non javascript languages is we rely heavily on language specific tools and re-writing those tools in javascript would introduce a significant implementation and maintenance cost.
+
+## North Star
+
+Lets first start with what would things look like if we eliminated all the gaps and what would be required to get there.
+
+### Design
+
+```mermaid
+sequenceDiagram
+    participant A as tsp
+    participant B as Emitter
+    participant C as EFv2
+    A->>B: onEmit(context)
+    B->>C: traverseTypeGraph(context)
+    C->>B: success
+    B->>B: Construct alloy components from typeGraph
+    B->>C: Emit alloy components
+    C->>C: Write *.cs files to disk
+    C->>B: success
+    B->>A: success
+```
+
+### Proposed alloy components
+
+The design of the alloy components has two main considerations.
+
+1. **Balance in granularity** We need the components to be granular enough such that the extension points for customers are reasonable.  If we have a component which is an entire class a customer who wanted to customize the xml docs for a method would need to write a parser to find the method in the string, find the xml docs above the method and then insert their comments inline.  If instead we have a method sub component in the class and a doc comments component for the method they could directly find the doc comment component and modify its contents.  At the same time we don't want to go all the way down to an assignment component or for loop component.
+2. **Cross language consistency** We need some degree of consistency across languages in order to realize the goal of learning how to customize in one language does not require relearning if you want to do the same thing in another language.  If one language had a method component with no sub components and another language had a method signature subcomponent and a method body subcomponent this would miss the mark on the stated goal.
+
+The following is a proposed breakdown of what the components would look like for csharp.  This isn't exhaustive but a representation of the direction.
+
+```xml
+
+<Directory name: string>
+    <Directory ... />
+    <Type name: string, isStruct: bool, fileName: string>
+        <Docs>
+            <Summary content: string/>
+            <Parameter paramName: string, content: string/>
+            <Remarks content: string/>
+            <Returns content: string/>
+            <Throws exceptionType: string, content: string/>
+        </Docs>
+        <Attribute type: string>
+        <Initializer param: string, value: string>
+        </Attribute>
+        <InterfaceImplementation type: string/>
+        <WhereClause clause: string/>
+        <Field name: string, type: string/>
+        <Constructor>
+            <Docs>
+                <Summary content: string/>
+                <Parameter paramName: string, content: string/>
+                <Remarks content: string/>
+                <Returns content: string/>
+                <Throws exceptionType: string, content: string/>
+            </Docs>
+            <Attribute type: string>
+                <Initializer param: string, value: string>
+            </Attribute>
+            <CtorSignature>
+                <Parameter name: string, type: string/>
+                <WhereClause clause: string/>
+                <BaseInitializer param: string, value: string/>
+            </CtorSignature>
+            <Body content: string/>
+            <Expression content: string/>
+        </Constructor>
+        <AutoProperty name: string, type: string, hasSet: bool, hasInit: bool>
+            <Docs>
+                <Summary content: string/>
+                <Parameter paramName: string, content: string/>
+                <Remarks content: string/>
+                <Returns content: string/>
+                <Throws exceptionType: string, content: string/>
+            </Docs>
+            <Attribute type: string>
+                <Initializer param: string, value: string>
+            </Attribute>
+        </AutoProperty>
+        <Property name: string, type: string>
+            <Docs>
+                <Summary content: string/>
+                <Parameter paramName: string, content: string/>
+                <Remarks content: string/>
+                <Returns content: string/>
+                <Throws exceptionType: string, content: string/>
+            </Docs>
+            <Attribute type: string>
+                <Initializer param: string, value: string>
+            </Attribute>
+            <Get>
+                <Body content: string/>
+                <Expression content: string/>
+            </Get>
+            <Set>
+                <Body content: string/>
+                <Expression content: string/>
+            </Set>
+        </Property>
+        <Method name: string>
+            <Docs>
+                <Summary content: string/>
+                <Parameter paramName: string, content: string/>
+                <Remarks content: string/>
+                <Returns content: string/>
+                <Throws exceptionType: string, content: string/>
+            </Docs>
+            <Attribute type: string>
+                <Initializer param: string, value: string>
+            </Attribute>
+            <MethodSignature returnType: string>
+                <Parameter name: string, type: string/>
+                <WhereClause clause: string/>
+            </Signature>
+            <Body content: string/>
+            <Expression content: string/>
+        </Method>
+        <Class ... />
+        <Enum ... />
+    </Class>
+    <Enum underlyingType: string, isExtensible: bool>
+        <Docs>
+            <Summary content: string/>
+            <Parameter paramName: string, content: string/>
+            <Remarks content: string/>
+            <Returns content: string/>
+            <Throws exceptionType: string, content: string/>
+        </Docs>
+        <EnumMember name: string, value: string/>
+    </Enum>
+</Directory>
+
+```
+
+### Work todo
+
+<a name="work1"></a>1. Convert TCGC createSdkContext into TypeKit helpers
+<a name="work2"></a>2. Rewrite logic of converting InputTypes into OutputTypes in javascript
+<a name="work3"></a>3. Replace roslyn capability to compare and merge custom code
+<a name="work4"></a>4. Replace roslyn capability to compare and update code based on last GA contract
+<a name="work5"></a>5. Replace capability to reflect over runtime dependencies of emitted libraries during generation and use the rich type information to inform the generation.
+<a name="work6"></a>6. Create dotnet alloy components
+<a name="work7"></a>7. Create the logic to write the alloy components in a formatted using EFv2
+
+If we can split this work into a few different phases we can achieve many of the goals up front for a lot less work.
+
+## Phase 1
+
+In this phase we modify the existing out of proc generator to instead of emitting code files to disk write an alloy component representation to disk.  This could then be loaded back in by the emitter, used to construct all the alloy components in memory, and finally send that to EFv2 to write out the *.cs files.  Anyone composing or extending would be able to do so as if there was no out of proc step.  This phase would eliminate Gap [1](#gap1) and [2](#gap2) while only requiring us to do Work [6](#work6) and [7](#work7).
 
 ```mermaid
 sequenceDiagram
@@ -220,7 +373,7 @@ sequenceDiagram
     E->>E: Deserialize codeModel.json to InputTypes
     E->>E: Convert InputTypes to dotnet idiomatic OutputTypes
     Note right of E: 85% of the logic to create the library is here
-    E->>E: Save alloy-components.json to disk
+    E->>E: Save alloy-metadata.json to disk
     Note right of E: Write an alloy representation of the OutputTypes
     E->>B: success
     B->>B: Construct alloy components from file
@@ -278,110 +431,52 @@ Each component would be represented by an object in the json structure which wou
 ```js
 
 const alloyComponents = getComponentsFromJson();
-const types = alloyComponents.types.map(t => <cs.Type type={t} />);
-const enums = alloyComponents.enums.map(e => <cs.Enum enum={e} />);
+
+const directories = alloyComponents.directories.map(d =>
+  const types = d.types.map(t => <cs.Type type={t} />);
+  const enums = d.enums.map(e => <cs.Enum enum={e} />);
+  return <cs.Directory directory={d}>
+    {types}
+    {enums}
+  </cs.Directory>
+);
+
 return (
   <ay.Output namePolicy={csNamePolicy}>
-    <cs.Directory directories={alloy.folders}>
-      {types},
-      {enums}
-    </cs.Directory>
+    {directories}
   </ay.Output>
 );
 
 ```
 
-## Proposed alloy components
+## Phase 2
 
-The design of the alloy components has two main considerations.
+In this phase the main goal would be to tackle Gap [3](#gap3).  This would require us to finish Work [2](#work2) and [5](#work5).  Once we have that work done we can run in the playground only using the javascript portion of the emitter.  Since using custom code in a playground scenario is not a big use case nor would it be common to want to pull in the latest contract as a backwards compatibility check we can safely skip these steps in that mode.  When running on a development machine however we would utilize these steps still depending on an out of proc step using Roslyn.
 
-1. We need the components to be granular enough such that the extension points for customers are reasonable.  If we have a component which is an entire class a customer who wanted to customize the xml docs for a method would need to write a parser to find the method in the string, find the xml docs above the method and then insert their comments inline.  If instead we have a method sub component in the class and a doc comments component for the method they could directly find the doc comment component and modify its contents.
-2. We need some degree of consistency across languages in order to realize the goal of learning how to customize in one language does not require relearning if you want to do the same thing in another language.  If one language had a method component with no sub components and another language had a method signature subcomponent and a method body subcomponent this would miss the mark on the stated goal.
-
-The following is a proposed breakdown of what the components would look like for csharp.  This isn't exhaustive but a representation of the direction.
-
-```xml
-
-<Directory name: string>
-    <Directory ... />
-    <Type name: string, isStruct: bool, fileName: string>
-        <Field name: string, type: string/>
-        <AutoProperty name: string, type: string, hasSet: bool, hasInit: bool />
-        <Property name: string, type: string>
-            <Attribute type: string>
-                <Initializer param: string, value: string>
-            </Attribute>
-            <Get>
-                <Body content: string/>
-                <Expression content: string/>
-            </Get>
-            <Set>
-                <Body content: string/>
-                <Expression content: string/>
-            </Set>
-            <Docs>
-                <Summary content: string/>
-                <Parameter paramName: string, content: string/>
-                <Remarks content: string/>
-                <Returns content: string/>
-                <Throws exceptionType: string, content: string/>
-            </Docs>
-        </Property>
-        <Method name: string>
-            <Attribute type: string>
-                <Initializer param: string, value: string>
-            </Attribute>
-            <MethodSignature returnType: string>
-                <Parameter name: string, type: string/>
-                <WhereClause/>
-                <BaseInitializer param: string, value: string/>
-            </Signature>
-            <Body content: string/>
-            <Expression content: string/>
-            <Docs>
-                <Summary content: string/>
-                <Parameter paramName: string, content: string/>
-                <Remarks content: string/>
-                <Returns content: string/>
-                <Throws exceptionType: string, content: string/>
-            </Docs>
-        </Method>
-        <Constructor>
-            <Attribute type: string>
-                <Initializer param: string, value: string>
-            </Attribute>
-            <CtorSignature>
-                <Parameter name: string, type: string/>
-                <WhereClause/>
-                <BaseInitializer param: string, value: string/>
-            </CtorSignature>
-            <Body content: string/>
-            <Expression content: string/>
-            <Docs>
-                <Summary content: string/>
-                <Parameter paramName: string, content: string/>
-                <Remarks content: string/>
-                <Returns content: string/>
-                <Throws exceptionType: string, content: string/>
-            </Docs>
-        </Constructor>
-        <Attribute type: string>
-            <Initializer param: string, value: string>
-        </Attribute>
-        <InterfaceImplementation type: string/>
-        <Class ... />
-        <Enum ... />
-    </Class>
-    <Enum>
-        <EnumMember name: string, value: string/>
-        <UnderlyingType type: string/>
-    </Enum>
-</Directory>
-
+```mermaid
+sequenceDiagram
+    participant A as tsp
+    participant B as Emitter
+    participant D as EFv2
+    participant E as Generator
+    A->>B: onEmit(context)
+    B->>D: traverseTypeGraph(context)
+    D->>B: success
+    B->>B: Construct alloy components from typeGraph
+    alt If not running in playground
+        B->>B: Save alloy-metadata.json to disk
+        Note right of B: Serialize alloy components
+        B->>E: dotnet run mgc.dll
+        E->>E: Deserialize alloy-metadata.json to OutputTypes
+        E->>E: Use Roslyn to update the OutputTypes
+        Note right of E: Apply custom code and last contract
+        E->>E: Save alloy-metadata.json to disk
+        Note right of E: Write an alloy representation of the OutputTypes
+        E->>B: success
+        B->>B: Construct alloy components from file
+    end
+    B->>D: Emit alloy components
+    D->>D: Write *.cs files to disk
+    D->>B: success
+    B->>A: success
 ```
-
-## Customization using only alloy
-
-One of the goals with this proposal is someone should be able to extend our emitter via js / alloy only.  To demonstrate how this could work we will take the scenario of someone wanting to wrap each service method with some tracing code.
-
-TODO: Fill in example
