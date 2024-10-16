@@ -220,7 +220,7 @@ sequenceDiagram
     C->>B: success
     B->>B: Construct alloy components from typeGraph
     B->>C: Emit alloy components
-    C->>C: Write *.cs files to disk
+    C->>C: Write *.cs files
     C->>B: success
     B->>A: success
 ```
@@ -371,18 +371,18 @@ sequenceDiagram
     B->>C: createSdkContext(context)
     C->>B: SdkPackage
     Note right of B: Client centric typegraph
-    B->>B: Save codeModel.json to disk
+    B->>B: Write codeModel.json
     Note right of B: Serialize SdkPackage typegraph
     B->>E: dotnet run mgc.dll
     E->>E: Deserialize codeModel.json to InputTypes
     E->>E: Convert InputTypes to dotnet idiomatic OutputTypes
     Note right of E: 85% of the logic to create the library is here
-    E->>E: Save alloy-metadata.json to disk
+    E->>E: Write alloy-metadata.json
     Note right of E: Write an alloy representation of the OutputTypes
     E->>B: success
-    B->>B: Construct alloy components from file
+    B->>B: Construct alloy components from alloy-metadata.json
     B->>D: Emit alloy components
-    D->>D: Write *.cs files to disk
+    D->>D: Write *.cs files
     D->>B: success
     B->>A: success
 ```
@@ -470,19 +470,19 @@ sequenceDiagram
     D->>B: success
     B->>B: Construct alloy components from typeGraph
     alt If not running in playground
-        B->>B: Save alloy-metadata.json to disk
+        B->>B: Write alloy-metadata.json
         Note right of B: Serialize alloy components
         B->>E: dotnet run mgc.dll
         E->>E: Deserialize alloy-metadata.json to OutputTypes
         E->>E: Use Roslyn to update the OutputTypes
         Note right of E: Apply custom code and last contract
-        E->>E: Save alloy-metadata.json to disk
+        E->>E: Write alloy-metadata.json
         Note right of E: Write an alloy representation of the OutputTypes
         E->>B: success
         B->>B: Construct alloy components from file
     end
     B->>D: Emit alloy components
-    D->>D: Write *.cs files to disk
+    D->>D: Write *.cs files
     D->>B: success
     B->>A: success
 ```
