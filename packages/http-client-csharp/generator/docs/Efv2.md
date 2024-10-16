@@ -229,8 +229,8 @@ sequenceDiagram
 
 The design of the alloy components has two main considerations.
 
-1. **Balance in granularity** We need the components to be granular enough such that the extension points for customers are reasonable.  If we have a component which is an entire class a customer who wanted to customize the xml docs for a method would need to write a parser to find the method in the string, find the xml docs above the method and then insert their comments inline.  If instead we have a method sub component in the class and a doc comments component for the method they could directly find the doc comment component and modify its contents.  At the same time we don't want to go all the way down to an assignment component or for loop component.
-2. **Cross language consistency** We need some degree of consistency across languages in order to realize the goal of learning how to customize in one language does not require relearning if you want to do the same thing in another language.  If one language had a method component with no sub components and another language had a method signature subcomponent and a method body subcomponent this would miss the mark on the stated goal.
+1. **Balance in granularity:** We need the components to be granular enough such that the extension points for customers are reasonable.  If we have a component which is an entire class a customer who wanted to customize the xml docs for a method would need to write a parser to find the method in the string, find the xml docs above the method and then insert their comments inline.  If instead we have a method sub component in the class and a doc comments component for the method they could directly find the doc comment component and modify its contents.  At the same time we don't want to go all the way down to an assignment component or for loop component.
+2. **Cross language consistency:** We need some degree of consistency across languages in order to realize the goal of learning how to customize in one language does not require relearning if you want to do the same thing in another language.  If one language had a method component with no sub components and another language had a method signature subcomponent and a method body subcomponent this would miss the mark on the stated goal.
 
 The following is a proposed breakdown of what the components would look like for csharp.  This isn't exhaustive but a representation of the direction.
 
@@ -346,11 +346,13 @@ The following is a proposed breakdown of what the components would look like for
 4. <a name="work4"></a>Replace roslyn capability to compare and update code based on last GA contract
 5. <a name="work5"></a>Replace capability to reflect over runtime dependencies of emitted libraries during generation and use the rich type information to inform the generation.
 6. <a name="work6"></a>Create dotnet alloy components
-7. <a name="work7"></a>Create the logic to write the alloy components in a formatted using EFv2
+7. <a name="work7"></a>Create the logic to write the alloy components into formatted code files using EFv2
 
 If we can split this work into a few different phases we can achieve many of the goals up front for a lot less work.
 
 ## Phase 1
+
+T-shirt Estimate XL
 
 In this phase we modify the existing out of proc generator to instead of emitting code files to disk write an alloy component representation to disk.  This could then be loaded back in by the emitter, used to construct all the alloy components in memory, and finally send that to EFv2 to write out the *.cs files.  Anyone composing or extending would be able to do so as if there was no out of proc step.  This phase would eliminate Gap [1](#gap1) and [2](#gap2) while only requiring us to do Work [6](#work6) and [7](#work7).
 
@@ -449,6 +451,8 @@ return (
 
 ## Phase 2
 
+T-shirt Estimate XXXL
+
 In this phase the main goal would be to tackle Gap [3](#gap3).  This would require us to finish Work [2](#work2) and [5](#work5).  Once we have that work done we can run in the playground only using the javascript portion of the emitter.  Since using custom code in a playground scenario is not a big use case nor would it be common to want to pull in the latest contract as a backwards compatibility check we can safely skip these steps in that mode.  When running on a development machine however we would utilize these steps still depending on an out of proc step using Roslyn.
 
 ```mermaid
@@ -478,3 +482,9 @@ sequenceDiagram
     D->>B: success
     B->>A: success
 ```
+
+## Phase 3
+
+T-shirt Estimate XXXXL
+
+If we make it this far and still find reasons to get to the north star we can start to look at how to replace Roslyn with alternative approaches.
