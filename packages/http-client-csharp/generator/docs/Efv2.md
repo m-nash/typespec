@@ -459,7 +459,7 @@ return (
 
 ## Phase 2
 
-T-shirt Estimate XXXL
+T-shirt Estimate XXXXL
 
 In this phase the main goal would be to tackle Gap [3](#gap3).  This would require us to finish Work [2](#work2), [5](#work5), and [8](#work8).  Once we have that work done we can run in the playground only using the javascript portion of the emitter.  Since using custom code in a playground scenario is not a big use case nor would it be common to want to pull in the latest contract as a backwards compatibility check we can safely skip these steps in that mode.  When running on a development machine however we would utilize these steps still depending on an out of proc step using Roslyn.
 
