@@ -210,7 +210,7 @@ The main challenge for mitigating these gaps for non javascript languages is we 
 
 ## North Star
 
-Lets first start with what would things look like if we eliminated all the gaps and what would be required to get there.
+Lets first start with what would things look like if we eliminated all the gaps and accomplished everyone's wish list and what would be required to get there.
 
 ### Design
 
