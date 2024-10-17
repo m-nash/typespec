@@ -202,9 +202,9 @@ There are a few gaps we have when considering the goals [here](https://loop.clou
 
 ## Gaps with current emitter
 
-1. <a name="gap1"></a>The first is that a customer who learns how to extend or compose their customizations in one language would not be able to directly apply those learnings to doing the same task in another language.  Ensuring that all emitters produce alloy components and utilize EFv2 to emit those into code files will allow us to provide this consistency across languages.
-2. <a name="gap2"></a>Another gap is that we aren't creating or using EFv2 components that can be reused by the community to build 3p emitters.  This means the barrier to entry for starting your own dotnet emitter using EFv2 would be very high.  If we had a baseline set of components that could work with dotnet it would make it much easier for the community to use and contribute to.
-3. <a name="gap3"></a>Another gap is around currently we rely on out of proc calls to dotnet components in order to complete the generation.  This introduces challenges when we want to run the emitter fully in the web.  If the emitters were written completely in javascript this wouldn't be an issue.
+1. <a name="gap1"></a>The first is that a customer who learns how to extend or compose their customizations in one language would not be able to directly apply those learnings to doing the same task in another language.  Ensuring that all emitters produce alloy components and utilize EFv2 to emit those into code files will allow us to provide this consistency across languages.  Our csharp emitter today is fully extensibility and composability but not in a conisistent way with other languages so I want to call out the gap here is around consistency not being extensible or composable at all.
+2. <a name="gap2"></a>Another gap is that we aren't creating or using EFv2 components that can be reused by the community to build 3p emitters.  This means the barrier to entry for starting your own csharp emitter using EFv2 would be very high.  If we had a baseline set of components that could work with csharp it would make it much easier for the community to use and contribute to.
+3. <a name="gap3"></a>Another gap is around currently we rely on out of proc calls to csharp components in order to complete the generation.  This introduces challenges when we want to run the emitter fully in the web.  If the emitters were written completely in javascript this wouldn't be an issue.
 
 The main challenge for mitigating these gaps for non javascript languages is we rely heavily on language specific tools and re-writing those tools in javascript would introduce a significant implementation and maintenance cost.
 
@@ -223,11 +223,24 @@ sequenceDiagram
     B->>C: traverseTypeGraph(context)
     C->>B: success
     B->>B: Construct alloy components from typeGraph
-    B->>C: Emit alloy components
+    B->>C: Render alloy components
     C->>C: Write *.cs files
     C->>B: success
     B->>A: success
 ```
+### Work todo
+
+1. <a name="work1"></a>Convert or modify TCGC createSdkContext into TypeKit helpers
+2. <a name="work2"></a>Rewrite logic of converting InputTypes into OutputTypes in javascript
+3. <a name="work3"></a>Support scenarios for roslyn capability to compare and merge custom code
+4. <a name="work4"></a>Support scenarios for roslyn capability to compare and update code based on last GA contract
+5. <a name="work5"></a>Support scenarios for capability to reflect over runtime dependencies of emitted libraries during generation and use the rich type information to inform the generation.
+6. <a name="work6"></a>Create csharp alloy components
+7. <a name="work7"></a>Create the logic to write the alloy components into formatted code files using EFv2
+8. <a name="work8"></a>Support scenarios for roslyn reduce capability
+9. <a name="work9"></a>Support scenarios for roslyn format capability
+
+If we can split this work into a few different phases we can achieve many of the goals up front for a lot less work.
 
 ### Proposed alloy components
 
@@ -237,6 +250,14 @@ The design of the alloy components has two main considerations.
 2. **Cross language consistency:** We need some degree of consistency across languages in order to realize the goal of learning how to customize in one language does not require relearning if you want to do the same thing in another language.  If one language had a method component with no sub components and another language had a method signature subcomponent and a method body subcomponent this would miss the mark on the stated goal.
 
 The following is a proposed breakdown of what the components would look like for csharp.  This isn't exhaustive but a representation of the direction.
+
+#### High level components
+
+```xml
+TODO
+```
+
+#### Language components
 
 ```xml
 
@@ -342,20 +363,6 @@ The following is a proposed breakdown of what the components would look like for
 
 ```
 
-### Work todo
-
-1. <a name="work1"></a>Convert TCGC createSdkContext into TypeKit helpers
-2. <a name="work2"></a>Rewrite logic of converting InputTypes into OutputTypes in javascript
-3. <a name="work3"></a>Replace roslyn capability to compare and merge custom code
-4. <a name="work4"></a>Replace roslyn capability to compare and update code based on last GA contract
-5. <a name="work5"></a>Replace capability to reflect over runtime dependencies of emitted libraries during generation and use the rich type information to inform the generation.
-6. <a name="work6"></a>Create dotnet alloy components
-7. <a name="work7"></a>Create the logic to write the alloy components into formatted code files using EFv2
-8. <a name="work8"></a>Replace roslyn reduce capability
-9. <a name="work9"></a>Replace roslyn format capability
-
-If we can split this work into a few different phases we can achieve many of the goals up front for a lot less work.
-
 ## Phase 1
 
 T-shirt Estimate XXL
@@ -379,13 +386,13 @@ sequenceDiagram
     Note right of B: Serialize SdkPackage typegraph
     B->>E: dotnet run mgc.dll
     E->>E: Deserialize codeModel.json to InputTypes
-    E->>E: Convert InputTypes to dotnet idiomatic OutputTypes
+    E->>E: Convert InputTypes to csharp idiomatic OutputTypes
     Note right of E: 85% of the logic to create the library is here
-    E->>E: Write alloy-metadata.json
+    E->>E: Write domain-specific-metadata.json
     Note right of E: Write an alloy representation of the OutputTypes
     E->>B: success
-    B->>B: Construct alloy components from alloy-metadata.json
-    B->>D: Emit alloy components
+    B->>B: Construct alloy components from domain-specific-metadata.json
+    B->>D: Render alloy components
     D->>D: Write *.cs files
     D->>B: success
     B->>A: success
@@ -474,18 +481,18 @@ sequenceDiagram
     D->>B: success
     B->>B: Construct alloy components from typeGraph
     alt If not running in playground
-        B->>B: Write alloy-metadata.json
+        B->>B: Write domain-specific-metadata.json
         Note right of B: Serialize alloy components
         B->>E: dotnet run mgc.dll
-        E->>E: Deserialize alloy-metadata.json to OutputTypes
+        E->>E: Deserialize domain-specific-metadata.json to OutputTypes
         E->>E: Use Roslyn to update the OutputTypes
         Note right of E: Apply custom code and last contract
-        E->>E: Write alloy-metadata.json
+        E->>E: Write domain-specific-metadata.json
         Note right of E: Write an alloy representation of the OutputTypes
         E->>B: success
         B->>B: Construct alloy components from file
     end
-    B->>D: Emit alloy components
+    B->>D: Render alloy components
     D->>D: Write *.cs files
     D->>B: success
     B->>A: success
