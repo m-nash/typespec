@@ -13,7 +13,7 @@ namespace Microsoft.Generator.CSharp
             pluginHandler.LoadPlugin(options);
 
             var csharpGen = new CSharpGen();
-            await csharpGen.ExecuteAsync();
+            await csharpGen.ExecuteAsync(options);
         }
     }
 }

@@ -147,6 +147,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
           projectRoot + "/dist/generator/Microsoft.Generator.CSharp.dll",
         );
 
+        const alloyFlag = options["use-alloy"] ? "-a" : "";
+
         const command = `dotnet --roll-forward Major ${generatorPath} ${outputFolder} -p ${options["plugin-name"]}${constructCommandArg(newProjectOption)}${constructCommandArg(existingProjectOption)}${constructCommandArg(debugFlag)}`;
         Logger.getInstance().info(command);
 
@@ -162,6 +164,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             newProjectOption,
             existingProjectOption,
             debugFlag,
+            alloyFlag,
           ],
           { stdio: "inherit" },
         );
