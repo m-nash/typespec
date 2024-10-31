@@ -14,9 +14,9 @@ namespace UnbrandedTypeSpec.Models
     public partial class RoundTripModel
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private protected readonly IDictionary<string, BinaryData> _additionalBinaryDataProperties;
+        private protected readonly global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> _additionalBinaryDataProperties;
 
-        /// <summary> Initializes a new instance of <see cref="RoundTripModel"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="global::UnbrandedTypeSpec.Models.RoundTripModel"/>. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
         /// <param name="requiredCollection"> Required collection of enums. </param>
@@ -26,37 +26,37 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="requiredRecordUnknown"> required record of unknown. </param>
         /// <param name="modelWithRequiredNullable"> this is a model with required nullable properties. </param>
         /// <param name="requiredBytes"> Required bytes. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/>, <paramref name="requiredModel"/>, <paramref name="requiredUnknown"/>, <paramref name="requiredRecordUnknown"/>, <paramref name="modelWithRequiredNullable"/> or <paramref name="requiredBytes"/> is null. </exception>
-        public RoundTripModel(string requiredString, int requiredInt, IEnumerable<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, BinaryData requiredUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, ModelWithRequiredNullableProperties modelWithRequiredNullable, BinaryData requiredBytes)
+        /// <exception cref="global::System.ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/>, <paramref name="requiredModel"/>, <paramref name="requiredUnknown"/>, <paramref name="requiredRecordUnknown"/>, <paramref name="modelWithRequiredNullable"/> or <paramref name="requiredBytes"/> is null. </exception>
+        public RoundTripModel(string requiredString, int requiredInt, global::System.Collections.Generic.IEnumerable<global::UnbrandedTypeSpec.Models.StringFixedEnum> requiredCollection, global::System.Collections.Generic.IDictionary<string, global::UnbrandedTypeSpec.Models.StringExtensibleEnum> requiredDictionary, global::UnbrandedTypeSpec.Models.Thing requiredModel, global::System.BinaryData requiredUnknown, global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> requiredRecordUnknown, global::UnbrandedTypeSpec.Models.ModelWithRequiredNullableProperties modelWithRequiredNullable, global::System.BinaryData requiredBytes)
         {
-            Argument.AssertNotNull(requiredString, nameof(requiredString));
-            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
-            Argument.AssertNotNull(requiredDictionary, nameof(requiredDictionary));
-            Argument.AssertNotNull(requiredModel, nameof(requiredModel));
-            Argument.AssertNotNull(requiredUnknown, nameof(requiredUnknown));
-            Argument.AssertNotNull(requiredRecordUnknown, nameof(requiredRecordUnknown));
-            Argument.AssertNotNull(modelWithRequiredNullable, nameof(modelWithRequiredNullable));
-            Argument.AssertNotNull(requiredBytes, nameof(requiredBytes));
+            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredString, nameof(requiredString));
+            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
+            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredDictionary, nameof(requiredDictionary));
+            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredModel, nameof(requiredModel));
+            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredUnknown, nameof(requiredUnknown));
+            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredRecordUnknown, nameof(requiredRecordUnknown));
+            global::UnbrandedTypeSpec.Argument.AssertNotNull(modelWithRequiredNullable, nameof(modelWithRequiredNullable));
+            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredBytes, nameof(requiredBytes));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredCollection = requiredCollection.ToList();
             RequiredDictionary = requiredDictionary;
             RequiredModel = requiredModel;
-            IntExtensibleEnumCollection = new ChangeTrackingList<IntExtensibleEnum>();
-            FloatExtensibleEnumCollection = new ChangeTrackingList<FloatExtensibleEnum>();
-            FloatFixedEnumCollection = new ChangeTrackingList<FloatFixedEnum>();
-            IntFixedEnumCollection = new ChangeTrackingList<IntFixedEnum>();
+            IntExtensibleEnumCollection = new global::UnbrandedTypeSpec.ChangeTrackingList<global::UnbrandedTypeSpec.Models.IntExtensibleEnum>();
+            FloatExtensibleEnumCollection = new global::UnbrandedTypeSpec.ChangeTrackingList<global::UnbrandedTypeSpec.Models.FloatExtensibleEnum>();
+            FloatFixedEnumCollection = new global::UnbrandedTypeSpec.ChangeTrackingList<global::UnbrandedTypeSpec.Models.FloatFixedEnum>();
+            IntFixedEnumCollection = new global::UnbrandedTypeSpec.ChangeTrackingList<global::UnbrandedTypeSpec.Models.IntFixedEnum>();
             RequiredUnknown = requiredUnknown;
             RequiredRecordUnknown = requiredRecordUnknown;
-            OptionalRecordUnknown = new ChangeTrackingDictionary<string, BinaryData>();
-            ReadOnlyRequiredRecordUnknown = new ChangeTrackingDictionary<string, BinaryData>();
-            ReadOnlyOptionalRecordUnknown = new ChangeTrackingDictionary<string, BinaryData>();
+            OptionalRecordUnknown = new global::UnbrandedTypeSpec.ChangeTrackingDictionary<string, global::System.BinaryData>();
+            ReadOnlyRequiredRecordUnknown = new global::UnbrandedTypeSpec.ChangeTrackingDictionary<string, global::System.BinaryData>();
+            ReadOnlyOptionalRecordUnknown = new global::UnbrandedTypeSpec.ChangeTrackingDictionary<string, global::System.BinaryData>();
             ModelWithRequiredNullable = modelWithRequiredNullable;
             RequiredBytes = requiredBytes;
         }
 
-        internal RoundTripModel(string requiredString, int requiredInt, IList<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, IntExtensibleEnum? intExtensibleEnum, IList<IntExtensibleEnum> intExtensibleEnumCollection, FloatExtensibleEnum? floatExtensibleEnum, FloatExtensibleEnumWithIntValue? floatExtensibleEnumWithIntValue, IList<FloatExtensibleEnum> floatExtensibleEnumCollection, FloatFixedEnum? floatFixedEnum, FloatFixedEnumWithIntValue? floatFixedEnumWithIntValue, IList<FloatFixedEnum> floatFixedEnumCollection, IntFixedEnum? intFixedEnum, IList<IntFixedEnum> intFixedEnumCollection, StringFixedEnum? stringFixedEnum, BinaryData requiredUnknown, BinaryData optionalUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, IDictionary<string, BinaryData> optionalRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown, ModelWithRequiredNullableProperties modelWithRequiredNullable, BinaryData requiredBytes, IDictionary<string, BinaryData> additionalBinaryDataProperties)
+        internal RoundTripModel(string requiredString, int requiredInt, global::System.Collections.Generic.IList<global::UnbrandedTypeSpec.Models.StringFixedEnum> requiredCollection, global::System.Collections.Generic.IDictionary<string, global::UnbrandedTypeSpec.Models.StringExtensibleEnum> requiredDictionary, global::UnbrandedTypeSpec.Models.Thing requiredModel, global::UnbrandedTypeSpec.Models.IntExtensibleEnum? intExtensibleEnum, global::System.Collections.Generic.IList<global::UnbrandedTypeSpec.Models.IntExtensibleEnum> intExtensibleEnumCollection, global::UnbrandedTypeSpec.Models.FloatExtensibleEnum? floatExtensibleEnum, global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue? floatExtensibleEnumWithIntValue, global::System.Collections.Generic.IList<global::UnbrandedTypeSpec.Models.FloatExtensibleEnum> floatExtensibleEnumCollection, global::UnbrandedTypeSpec.Models.FloatFixedEnum? floatFixedEnum, global::UnbrandedTypeSpec.Models.FloatFixedEnumWithIntValue? floatFixedEnumWithIntValue, global::System.Collections.Generic.IList<global::UnbrandedTypeSpec.Models.FloatFixedEnum> floatFixedEnumCollection, global::UnbrandedTypeSpec.Models.IntFixedEnum? intFixedEnum, global::System.Collections.Generic.IList<global::UnbrandedTypeSpec.Models.IntFixedEnum> intFixedEnumCollection, global::UnbrandedTypeSpec.Models.StringFixedEnum? stringFixedEnum, global::System.BinaryData requiredUnknown, global::System.BinaryData optionalUnknown, global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> requiredRecordUnknown, global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> optionalRecordUnknown, global::System.Collections.Generic.IReadOnlyDictionary<string, global::System.BinaryData> readOnlyRequiredRecordUnknown, global::System.Collections.Generic.IReadOnlyDictionary<string, global::System.BinaryData> readOnlyOptionalRecordUnknown, global::UnbrandedTypeSpec.Models.ModelWithRequiredNullableProperties modelWithRequiredNullable, global::System.BinaryData requiredBytes, global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> additionalBinaryDataProperties)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -92,51 +92,51 @@ namespace UnbrandedTypeSpec.Models
         public int RequiredInt { get; set; }
 
         /// <summary> Required collection of enums. </summary>
-        public IList<StringFixedEnum> RequiredCollection { get; }
+        public global::System.Collections.Generic.IList<global::UnbrandedTypeSpec.Models.StringFixedEnum> RequiredCollection { get; }
 
         /// <summary> Required dictionary of enums. </summary>
-        public IDictionary<string, StringExtensibleEnum> RequiredDictionary { get; }
+        public global::System.Collections.Generic.IDictionary<string, global::UnbrandedTypeSpec.Models.StringExtensibleEnum> RequiredDictionary { get; }
 
         /// <summary> Required model. </summary>
-        public Thing RequiredModel { get; set; }
+        public global::UnbrandedTypeSpec.Models.Thing RequiredModel { get; set; }
 
         /// <summary> this is an int based extensible enum. </summary>
-        public IntExtensibleEnum? IntExtensibleEnum { get; set; }
+        public global::UnbrandedTypeSpec.Models.IntExtensibleEnum? IntExtensibleEnum { get; set; }
 
         /// <summary> this is a collection of int based extensible enum. </summary>
-        public IList<IntExtensibleEnum> IntExtensibleEnumCollection { get; }
+        public global::System.Collections.Generic.IList<global::UnbrandedTypeSpec.Models.IntExtensibleEnum> IntExtensibleEnumCollection { get; }
 
         /// <summary> this is a float based extensible enum. </summary>
-        public FloatExtensibleEnum? FloatExtensibleEnum { get; set; }
+        public global::UnbrandedTypeSpec.Models.FloatExtensibleEnum? FloatExtensibleEnum { get; set; }
 
         /// <summary> this is a float based extensible enum. </summary>
-        public FloatExtensibleEnumWithIntValue? FloatExtensibleEnumWithIntValue { get; set; }
+        public global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue? FloatExtensibleEnumWithIntValue { get; set; }
 
         /// <summary> this is a collection of float based extensible enum. </summary>
-        public IList<FloatExtensibleEnum> FloatExtensibleEnumCollection { get; }
+        public global::System.Collections.Generic.IList<global::UnbrandedTypeSpec.Models.FloatExtensibleEnum> FloatExtensibleEnumCollection { get; }
 
         /// <summary> this is a float based fixed enum. </summary>
-        public FloatFixedEnum? FloatFixedEnum { get; set; }
+        public global::UnbrandedTypeSpec.Models.FloatFixedEnum? FloatFixedEnum { get; set; }
 
         /// <summary> this is a float based fixed enum. </summary>
-        public FloatFixedEnumWithIntValue? FloatFixedEnumWithIntValue { get; set; }
+        public global::UnbrandedTypeSpec.Models.FloatFixedEnumWithIntValue? FloatFixedEnumWithIntValue { get; set; }
 
         /// <summary> this is a collection of float based fixed enum. </summary>
-        public IList<FloatFixedEnum> FloatFixedEnumCollection { get; }
+        public global::System.Collections.Generic.IList<global::UnbrandedTypeSpec.Models.FloatFixedEnum> FloatFixedEnumCollection { get; }
 
         /// <summary> this is a int based fixed enum. </summary>
-        public IntFixedEnum? IntFixedEnum { get; set; }
+        public global::UnbrandedTypeSpec.Models.IntFixedEnum? IntFixedEnum { get; set; }
 
         /// <summary> this is a collection of int based fixed enum. </summary>
-        public IList<IntFixedEnum> IntFixedEnumCollection { get; }
+        public global::System.Collections.Generic.IList<global::UnbrandedTypeSpec.Models.IntFixedEnum> IntFixedEnumCollection { get; }
 
         /// <summary> this is a string based fixed enum. </summary>
-        public StringFixedEnum? StringFixedEnum { get; set; }
+        public global::UnbrandedTypeSpec.Models.StringFixedEnum? StringFixedEnum { get; set; }
 
         /// <summary>
         /// required unknown
-        /// <para> To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, JsonSerializerOptions?)"/>. </para>
-        /// <para> To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>. </para>
+        /// <para> To assign an object to this property use <see cref="global::System.BinaryData.FromObjectAsJson{T}(T, global::System.Text.Json.JsonSerializerOptions?)"/>. </para>
+        /// <para> To assign an already formatted json string to this property use <see cref="global::System.BinaryData.FromString(string)"/>. </para>
         /// <para>
         /// Examples:
         /// <list type="bullet">
@@ -159,12 +159,12 @@ namespace UnbrandedTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData RequiredUnknown { get; set; }
+        public global::System.BinaryData RequiredUnknown { get; set; }
 
         /// <summary>
         /// optional unknown
-        /// <para> To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, JsonSerializerOptions?)"/>. </para>
-        /// <para> To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>. </para>
+        /// <para> To assign an object to this property use <see cref="global::System.BinaryData.FromObjectAsJson{T}(T, global::System.Text.Json.JsonSerializerOptions?)"/>. </para>
+        /// <para> To assign an already formatted json string to this property use <see cref="global::System.BinaryData.FromString(string)"/>. </para>
         /// <para>
         /// Examples:
         /// <list type="bullet">
@@ -187,12 +187,12 @@ namespace UnbrandedTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData OptionalUnknown { get; set; }
+        public global::System.BinaryData OptionalUnknown { get; set; }
 
         /// <summary>
         /// required record of unknown
-        /// <para> To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, JsonSerializerOptions?)"/>. </para>
-        /// <para> To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>. </para>
+        /// <para> To assign an object to the value of this property use <see cref="global::System.BinaryData.FromObjectAsJson{T}(T, global::System.Text.Json.JsonSerializerOptions?)"/>. </para>
+        /// <para> To assign an already formatted json string to this property use <see cref="global::System.BinaryData.FromString(string)"/>. </para>
         /// <para>
         /// Examples:
         /// <list type="bullet">
@@ -215,12 +215,12 @@ namespace UnbrandedTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        public IDictionary<string, BinaryData> RequiredRecordUnknown { get; }
+        public global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> RequiredRecordUnknown { get; }
 
         /// <summary>
         /// optional record of unknown
-        /// <para> To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, JsonSerializerOptions?)"/>. </para>
-        /// <para> To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>. </para>
+        /// <para> To assign an object to the value of this property use <see cref="global::System.BinaryData.FromObjectAsJson{T}(T, global::System.Text.Json.JsonSerializerOptions?)"/>. </para>
+        /// <para> To assign an already formatted json string to this property use <see cref="global::System.BinaryData.FromString(string)"/>. </para>
         /// <para>
         /// Examples:
         /// <list type="bullet">
@@ -243,12 +243,12 @@ namespace UnbrandedTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        public IDictionary<string, BinaryData> OptionalRecordUnknown { get; }
+        public global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> OptionalRecordUnknown { get; }
 
         /// <summary>
         /// required readonly record of unknown
-        /// <para> To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, JsonSerializerOptions?)"/>. </para>
-        /// <para> To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>. </para>
+        /// <para> To assign an object to the value of this property use <see cref="global::System.BinaryData.FromObjectAsJson{T}(T, global::System.Text.Json.JsonSerializerOptions?)"/>. </para>
+        /// <para> To assign an already formatted json string to this property use <see cref="global::System.BinaryData.FromString(string)"/>. </para>
         /// <para>
         /// Examples:
         /// <list type="bullet">
@@ -271,12 +271,12 @@ namespace UnbrandedTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        public IReadOnlyDictionary<string, BinaryData> ReadOnlyRequiredRecordUnknown { get; }
+        public global::System.Collections.Generic.IReadOnlyDictionary<string, global::System.BinaryData> ReadOnlyRequiredRecordUnknown { get; }
 
         /// <summary>
         /// optional readonly record of unknown
-        /// <para> To assign an object to the value of this property use <see cref="BinaryData.FromObjectAsJson{T}(T, JsonSerializerOptions?)"/>. </para>
-        /// <para> To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>. </para>
+        /// <para> To assign an object to the value of this property use <see cref="global::System.BinaryData.FromObjectAsJson{T}(T, global::System.Text.Json.JsonSerializerOptions?)"/>. </para>
+        /// <para> To assign an already formatted json string to this property use <see cref="global::System.BinaryData.FromString(string)"/>. </para>
         /// <para>
         /// Examples:
         /// <list type="bullet">
@@ -299,15 +299,15 @@ namespace UnbrandedTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        public IReadOnlyDictionary<string, BinaryData> ReadOnlyOptionalRecordUnknown { get; }
+        public global::System.Collections.Generic.IReadOnlyDictionary<string, global::System.BinaryData> ReadOnlyOptionalRecordUnknown { get; }
 
         /// <summary> this is a model with required nullable properties. </summary>
-        public ModelWithRequiredNullableProperties ModelWithRequiredNullable { get; set; }
+        public global::UnbrandedTypeSpec.Models.ModelWithRequiredNullableProperties ModelWithRequiredNullable { get; set; }
 
         /// <summary>
         /// Required bytes
         /// <para>
-        /// To assign a byte[] to this property use <see cref="BinaryData.FromBytes(byte[])"/>.
+        /// To assign a byte[] to this property use <see cref="global::System.BinaryData.FromBytes(byte[])"/>.
         /// The byte[] will be serialized to a Base64 encoded string.
         /// </para>
         /// <para>
@@ -320,6 +320,6 @@ namespace UnbrandedTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData RequiredBytes { get; set; }
+        public global::System.BinaryData RequiredBytes { get; set; }
     }
 }

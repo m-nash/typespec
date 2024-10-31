@@ -7,20 +7,20 @@ using System.ClientModel.Primitives;
 
 namespace UnbrandedTypeSpec
 {
-    /// <summary> Client options for <see cref="UnbrandedTypeSpecClient"/>. </summary>
-    public partial class UnbrandedTypeSpecClientOptions : ClientPipelineOptions
+    /// <summary> Client options for <see cref="global::UnbrandedTypeSpec.UnbrandedTypeSpecClient"/>. </summary>
+    public partial class UnbrandedTypeSpecClientOptions : global::System.ClientModel.Primitives.ClientPipelineOptions
     {
-        private const ServiceVersion LatestVersion = ServiceVersion.V2024_08_16_Preview;
+        private const global::UnbrandedTypeSpec.UnbrandedTypeSpecClientOptions.ServiceVersion LatestVersion = global::UnbrandedTypeSpec.UnbrandedTypeSpecClientOptions.ServiceVersion.V2024_08_16_Preview;
 
         /// <summary> Initializes a new instance of UnbrandedTypeSpecClientOptions. </summary>
         /// <param name="version"> The service version. </param>
-        public UnbrandedTypeSpecClientOptions(ServiceVersion version = LatestVersion)
+        public UnbrandedTypeSpecClientOptions(global::UnbrandedTypeSpec.UnbrandedTypeSpecClientOptions.ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {
-                ServiceVersion.V2024_07_16_Preview => "2024-07-16-preview",
-                ServiceVersion.V2024_08_16_Preview => "2024-08-16-preview",
-                _ => throw new NotSupportedException()
+                global::UnbrandedTypeSpec.UnbrandedTypeSpecClientOptions.ServiceVersion.V2024_07_16_Preview => "2024-07-16-preview",
+                global::UnbrandedTypeSpec.UnbrandedTypeSpecClientOptions.ServiceVersion.V2024_08_16_Preview => "2024-08-16-preview",
+                _ => throw new global::System.NotSupportedException()
             };
         }
 

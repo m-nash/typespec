@@ -13,15 +13,15 @@ namespace UnbrandedTypeSpec
 {
     internal static partial class ModelSerializationExtensions
     {
-        internal static readonly ModelReaderWriterOptions WireOptions = new ModelReaderWriterOptions("W");
+        internal static readonly global::System.ClientModel.Primitives.ModelReaderWriterOptions WireOptions = new global::System.ClientModel.Primitives.ModelReaderWriterOptions("W");
 
-        public static object GetObject(this JsonElement element)
+        public static object GetObject(this global::System.Text.Json.JsonElement element)
         {
             switch (element.ValueKind)
             {
-                case JsonValueKind.String:
+                case global::System.Text.Json.JsonValueKind.String:
                     return element.GetString();
-                case JsonValueKind.Number:
+                case global::System.Text.Json.JsonValueKind.Number:
                     if (element.TryGetInt32(out int intValue))
                     {
                         return intValue;
@@ -31,111 +31,111 @@ namespace UnbrandedTypeSpec
                         return longValue;
                     }
                     return element.GetDouble();
-                case JsonValueKind.True:
+                case global::System.Text.Json.JsonValueKind.True:
                     return true;
-                case JsonValueKind.False:
+                case global::System.Text.Json.JsonValueKind.False:
                     return false;
-                case JsonValueKind.Undefined:
-                case JsonValueKind.Null:
+                case global::System.Text.Json.JsonValueKind.Undefined:
+                case global::System.Text.Json.JsonValueKind.Null:
                     return null;
-                case JsonValueKind.Object:
-                    Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                case global::System.Text.Json.JsonValueKind.Object:
+                    global::System.Collections.Generic.Dictionary<string, object> dictionary = new global::System.Collections.Generic.Dictionary<string, object>();
                     foreach (var jsonProperty in element.EnumerateObject())
                     {
                         dictionary.Add(jsonProperty.Name, jsonProperty.Value.GetObject());
                     }
                     return dictionary;
-                case JsonValueKind.Array:
-                    List<object> list = new List<object>();
+                case global::System.Text.Json.JsonValueKind.Array:
+                    global::System.Collections.Generic.List<object> list = new global::System.Collections.Generic.List<object>();
                     foreach (var item in element.EnumerateArray())
                     {
                         list.Add(item.GetObject());
                     }
                     return list.ToArray();
                 default:
-                    throw new NotSupportedException($"Not supported value kind {element.ValueKind}");
+                    throw new global::System.NotSupportedException($"Not supported value kind {element.ValueKind}");
             }
         }
 
-        public static byte[] GetBytesFromBase64(this JsonElement element, string format)
+        public static global::System.Byte[] GetBytesFromBase64(this global::System.Text.Json.JsonElement element, string format)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            if ((element.ValueKind == global::System.Text.Json.JsonValueKind.Null))
             {
                 return null;
             }
 
             return format switch
             {
-                "U" => TypeFormatters.FromBase64UrlString(element.GetRequiredString()),
+                "U" => global::UnbrandedTypeSpec.TypeFormatters.FromBase64UrlString(element.GetRequiredString()),
                 "D" => element.GetBytesFromBase64(),
-                _ => throw new ArgumentException($"Format is not supported: '{format}'", nameof(format))
+                _ => throw new global::System.ArgumentException($"Format is not supported: '{format}'", nameof(format))
             };
         }
 
-        public static DateTimeOffset GetDateTimeOffset(this JsonElement element, string format) => format switch
+        public static global::System.DateTimeOffset GetDateTimeOffset(this global::System.Text.Json.JsonElement element, string format) => format switch
         {
-            "U" when element.ValueKind == JsonValueKind.Number => DateTimeOffset.FromUnixTimeSeconds(element.GetInt64()),
-            _ => TypeFormatters.ParseDateTimeOffset(element.GetString(), format)
+            "U" when (element.ValueKind == global::System.Text.Json.JsonValueKind.Number) => global::System.DateTimeOffset.FromUnixTimeSeconds(element.GetInt64()),
+            _ => global::UnbrandedTypeSpec.TypeFormatters.ParseDateTimeOffset(element.GetString(), format)
         };
 
-        public static TimeSpan GetTimeSpan(this JsonElement element, string format) => TypeFormatters.ParseTimeSpan(element.GetString(), format);
+        public static global::System.TimeSpan GetTimeSpan(this global::System.Text.Json.JsonElement element, string format) => global::UnbrandedTypeSpec.TypeFormatters.ParseTimeSpan(element.GetString(), format);
 
-        public static char GetChar(this JsonElement element)
+        public static char GetChar(this global::System.Text.Json.JsonElement element)
         {
-            if (element.ValueKind == JsonValueKind.String)
+            if ((element.ValueKind == global::System.Text.Json.JsonValueKind.String))
             {
                 string text = element.GetString();
-                if (text == null || text.Length != 1)
+                if (((text == null) || (text.Length != 1)))
                 {
-                    throw new NotSupportedException($"Cannot convert \"{text}\" to a char");
+                    throw new global::System.NotSupportedException($"Cannot convert \"{text}\" to a char");
                 }
                 return text[0];
             }
             else
             {
-                throw new NotSupportedException($"Cannot convert {element.ValueKind} to a char");
+                throw new global::System.NotSupportedException($"Cannot convert {element.ValueKind} to a char");
             }
         }
 
-        [Conditional("DEBUG")]
-        public static void ThrowNonNullablePropertyIsNull(this JsonProperty @property)
+        [global::System.Diagnostics.ConditionalAttribute("DEBUG")]
+        public static void ThrowNonNullablePropertyIsNull(this global::System.Text.Json.JsonProperty @property)
         {
-            throw new JsonException($"A property '{@property.Name}' defined as non-nullable but received as null from the service. This exception only happens in DEBUG builds of the library and would be ignored in the release build");
+            throw new global::System.Text.Json.JsonException($"A property '{@property.Name}' defined as non-nullable but received as null from the service. This exception only happens in DEBUG builds of the library and would be ignored in the release build");
         }
 
-        public static string GetRequiredString(this JsonElement element)
+        public static string GetRequiredString(this global::System.Text.Json.JsonElement element)
         {
             string value = element.GetString();
-            if (value == null)
+            if ((value == null))
             {
-                throw new InvalidOperationException($"The requested operation requires an element of type 'String', but the target element has type '{element.ValueKind}'.");
+                throw new global::System.InvalidOperationException($"The requested operation requires an element of type 'String', but the target element has type '{element.ValueKind}'.");
             }
             return value;
         }
 
-        public static void WriteStringValue(this Utf8JsonWriter writer, DateTimeOffset value, string format)
+        public static void WriteStringValue(this global::System.Text.Json.Utf8JsonWriter writer, global::System.DateTimeOffset value, string format)
         {
-            writer.WriteStringValue(TypeFormatters.ToString(value, format));
+            writer.WriteStringValue(global::UnbrandedTypeSpec.TypeFormatters.ToString(value, format));
         }
 
-        public static void WriteStringValue(this Utf8JsonWriter writer, DateTime value, string format)
+        public static void WriteStringValue(this global::System.Text.Json.Utf8JsonWriter writer, global::System.DateTime value, string format)
         {
-            writer.WriteStringValue(TypeFormatters.ToString(value, format));
+            writer.WriteStringValue(global::UnbrandedTypeSpec.TypeFormatters.ToString(value, format));
         }
 
-        public static void WriteStringValue(this Utf8JsonWriter writer, TimeSpan value, string format)
+        public static void WriteStringValue(this global::System.Text.Json.Utf8JsonWriter writer, global::System.TimeSpan value, string format)
         {
-            writer.WriteStringValue(TypeFormatters.ToString(value, format));
+            writer.WriteStringValue(global::UnbrandedTypeSpec.TypeFormatters.ToString(value, format));
         }
 
-        public static void WriteStringValue(this Utf8JsonWriter writer, char value)
+        public static void WriteStringValue(this global::System.Text.Json.Utf8JsonWriter writer, char value)
         {
-            writer.WriteStringValue(value.ToString(CultureInfo.InvariantCulture));
+            writer.WriteStringValue(value.ToString(global::System.Globalization.CultureInfo.InvariantCulture));
         }
 
-        public static void WriteBase64StringValue(this Utf8JsonWriter writer, byte[] value, string format)
+        public static void WriteBase64StringValue(this global::System.Text.Json.Utf8JsonWriter writer, global::System.Byte[] value, string format)
         {
-            if (value == null)
+            if ((value == null))
             {
                 writer.WriteNullValue();
                 return;
@@ -143,42 +143,42 @@ namespace UnbrandedTypeSpec
             switch (format)
             {
                 case "U":
-                    writer.WriteStringValue(TypeFormatters.ToBase64UrlString(value));
+                    writer.WriteStringValue(global::UnbrandedTypeSpec.TypeFormatters.ToBase64UrlString(value));
                     break;
                 case "D":
                     writer.WriteBase64StringValue(value);
                     break;
                 default:
-                    throw new ArgumentException($"Format is not supported: '{format}'", nameof(format));
+                    throw new global::System.ArgumentException($"Format is not supported: '{format}'", nameof(format));
             }
         }
 
-        public static void WriteNumberValue(this Utf8JsonWriter writer, DateTimeOffset value, string format)
+        public static void WriteNumberValue(this global::System.Text.Json.Utf8JsonWriter writer, global::System.DateTimeOffset value, string format)
         {
-            if (format != "U")
+            if ((format != "U"))
             {
-                throw new ArgumentOutOfRangeException(nameof(format), "Only 'U' format is supported when writing a DateTimeOffset as a Number.");
+                throw new global::System.ArgumentOutOfRangeException(nameof(format), "Only 'U' format is supported when writing a DateTimeOffset as a Number.");
             }
             writer.WriteNumberValue(value.ToUnixTimeSeconds());
         }
 
-        public static void WriteObjectValue<T>(this Utf8JsonWriter writer, T value, ModelReaderWriterOptions options = null)
+        public static void WriteObjectValue<T>(this global::System.Text.Json.Utf8JsonWriter writer, T value, global::System.ClientModel.Primitives.ModelReaderWriterOptions options = ((global::System.ClientModel.Primitives.ModelReaderWriterOptions)null))
         {
             switch (value)
             {
                 case null:
                     writer.WriteNullValue();
                     break;
-                case IJsonModel<T> jsonModel:
-                    jsonModel.Write(writer, options ?? WireOptions);
+                case global::System.ClientModel.Primitives.IJsonModel<T> jsonModel:
+                    jsonModel.Write(writer, (options ?? global::UnbrandedTypeSpec.ModelSerializationExtensions.WireOptions));
                     break;
-                case byte[] bytes:
+                case global::System.Byte[] bytes:
                     writer.WriteBase64StringValue(bytes);
                     break;
-                case BinaryData bytes0:
+                case global::System.BinaryData bytes0:
                     writer.WriteBase64StringValue(bytes0);
                     break;
-                case JsonElement json:
+                case global::System.Text.Json.JsonElement json:
                     json.WriteTo(writer);
                     break;
                 case int i:
@@ -209,16 +209,16 @@ namespace UnbrandedTypeSpec
                 case bool b:
                     writer.WriteBooleanValue(b);
                     break;
-                case Guid g:
+                case global::System.Guid g:
                     writer.WriteStringValue(g);
                     break;
-                case DateTimeOffset dateTimeOffset:
+                case global::System.DateTimeOffset dateTimeOffset:
                     writer.WriteStringValue(dateTimeOffset, "O");
                     break;
-                case DateTime dateTime:
+                case global::System.DateTime dateTime:
                     writer.WriteStringValue(dateTime, "O");
                     break;
-                case IEnumerable<KeyValuePair<string, object>> enumerable:
+                case global::System.Collections.Generic.IEnumerable<global::System.Collections.Generic.KeyValuePair<string, object>> enumerable:
                     writer.WriteStartObject();
                     foreach (var pair in enumerable)
                     {
@@ -227,7 +227,7 @@ namespace UnbrandedTypeSpec
                     }
                     writer.WriteEndObject();
                     break;
-                case IEnumerable<object> objectEnumerable:
+                case global::System.Collections.Generic.IEnumerable<object> objectEnumerable:
                     writer.WriteStartArray();
                     foreach (var item in objectEnumerable)
                     {
@@ -235,15 +235,15 @@ namespace UnbrandedTypeSpec
                     }
                     writer.WriteEndArray();
                     break;
-                case TimeSpan timeSpan:
+                case global::System.TimeSpan timeSpan:
                     writer.WriteStringValue(timeSpan, "P");
                     break;
                 default:
-                    throw new NotSupportedException($"Not supported type {value.GetType()}");
+                    throw new global::System.NotSupportedException($"Not supported type {value.GetType()}");
             }
         }
 
-        public static void WriteObjectValue(this Utf8JsonWriter writer, object value, ModelReaderWriterOptions options = null)
+        public static void WriteObjectValue(this global::System.Text.Json.Utf8JsonWriter writer, object value, global::System.ClientModel.Primitives.ModelReaderWriterOptions options = ((global::System.ClientModel.Primitives.ModelReaderWriterOptions)null))
         {
             writer.WriteObjectValue<object>(value, options);
         }

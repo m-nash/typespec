@@ -16,7 +16,7 @@ namespace Microsoft.Generator.CSharp.Writers
             Dictionary<string, List<TypeProvider>> directoryHash = [];
             foreach (var type in library.TypeProviders)
             {
-                var directory = Path.GetDirectoryName(type.RelativeFilePath)!;
+                var directory = Path.Combine("./", Path.GetDirectoryName(type.RelativeFilePath)!.Replace("\\", "/"));
                 if (directoryHash.ContainsKey(directory))
                 {
                     directoryHash[directory].Add(type);

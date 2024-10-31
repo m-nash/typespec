@@ -1,7 +1,7 @@
 {
   "directories": [
     {
-      "name": "src\\Generated\\Models",
+      "name": "./src/Generated/Models",
       "files": [
         {
           "name": "ThingRequiredLiteralString.cs",
@@ -146,7 +146,7 @@
       ]
     },
     {
-      "name": "src\\Generated\\Internal",
+      "name": "./src/Generated/Internal",
       "files": [
         {
           "name": "ChangeTrackingList.cs",
@@ -215,7 +215,7 @@
           "name": "Utf8JsonBinaryContent.cs",
           "typeDeclaration": {
             "name": "Utf8JsonBinaryContent",
-            "content": "// \u003Cauto-generated/\u003E\n\n#nullable disable\n\nusing System.ClientModel;\nusing System.IO;\nusing System.Text.Json;\nusing System.Threading;\nusing System.Threading.Tasks;\n\nnamespace UnbrandedTypeSpec\n{\n    internal partial class Utf8JsonBinaryContent : global::System.ClientModel.BinaryContent\n    {\n        private readonly global::System.IO.MemoryStream _stream;\n        private readonly global::System.ClientModel.BinaryContent _content;\n\n        public Utf8JsonBinaryContent()\n        {\n            _stream = new global::System.IO.MemoryStream();\n            _content = global::System.ClientModel.BinaryContent.Create(_stream);\n            JsonWriter = new global::System.Text.Json.Utf8JsonWriter(_stream);\n        }\n\n        public global::System.Text.Json.Utf8JsonWriter JsonWriter { get; }\n\n        public override async global::System.Threading.Tasks.Task WriteToAsync(global::System.IO.Stream stream, global::System.Threading.CancellationToken cancellationToken = ((global::System.Threading.CancellationToken)default))\n        {\n            await JsonWriter.FlushAsync().ConfigureAwait(false);\n            await _content.WriteToAsync(stream, cancellationToken).ConfigureAwait(false);\n        }\n\n        public override void WriteTo(global::System.IO.Stream stream, global::System.Threading.CancellationToken cancellationToken = ((global::System.Threading.CancellationToken)default))\n        {\n            JsonWriter.Flush();\n            _content.WriteTo(stream, cancellationToken);\n        }\n\n        public override bool TryComputeLength(out long length)\n        {\n            length = (JsonWriter.BytesCommitted \u002B JsonWriter.BytesPending);\n            return true;\n        }\n\n        public override void Dispose()\n        {\n            JsonWriter.Dispose();\n            _content.Dispose();\n            _stream.Dispose();\n        }\n    }\n}\n"
+            "content": "// \u003Cauto-generated/\u003E\n\n#nullable disable\n\nusing System.ClientModel;\nusing System.IO;\nusing System.Text.Json;\nusing System.Threading;\nusing System.Threading.Tasks;\n\nnamespace UnbrandedTypeSpec\n{\n    internal partial class Utf8JsonBinaryContent : global::System.ClientModel.BinaryContent\n    {\n        private readonly global::System.IO.MemoryStream _stream;\n        private readonly global::System.ClientModel.BinaryContent _content;\n\n        public Utf8JsonBinaryContent()\n        {\n            _stream = new global::System.IO.MemoryStream();\n            _content = global::System.ClientModel.BinaryContent.Create(_stream);\n            JsonWriter = new global::System.Text.Json.Utf8JsonWriter(_stream);\n        }\n\n        public global::System.Text.Json.Utf8JsonWriter JsonWriter { get; }\n\n        public override async global::System.Threading.Tasks.Task WriteToAsync(global::System.IO.Stream stream, global::System.Threading.CancellationToken cancellationToken = default)\n        {\n            await JsonWriter.FlushAsync().ConfigureAwait(false);\n            await _content.WriteToAsync(stream, cancellationToken).ConfigureAwait(false);\n        }\n\n        public override void WriteTo(global::System.IO.Stream stream, global::System.Threading.CancellationToken cancellationToken = default)\n        {\n            JsonWriter.Flush();\n            _content.WriteTo(stream, cancellationToken);\n        }\n\n        public override bool TryComputeLength(out long length)\n        {\n            length = (JsonWriter.BytesCommitted \u002B JsonWriter.BytesPending);\n            return true;\n        }\n\n        public override void Dispose()\n        {\n            JsonWriter.Dispose();\n            _content.Dispose();\n            _stream.Dispose();\n        }\n    }\n}\n"
           }
         },
         {
@@ -235,7 +235,7 @@
       ]
     },
     {
-      "name": "src\\Generated",
+      "name": "./src/Generated",
       "files": [
         {
           "name": "UnbrandedTypeSpecModelFactory.cs",

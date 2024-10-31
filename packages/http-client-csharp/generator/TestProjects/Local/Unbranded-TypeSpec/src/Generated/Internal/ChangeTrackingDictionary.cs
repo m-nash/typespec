@@ -8,158 +8,158 @@ using System.Collections.Generic;
 
 namespace UnbrandedTypeSpec
 {
-    internal partial class ChangeTrackingDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>
+    internal partial class ChangeTrackingDictionary<TKey, TValue> : global::System.Collections.Generic.IDictionary<TKey, TValue>, global::System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>
         where TKey : notnull
     {
-        private IDictionary<TKey, TValue> _innerDictionary;
+        private global::System.Collections.Generic.IDictionary<TKey, TValue> _innerDictionary;
 
         public ChangeTrackingDictionary()
         {
         }
 
-        public ChangeTrackingDictionary(IDictionary<TKey, TValue> dictionary)
+        public ChangeTrackingDictionary(global::System.Collections.Generic.IDictionary<TKey, TValue> dictionary)
         {
-            if (dictionary == null)
+            if ((dictionary == null))
             {
                 return;
             }
-            _innerDictionary = new Dictionary<TKey, TValue>(dictionary);
+            _innerDictionary = new global::System.Collections.Generic.Dictionary<TKey, TValue>(dictionary);
         }
 
-        public ChangeTrackingDictionary(IReadOnlyDictionary<TKey, TValue> dictionary)
+        public ChangeTrackingDictionary(global::System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> dictionary)
         {
-            if (dictionary == null)
+            if ((dictionary == null))
             {
                 return;
             }
-            _innerDictionary = new Dictionary<TKey, TValue>();
+            _innerDictionary = new global::System.Collections.Generic.Dictionary<TKey, TValue>();
             foreach (var pair in dictionary)
             {
                 _innerDictionary.Add(pair);
             }
         }
 
-        public bool IsUndefined => _innerDictionary == null;
+        public bool IsUndefined => (_innerDictionary == null);
 
-        public int Count => IsUndefined ? 0 : EnsureDictionary().Count;
+        public int Count => this.IsUndefined ? 0 : this.EnsureDictionary().Count;
 
-        public bool IsReadOnly => IsUndefined ? false : EnsureDictionary().IsReadOnly;
+        public bool IsReadOnly => this.IsUndefined ? false : this.EnsureDictionary().IsReadOnly;
 
-        public ICollection<TKey> Keys => IsUndefined ? Array.Empty<TKey>() : EnsureDictionary().Keys;
+        public global::System.Collections.Generic.ICollection<TKey> Keys => this.IsUndefined ? global::System.Array.Empty<TKey>() : this.EnsureDictionary().Keys;
 
-        public ICollection<TValue> Values => IsUndefined ? Array.Empty<TValue>() : EnsureDictionary().Values;
+        public global::System.Collections.Generic.ICollection<TValue> Values => this.IsUndefined ? global::System.Array.Empty<TValue>() : this.EnsureDictionary().Values;
 
         public TValue this[TKey key]
         {
             get
             {
-                if (IsUndefined)
+                if (this.IsUndefined)
                 {
-                    throw new KeyNotFoundException(nameof(key));
+                    throw new global::System.Collections.Generic.KeyNotFoundException(nameof(key));
                 }
-                return EnsureDictionary()[key];
+                return this.EnsureDictionary()[key];
             }
             set
             {
-                EnsureDictionary()[key] = value;
+                this.EnsureDictionary()[key] = value;
             }
         }
 
-        IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys => Keys;
+        global::System.Collections.Generic.IEnumerable<TKey> global::System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>.Keys => this.Keys;
 
-        IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values => Values;
+        global::System.Collections.Generic.IEnumerable<TValue> global::System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>.Values => this.Values;
 
-        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        public global::System.Collections.Generic.IEnumerator<global::System.Collections.Generic.KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            if (IsUndefined)
+            if (this.IsUndefined)
             {
-                IEnumerator<KeyValuePair<TKey, TValue>> enumerateEmpty()
+                global::System.Collections.Generic.IEnumerator<global::System.Collections.Generic.KeyValuePair<TKey, TValue>> enumerateEmpty()
                 {
                     yield break;
                 }
                 return enumerateEmpty();
             }
-            return EnsureDictionary().GetEnumerator();
+            return this.EnsureDictionary().GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        global::System.Collections.IEnumerator global::System.Collections.IEnumerable.GetEnumerator()
         {
-            return GetEnumerator();
+            return this.GetEnumerator();
         }
 
-        public void Add(KeyValuePair<TKey, TValue> item)
+        public void Add(global::System.Collections.Generic.KeyValuePair<TKey, TValue> item)
         {
-            EnsureDictionary().Add(item);
+            this.EnsureDictionary().Add(item);
         }
 
         public void Clear()
         {
-            EnsureDictionary().Clear();
+            this.EnsureDictionary().Clear();
         }
 
-        public bool Contains(KeyValuePair<TKey, TValue> item)
+        public bool Contains(global::System.Collections.Generic.KeyValuePair<TKey, TValue> item)
         {
-            if (IsUndefined)
+            if (this.IsUndefined)
             {
                 return false;
             }
-            return EnsureDictionary().Contains(item);
+            return this.EnsureDictionary().Contains(item);
         }
 
-        public void CopyTo(KeyValuePair<TKey, TValue>[] array, int index)
+        public void CopyTo(global::System.Collections.Generic.KeyValuePair<TKey, TValue>[] array, int index)
         {
-            if (IsUndefined)
+            if (this.IsUndefined)
             {
                 return;
             }
-            EnsureDictionary().CopyTo(array, index);
+            this.EnsureDictionary().CopyTo(array, index);
         }
 
-        public bool Remove(KeyValuePair<TKey, TValue> item)
+        public bool Remove(global::System.Collections.Generic.KeyValuePair<TKey, TValue> item)
         {
-            if (IsUndefined)
+            if (this.IsUndefined)
             {
                 return false;
             }
-            return EnsureDictionary().Remove(item);
+            return this.EnsureDictionary().Remove(item);
         }
 
         public void Add(TKey key, TValue value)
         {
-            EnsureDictionary().Add(key, value);
+            this.EnsureDictionary().Add(key, value);
         }
 
         public bool ContainsKey(TKey key)
         {
-            if (IsUndefined)
+            if (this.IsUndefined)
             {
                 return false;
             }
-            return EnsureDictionary().ContainsKey(key);
+            return this.EnsureDictionary().ContainsKey(key);
         }
 
         public bool Remove(TKey key)
         {
-            if (IsUndefined)
+            if (this.IsUndefined)
             {
                 return false;
             }
-            return EnsureDictionary().Remove(key);
+            return this.EnsureDictionary().Remove(key);
         }
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            if (IsUndefined)
+            if (this.IsUndefined)
             {
                 value = default;
                 return false;
             }
-            return EnsureDictionary().TryGetValue(key, out value);
+            return this.EnsureDictionary().TryGetValue(key, out value);
         }
 
-        public IDictionary<TKey, TValue> EnsureDictionary()
+        public global::System.Collections.Generic.IDictionary<TKey, TValue> EnsureDictionary()
         {
-            return _innerDictionary ??= new Dictionary<TKey, TValue>();
+            return (_innerDictionary ??= new global::System.Collections.Generic.Dictionary<TKey, TValue>());
         }
     }
 }

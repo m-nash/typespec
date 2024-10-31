@@ -14,28 +14,28 @@ namespace UnbrandedTypeSpec.Models
     public partial class Thing
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private protected readonly IDictionary<string, BinaryData> _additionalBinaryDataProperties;
+        private protected readonly global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> _additionalBinaryDataProperties;
 
-        /// <summary> Initializes a new instance of <see cref="Thing"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="global::UnbrandedTypeSpec.Models.Thing"/>. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        public Thing(string name, BinaryData requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList)
+        /// <exception cref="global::System.ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        public Thing(string name, global::System.BinaryData requiredUnion, string requiredBadDescription, global::System.Collections.Generic.IEnumerable<int> requiredNullableList)
         {
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
-            Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
+            global::UnbrandedTypeSpec.Argument.AssertNotNull(name, nameof(name));
+            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
             Name = name;
             RequiredUnion = requiredUnion;
             RequiredBadDescription = requiredBadDescription;
-            OptionalNullableList = new ChangeTrackingList<int>();
+            OptionalNullableList = new global::UnbrandedTypeSpec.ChangeTrackingList<int>();
             RequiredNullableList = requiredNullableList?.ToList();
         }
 
-        internal Thing(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, IDictionary<string, BinaryData> additionalBinaryDataProperties)
+        internal Thing(string name, global::System.BinaryData requiredUnion, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralString requiredLiteralString, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt requiredLiteralInt, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString? optionalLiteralString, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralInt? optionalLiteralInt, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, global::System.Collections.Generic.IList<int> optionalNullableList, global::System.Collections.Generic.IList<int> requiredNullableList, global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> additionalBinaryDataProperties)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -58,8 +58,8 @@ namespace UnbrandedTypeSpec.Models
 
         /// <summary>
         /// required Union
-        /// <para> To assign an object to this property use <see cref="BinaryData.FromObjectAsJson{T}(T, JsonSerializerOptions?)"/>. </para>
-        /// <para> To assign an already formatted json string to this property use <see cref="BinaryData.FromString(string)"/>. </para>
+        /// <para> To assign an object to this property use <see cref="global::System.BinaryData.FromObjectAsJson{T}(T, global::System.Text.Json.JsonSerializerOptions?)"/>. </para>
+        /// <para> To assign an already formatted json string to this property use <see cref="global::System.BinaryData.FromString(string)"/>. </para>
         /// <para>
         /// <remarks>
         /// Supported types:
@@ -68,7 +68,7 @@ namespace UnbrandedTypeSpec.Models
         /// <description> <see cref="string"/>. </description>
         /// </item>
         /// <item>
-        /// <description> <see cref="IList{T}"/> where <c>T</c> is of type <see cref="string"/>. </description>
+        /// <description> <see cref="global::System.Collections.Generic.IList{T}"/> where <c>T</c> is of type <see cref="string"/>. </description>
         /// </item>
         /// <item>
         /// <description> <see cref="int"/>. </description>
@@ -98,28 +98,28 @@ namespace UnbrandedTypeSpec.Models
         /// </list>
         /// </para>
         /// </summary>
-        public BinaryData RequiredUnion { get; set; }
+        public global::System.BinaryData RequiredUnion { get; set; }
 
         /// <summary> required literal string. </summary>
-        public ThingRequiredLiteralString RequiredLiteralString { get; } = "accept";
+        public global::UnbrandedTypeSpec.Models.ThingRequiredLiteralString RequiredLiteralString { get; } = "accept";
 
         /// <summary> required literal int. </summary>
-        public ThingRequiredLiteralInt RequiredLiteralInt { get; } = 123;
+        public global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt RequiredLiteralInt { get; } = 123;
 
         /// <summary> required literal float. </summary>
-        public ThingRequiredLiteralFloat RequiredLiteralFloat { get; } = 1.23F;
+        public global::UnbrandedTypeSpec.Models.ThingRequiredLiteralFloat RequiredLiteralFloat { get; } = 1.23F;
 
         /// <summary> required literal bool. </summary>
         public bool RequiredLiteralBool { get; } = false;
 
         /// <summary> optional literal string. </summary>
-        public ThingOptionalLiteralString? OptionalLiteralString { get; set; }
+        public global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString? OptionalLiteralString { get; set; }
 
         /// <summary> optional literal int. </summary>
-        public ThingOptionalLiteralInt? OptionalLiteralInt { get; set; }
+        public global::UnbrandedTypeSpec.Models.ThingOptionalLiteralInt? OptionalLiteralInt { get; set; }
 
         /// <summary> optional literal float. </summary>
-        public ThingOptionalLiteralFloat? OptionalLiteralFloat { get; set; }
+        public global::UnbrandedTypeSpec.Models.ThingOptionalLiteralFloat? OptionalLiteralFloat { get; set; }
 
         /// <summary> optional literal bool. </summary>
         public bool? OptionalLiteralBool { get; set; }
@@ -128,9 +128,9 @@ namespace UnbrandedTypeSpec.Models
         public string RequiredBadDescription { get; set; }
 
         /// <summary> optional nullable collection. </summary>
-        public IList<int> OptionalNullableList { get; set; }
+        public global::System.Collections.Generic.IList<int> OptionalNullableList { get; set; }
 
         /// <summary> required nullable collection. </summary>
-        public IList<int> RequiredNullableList { get; set; }
+        public global::System.Collections.Generic.IList<int> RequiredNullableList { get; set; }
     }
 }

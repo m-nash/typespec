@@ -9,14 +9,14 @@ using System.Globalization;
 namespace UnbrandedTypeSpec.Models
 {
     /// <summary> float fixed enum. </summary>
-    public readonly partial struct FloatExtensibleEnumWithIntValue : IEquatable<FloatExtensibleEnumWithIntValue>
+    public readonly partial struct FloatExtensibleEnumWithIntValue : global::System.IEquatable<global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue>
     {
         private readonly float _value;
         private const float OneValue = 1F;
         private const float TwoValue = 2F;
         private const float FourValue = 4F;
 
-        /// <summary> Initializes a new instance of <see cref="FloatExtensibleEnumWithIntValue"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue"/>. </summary>
         /// <param name="value"> The value. </param>
         public FloatExtensibleEnumWithIntValue(float value)
         {
@@ -24,39 +24,39 @@ namespace UnbrandedTypeSpec.Models
         }
 
         /// <summary> Gets the One. </summary>
-        public static FloatExtensibleEnumWithIntValue One { get; } = new FloatExtensibleEnumWithIntValue(OneValue);
+        public static global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue One { get; } = new global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue(OneValue);
 
         /// <summary> Gets the Two. </summary>
-        public static FloatExtensibleEnumWithIntValue Two { get; } = new FloatExtensibleEnumWithIntValue(TwoValue);
+        public static global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue Two { get; } = new global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue(TwoValue);
 
         /// <summary> Gets the Four. </summary>
-        public static FloatExtensibleEnumWithIntValue Four { get; } = new FloatExtensibleEnumWithIntValue(FourValue);
+        public static global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue Four { get; } = new global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue(FourValue);
 
-        /// <summary> Determines if two <see cref="FloatExtensibleEnumWithIntValue"/> values are the same. </summary>
+        /// <summary> Determines if two <see cref="global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue"/> values are the same. </summary>
         /// <param name="left"> The left value to compare. </param>
         /// <param name="right"> The right value to compare. </param>
-        public static bool operator ==(FloatExtensibleEnumWithIntValue left, FloatExtensibleEnumWithIntValue right) => left.Equals(right);
+        public static bool operator ==(global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue left, global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue right) => left.Equals(right);
 
-        /// <summary> Determines if two <see cref="FloatExtensibleEnumWithIntValue"/> values are not the same. </summary>
+        /// <summary> Determines if two <see cref="global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue"/> values are not the same. </summary>
         /// <param name="left"> The left value to compare. </param>
         /// <param name="right"> The right value to compare. </param>
-        public static bool operator !=(FloatExtensibleEnumWithIntValue left, FloatExtensibleEnumWithIntValue right) => !left.Equals(right);
+        public static bool operator !=(global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue left, global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue right) => !left.Equals(right);
 
-        /// <summary> Converts a string to a <see cref="FloatExtensibleEnumWithIntValue"/>. </summary>
+        /// <summary> Converts a string to a <see cref="global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue"/>. </summary>
         /// <param name="value"> The value. </param>
-        public static implicit operator FloatExtensibleEnumWithIntValue(float value) => new FloatExtensibleEnumWithIntValue(value);
+        public static implicit operator global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue(float value) => new global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue(value);
 
         /// <param name="obj"> The object to compare. </param>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object obj) => obj is FloatExtensibleEnumWithIntValue other && Equals(other);
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public override bool Equals(object obj) => ((obj is global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue other) && this.Equals(other));
 
         /// <param name="other"> The instance to compare. </param>
-        public bool Equals(FloatExtensibleEnumWithIntValue other) => Equals(_value, other._value);
+        public bool Equals(global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue other) => float.Equals(_value, other._value);
 
         /// <inheritdoc/>
         public override int GetHashCode() => _value.GetHashCode();
 
         /// <inheritdoc/>
-        public override string ToString() => _value.ToString(CultureInfo.InvariantCulture);
+        public override string ToString() => _value.ToString(global::System.Globalization.CultureInfo.InvariantCulture);
     }
 }

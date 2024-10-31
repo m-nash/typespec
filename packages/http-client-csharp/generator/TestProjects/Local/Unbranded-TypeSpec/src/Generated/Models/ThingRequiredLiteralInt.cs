@@ -9,13 +9,13 @@ using System.Globalization;
 namespace UnbrandedTypeSpec.Models
 {
     /// <summary> The Thing_requiredLiteralInt. </summary>
-    public readonly partial struct ThingRequiredLiteralInt : IEquatable<ThingRequiredLiteralInt>
+    public readonly partial struct ThingRequiredLiteralInt : global::System.IEquatable<global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt>
     {
         private readonly int _value;
         /// <summary> 123. </summary>
         private const int _123Value = 123;
 
-        /// <summary> Initializes a new instance of <see cref="ThingRequiredLiteralInt"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt"/>. </summary>
         /// <param name="value"> The value. </param>
         public ThingRequiredLiteralInt(int value)
         {
@@ -23,33 +23,33 @@ namespace UnbrandedTypeSpec.Models
         }
 
         /// <summary> 123. </summary>
-        public static ThingRequiredLiteralInt _123 { get; } = new ThingRequiredLiteralInt(_123Value);
+        public static global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt _123 { get; } = new global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt(_123Value);
 
-        /// <summary> Determines if two <see cref="ThingRequiredLiteralInt"/> values are the same. </summary>
+        /// <summary> Determines if two <see cref="global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt"/> values are the same. </summary>
         /// <param name="left"> The left value to compare. </param>
         /// <param name="right"> The right value to compare. </param>
-        public static bool operator ==(ThingRequiredLiteralInt left, ThingRequiredLiteralInt right) => left.Equals(right);
+        public static bool operator ==(global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt left, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt right) => left.Equals(right);
 
-        /// <summary> Determines if two <see cref="ThingRequiredLiteralInt"/> values are not the same. </summary>
+        /// <summary> Determines if two <see cref="global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt"/> values are not the same. </summary>
         /// <param name="left"> The left value to compare. </param>
         /// <param name="right"> The right value to compare. </param>
-        public static bool operator !=(ThingRequiredLiteralInt left, ThingRequiredLiteralInt right) => !left.Equals(right);
+        public static bool operator !=(global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt left, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt right) => !left.Equals(right);
 
-        /// <summary> Converts a string to a <see cref="ThingRequiredLiteralInt"/>. </summary>
+        /// <summary> Converts a string to a <see cref="global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt"/>. </summary>
         /// <param name="value"> The value. </param>
-        public static implicit operator ThingRequiredLiteralInt(int value) => new ThingRequiredLiteralInt(value);
+        public static implicit operator global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt(int value) => new global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt(value);
 
         /// <param name="obj"> The object to compare. </param>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals(object obj) => obj is ThingRequiredLiteralInt other && Equals(other);
+        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public override bool Equals(object obj) => ((obj is global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt other) && this.Equals(other));
 
         /// <param name="other"> The instance to compare. </param>
-        public bool Equals(ThingRequiredLiteralInt other) => Equals(_value, other._value);
+        public bool Equals(global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt other) => int.Equals(_value, other._value);
 
         /// <inheritdoc/>
         public override int GetHashCode() => _value.GetHashCode();
 
         /// <inheritdoc/>
-        public override string ToString() => _value.ToString(CultureInfo.InvariantCulture);
+        public override string ToString() => _value.ToString(global::System.Globalization.CultureInfo.InvariantCulture);
     }
 }

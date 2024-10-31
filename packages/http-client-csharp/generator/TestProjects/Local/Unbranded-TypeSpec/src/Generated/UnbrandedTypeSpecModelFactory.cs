@@ -26,13 +26,13 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
-        /// <returns> A new <see cref="Models.Thing"/> instance for mocking. </returns>
-        public static Thing Thing(string name = default, BinaryData requiredUnion = default, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = default, ThingOptionalLiteralInt? optionalLiteralInt = default, ThingOptionalLiteralFloat? optionalLiteralFloat = default, bool? optionalLiteralBool = default, string requiredBadDescription = default, IEnumerable<int> optionalNullableList = default, IEnumerable<int> requiredNullableList = default)
+        /// <returns> A new <see cref="global::UnbrandedTypeSpec.Models.Thing"/> instance for mocking. </returns>
+        public static global::UnbrandedTypeSpec.Models.Thing Thing(string name = default, global::System.BinaryData requiredUnion = default, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralString requiredLiteralString = default, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt requiredLiteralInt = default, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString? optionalLiteralString = default, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralInt? optionalLiteralInt = default, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralFloat? optionalLiteralFloat = default, bool? optionalLiteralBool = default, string requiredBadDescription = default, global::System.Collections.Generic.IEnumerable<int> optionalNullableList = default, global::System.Collections.Generic.IEnumerable<int> requiredNullableList = default)
         {
-            optionalNullableList ??= new ChangeTrackingList<int>();
-            requiredNullableList ??= new ChangeTrackingList<int>();
+            optionalNullableList ??= new global::UnbrandedTypeSpec.ChangeTrackingList<int>();
+            requiredNullableList ??= new global::UnbrandedTypeSpec.ChangeTrackingList<int>();
 
-            return new Thing(
+            return new global::UnbrandedTypeSpec.Models.Thing(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -74,21 +74,21 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="readOnlyOptionalRecordUnknown"> optional readonly record of unknown. </param>
         /// <param name="modelWithRequiredNullable"> this is a model with required nullable properties. </param>
         /// <param name="requiredBytes"> Required bytes. </param>
-        /// <returns> A new <see cref="Models.RoundTripModel"/> instance for mocking. </returns>
-        public static RoundTripModel RoundTripModel(string requiredString = default, int requiredInt = default, IEnumerable<StringFixedEnum> requiredCollection = default, IDictionary<string, StringExtensibleEnum> requiredDictionary = default, Thing requiredModel = default, IntExtensibleEnum? intExtensibleEnum = default, IEnumerable<IntExtensibleEnum> intExtensibleEnumCollection = default, FloatExtensibleEnum? floatExtensibleEnum = default, FloatExtensibleEnumWithIntValue? floatExtensibleEnumWithIntValue = default, IEnumerable<FloatExtensibleEnum> floatExtensibleEnumCollection = default, FloatFixedEnum? floatFixedEnum = default, FloatFixedEnumWithIntValue? floatFixedEnumWithIntValue = default, IEnumerable<FloatFixedEnum> floatFixedEnumCollection = default, IntFixedEnum? intFixedEnum = default, IEnumerable<IntFixedEnum> intFixedEnumCollection = default, StringFixedEnum? stringFixedEnum = default, BinaryData requiredUnknown = default, BinaryData optionalUnknown = default, IDictionary<string, BinaryData> requiredRecordUnknown = default, IDictionary<string, BinaryData> optionalRecordUnknown = default, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = default, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = default, ModelWithRequiredNullableProperties modelWithRequiredNullable = default, BinaryData requiredBytes = default)
+        /// <returns> A new <see cref="global::UnbrandedTypeSpec.Models.RoundTripModel"/> instance for mocking. </returns>
+        public static global::UnbrandedTypeSpec.Models.RoundTripModel RoundTripModel(string requiredString = default, int requiredInt = default, global::System.Collections.Generic.IEnumerable<global::UnbrandedTypeSpec.Models.StringFixedEnum> requiredCollection = default, global::System.Collections.Generic.IDictionary<string, global::UnbrandedTypeSpec.Models.StringExtensibleEnum> requiredDictionary = default, global::UnbrandedTypeSpec.Models.Thing requiredModel = default, global::UnbrandedTypeSpec.Models.IntExtensibleEnum? intExtensibleEnum = default, global::System.Collections.Generic.IEnumerable<global::UnbrandedTypeSpec.Models.IntExtensibleEnum> intExtensibleEnumCollection = default, global::UnbrandedTypeSpec.Models.FloatExtensibleEnum? floatExtensibleEnum = default, global::UnbrandedTypeSpec.Models.FloatExtensibleEnumWithIntValue? floatExtensibleEnumWithIntValue = default, global::System.Collections.Generic.IEnumerable<global::UnbrandedTypeSpec.Models.FloatExtensibleEnum> floatExtensibleEnumCollection = default, global::UnbrandedTypeSpec.Models.FloatFixedEnum? floatFixedEnum = default, global::UnbrandedTypeSpec.Models.FloatFixedEnumWithIntValue? floatFixedEnumWithIntValue = default, global::System.Collections.Generic.IEnumerable<global::UnbrandedTypeSpec.Models.FloatFixedEnum> floatFixedEnumCollection = default, global::UnbrandedTypeSpec.Models.IntFixedEnum? intFixedEnum = default, global::System.Collections.Generic.IEnumerable<global::UnbrandedTypeSpec.Models.IntFixedEnum> intFixedEnumCollection = default, global::UnbrandedTypeSpec.Models.StringFixedEnum? stringFixedEnum = default, global::System.BinaryData requiredUnknown = default, global::System.BinaryData optionalUnknown = default, global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> requiredRecordUnknown = default, global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> optionalRecordUnknown = default, global::System.Collections.Generic.IReadOnlyDictionary<string, global::System.BinaryData> readOnlyRequiredRecordUnknown = default, global::System.Collections.Generic.IReadOnlyDictionary<string, global::System.BinaryData> readOnlyOptionalRecordUnknown = default, global::UnbrandedTypeSpec.Models.ModelWithRequiredNullableProperties modelWithRequiredNullable = default, global::System.BinaryData requiredBytes = default)
         {
-            requiredCollection ??= new ChangeTrackingList<StringFixedEnum>();
-            requiredDictionary ??= new ChangeTrackingDictionary<string, StringExtensibleEnum>();
-            intExtensibleEnumCollection ??= new ChangeTrackingList<IntExtensibleEnum>();
-            floatExtensibleEnumCollection ??= new ChangeTrackingList<FloatExtensibleEnum>();
-            floatFixedEnumCollection ??= new ChangeTrackingList<FloatFixedEnum>();
-            intFixedEnumCollection ??= new ChangeTrackingList<IntFixedEnum>();
-            requiredRecordUnknown ??= new ChangeTrackingDictionary<string, BinaryData>();
-            optionalRecordUnknown ??= new ChangeTrackingDictionary<string, BinaryData>();
-            readOnlyRequiredRecordUnknown ??= new ChangeTrackingDictionary<string, BinaryData>();
-            readOnlyOptionalRecordUnknown ??= new ChangeTrackingDictionary<string, BinaryData>();
+            requiredCollection ??= new global::UnbrandedTypeSpec.ChangeTrackingList<global::UnbrandedTypeSpec.Models.StringFixedEnum>();
+            requiredDictionary ??= new global::UnbrandedTypeSpec.ChangeTrackingDictionary<string, global::UnbrandedTypeSpec.Models.StringExtensibleEnum>();
+            intExtensibleEnumCollection ??= new global::UnbrandedTypeSpec.ChangeTrackingList<global::UnbrandedTypeSpec.Models.IntExtensibleEnum>();
+            floatExtensibleEnumCollection ??= new global::UnbrandedTypeSpec.ChangeTrackingList<global::UnbrandedTypeSpec.Models.FloatExtensibleEnum>();
+            floatFixedEnumCollection ??= new global::UnbrandedTypeSpec.ChangeTrackingList<global::UnbrandedTypeSpec.Models.FloatFixedEnum>();
+            intFixedEnumCollection ??= new global::UnbrandedTypeSpec.ChangeTrackingList<global::UnbrandedTypeSpec.Models.IntFixedEnum>();
+            requiredRecordUnknown ??= new global::UnbrandedTypeSpec.ChangeTrackingDictionary<string, global::System.BinaryData>();
+            optionalRecordUnknown ??= new global::UnbrandedTypeSpec.ChangeTrackingDictionary<string, global::System.BinaryData>();
+            readOnlyRequiredRecordUnknown ??= new global::UnbrandedTypeSpec.ChangeTrackingDictionary<string, global::System.BinaryData>();
+            readOnlyOptionalRecordUnknown ??= new global::UnbrandedTypeSpec.ChangeTrackingDictionary<string, global::System.BinaryData>();
 
-            return new RoundTripModel(
+            return new global::UnbrandedTypeSpec.Models.RoundTripModel(
                 requiredString,
                 requiredInt,
                 requiredCollection?.ToList(),
@@ -120,37 +120,37 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="requiredNullablePrimitive"> required nullable primitive type. </param>
         /// <param name="requiredExtensibleEnum"> required nullable extensible enum type. </param>
         /// <param name="requiredFixedEnum"> required nullable fixed enum type. </param>
-        /// <returns> A new <see cref="Models.ModelWithRequiredNullableProperties"/> instance for mocking. </returns>
-        public static ModelWithRequiredNullableProperties ModelWithRequiredNullableProperties(int? requiredNullablePrimitive = default, StringExtensibleEnum? requiredExtensibleEnum = default, StringFixedEnum? requiredFixedEnum = default)
+        /// <returns> A new <see cref="global::UnbrandedTypeSpec.Models.ModelWithRequiredNullableProperties"/> instance for mocking. </returns>
+        public static global::UnbrandedTypeSpec.Models.ModelWithRequiredNullableProperties ModelWithRequiredNullableProperties(int? requiredNullablePrimitive = default, global::UnbrandedTypeSpec.Models.StringExtensibleEnum? requiredExtensibleEnum = default, global::UnbrandedTypeSpec.Models.StringFixedEnum? requiredFixedEnum = default)
         {
 
-            return new ModelWithRequiredNullableProperties(requiredNullablePrimitive, requiredExtensibleEnum, requiredFixedEnum, additionalBinaryDataProperties: null);
+            return new global::UnbrandedTypeSpec.Models.ModelWithRequiredNullableProperties(requiredNullablePrimitive, requiredExtensibleEnum, requiredFixedEnum, additionalBinaryDataProperties: null);
         }
 
         /// <summary> this is not a friendly model but with a friendly name. </summary>
         /// <param name="name"> name of the NotFriend. </param>
-        /// <returns> A new <see cref="Models.Friend"/> instance for mocking. </returns>
-        public static Friend Friend(string name = default)
+        /// <returns> A new <see cref="global::UnbrandedTypeSpec.Models.Friend"/> instance for mocking. </returns>
+        public static global::UnbrandedTypeSpec.Models.Friend Friend(string name = default)
         {
 
-            return new Friend(name, additionalBinaryDataProperties: null);
+            return new global::UnbrandedTypeSpec.Models.Friend(name, additionalBinaryDataProperties: null);
         }
 
         /// <summary> this is a model with a projected name. </summary>
         /// <param name="name"> name of the ModelWithProjectedName. </param>
-        /// <returns> A new <see cref="Models.ProjectedModel"/> instance for mocking. </returns>
-        public static ProjectedModel ProjectedModel(string name = default)
+        /// <returns> A new <see cref="global::UnbrandedTypeSpec.Models.ProjectedModel"/> instance for mocking. </returns>
+        public static global::UnbrandedTypeSpec.Models.ProjectedModel ProjectedModel(string name = default)
         {
 
-            return new ProjectedModel(name, additionalBinaryDataProperties: null);
+            return new global::UnbrandedTypeSpec.Models.ProjectedModel(name, additionalBinaryDataProperties: null);
         }
 
         /// <summary> The ReturnsAnonymousModelResponse. </summary>
-        /// <returns> A new <see cref="Models.ReturnsAnonymousModelResponse"/> instance for mocking. </returns>
-        public static ReturnsAnonymousModelResponse ReturnsAnonymousModelResponse()
+        /// <returns> A new <see cref="global::UnbrandedTypeSpec.Models.ReturnsAnonymousModelResponse"/> instance for mocking. </returns>
+        public static global::UnbrandedTypeSpec.Models.ReturnsAnonymousModelResponse ReturnsAnonymousModelResponse()
         {
 
-            return new ReturnsAnonymousModelResponse(additionalBinaryDataProperties: null);
+            return new global::UnbrandedTypeSpec.Models.ReturnsAnonymousModelResponse(additionalBinaryDataProperties: null);
         }
     }
 }

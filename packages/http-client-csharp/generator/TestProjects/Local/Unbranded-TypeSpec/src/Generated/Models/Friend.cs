@@ -11,14 +11,14 @@ namespace UnbrandedTypeSpec.Models
     public partial class Friend
     {
         /// <summary> Keeps track of any properties unknown to the library. </summary>
-        private protected readonly IDictionary<string, BinaryData> _additionalBinaryDataProperties;
+        private protected readonly global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> _additionalBinaryDataProperties;
 
         internal Friend(string name)
         {
             Name = name;
         }
 
-        internal Friend(string name, IDictionary<string, BinaryData> additionalBinaryDataProperties)
+        internal Friend(string name, global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> additionalBinaryDataProperties)
         {
             Name = name;
             _additionalBinaryDataProperties = additionalBinaryDataProperties;

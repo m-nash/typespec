@@ -12,9 +12,9 @@ namespace UnbrandedTypeSpec
     {
         public static void AssertNotNull<T>(T value, string name)
         {
-            if (value is null)
+            if ((value is null))
             {
-                throw new ArgumentNullException(name);
+                throw new global::System.ArgumentNullException(name);
             }
         }
 
@@ -23,103 +23,103 @@ namespace UnbrandedTypeSpec
         {
             if (!value.HasValue)
             {
-                throw new ArgumentNullException(name);
+                throw new global::System.ArgumentNullException(name);
             }
         }
 
-        public static void AssertNotNullOrEmpty<T>(IEnumerable<T> value, string name)
+        public static void AssertNotNullOrEmpty<T>(global::System.Collections.Generic.IEnumerable<T> value, string name)
         {
-            if (value is null)
+            if ((value is null))
             {
-                throw new ArgumentNullException(name);
+                throw new global::System.ArgumentNullException(name);
             }
-            if (value is ICollection<T> collectionOfT && collectionOfT.Count == 0)
+            if (((value is global::System.Collections.Generic.ICollection<T> collectionOfT) && (collectionOfT.Count == 0)))
             {
-                throw new ArgumentException("Value cannot be an empty collection.", name);
+                throw new global::System.ArgumentException("Value cannot be an empty collection.", name);
             }
-            if (value is ICollection collection && collection.Count == 0)
+            if (((value is global::System.Collections.ICollection collection) && (collection.Count == 0)))
             {
-                throw new ArgumentException("Value cannot be an empty collection.", name);
+                throw new global::System.ArgumentException("Value cannot be an empty collection.", name);
             }
-            using IEnumerator<T> e = value.GetEnumerator();
+            using global::System.Collections.Generic.IEnumerator<T> e = value.GetEnumerator();
             if (!e.MoveNext())
             {
-                throw new ArgumentException("Value cannot be an empty collection.", name);
+                throw new global::System.ArgumentException("Value cannot be an empty collection.", name);
             }
         }
 
         public static void AssertNotNullOrEmpty(string value, string name)
         {
-            if (value is null)
+            if ((value is null))
             {
-                throw new ArgumentNullException(name);
+                throw new global::System.ArgumentNullException(name);
             }
-            if (value.Length == 0)
+            if ((value.Length == 0))
             {
-                throw new ArgumentException("Value cannot be an empty string.", name);
+                throw new global::System.ArgumentException("Value cannot be an empty string.", name);
             }
         }
 
         public static void AssertNotNullOrWhiteSpace(string value, string name)
         {
-            if (value is null)
+            if ((value is null))
             {
-                throw new ArgumentNullException(name);
+                throw new global::System.ArgumentNullException(name);
             }
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException("Value cannot be empty or contain only white-space characters.", name);
+                throw new global::System.ArgumentException("Value cannot be empty or contain only white-space characters.", name);
             }
         }
 
         public static void AssertNotDefault<T>(ref T value, string name)
-            where T : struct, IEquatable<T> 
+            where T : struct, global::System.IEquatable<T> 
         {
             if (value.Equals(default))
             {
-                throw new ArgumentException("Value cannot be empty.", name);
+                throw new global::System.ArgumentException("Value cannot be empty.", name);
             }
         }
 
         public static void AssertInRange<T>(T value, T minimum, T maximum, string name)
-            where T : notnull, IComparable<T> 
+            where T : notnull, global::System.IComparable<T> 
         {
-            if (minimum.CompareTo(value) > 0)
+            if ((minimum.CompareTo(value) > 0))
             {
-                throw new ArgumentOutOfRangeException(name, "Value is less than the minimum allowed.");
+                throw new global::System.ArgumentOutOfRangeException(name, "Value is less than the minimum allowed.");
             }
-            if (maximum.CompareTo(value) < 0)
+            if ((maximum.CompareTo(value) < 0))
             {
-                throw new ArgumentOutOfRangeException(name, "Value is greater than the maximum allowed.");
+                throw new global::System.ArgumentOutOfRangeException(name, "Value is greater than the maximum allowed.");
             }
         }
 
-        public static void AssertEnumDefined(Type enumType, object value, string name)
+        public static void AssertEnumDefined(global::System.Type enumType, object value, string name)
         {
-            if (!Enum.IsDefined(enumType, value))
+            if (!global::System.Enum.IsDefined(enumType, value))
             {
-                throw new ArgumentException($"Value not defined for {enumType.FullName}.", name);
+                throw new global::System.ArgumentException($"Value not defined for {enumType.FullName}.", name);
             }
         }
 
         public static T CheckNotNull<T>(T value, string name)
             where T : class 
         {
-            AssertNotNull(value, name);
+            global::UnbrandedTypeSpec.Argument.AssertNotNull(value, name);
             return value;
         }
 
         public static string CheckNotNullOrEmpty(string value, string name)
         {
-            AssertNotNullOrEmpty(value, name);
+            global::UnbrandedTypeSpec.Argument.AssertNotNullOrEmpty(value, name);
             return value;
         }
 
-        public static void AssertNull<T>(T value, string name, string message = null)
+        public static void AssertNull<T>(T value, string name, string message = ((string)null))
         {
-            if (value != null)
+            if ((value != null))
             {
-                throw new ArgumentException(message ?? "Value must be null.", name);
+                throw new global::System.ArgumentException((message ?? "Value must be null."), name);
             }
         }
     }

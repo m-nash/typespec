@@ -11,30 +11,30 @@ namespace UnbrandedTypeSpec
     /// <summary></summary>
     public partial class UnbrandedTypeSpecClient
     {
-        private static PipelineMessageClassifier _pipelineMessageClassifier200;
-        private static PipelineMessageClassifier _pipelineMessageClassifier201;
-        private static PipelineMessageClassifier _pipelineMessageClassifier204;
-        private static Classifier2xxAnd4xx _pipelineMessageClassifier2xxAnd4xx;
+        private static global::System.ClientModel.Primitives.PipelineMessageClassifier _pipelineMessageClassifier200;
+        private static global::System.ClientModel.Primitives.PipelineMessageClassifier _pipelineMessageClassifier201;
+        private static global::System.ClientModel.Primitives.PipelineMessageClassifier _pipelineMessageClassifier204;
+        private static global::UnbrandedTypeSpec.UnbrandedTypeSpecClient.Classifier2xxAnd4xx _pipelineMessageClassifier2xxAnd4xx;
 
-        private static PipelineMessageClassifier PipelineMessageClassifier200 => _pipelineMessageClassifier200 = PipelineMessageClassifier.Create(stackalloc ushort[] { 200 });
+        private static global::System.ClientModel.Primitives.PipelineMessageClassifier PipelineMessageClassifier200 => _pipelineMessageClassifier200 = global::System.ClientModel.Primitives.PipelineMessageClassifier.Create(stackalloc ushort[] { 200 });
 
-        private static PipelineMessageClassifier PipelineMessageClassifier201 => _pipelineMessageClassifier201 = PipelineMessageClassifier.Create(stackalloc ushort[] { 201 });
+        private static global::System.ClientModel.Primitives.PipelineMessageClassifier PipelineMessageClassifier201 => _pipelineMessageClassifier201 = global::System.ClientModel.Primitives.PipelineMessageClassifier.Create(stackalloc ushort[] { 201 });
 
-        private static PipelineMessageClassifier PipelineMessageClassifier204 => _pipelineMessageClassifier204 = PipelineMessageClassifier.Create(stackalloc ushort[] { 204 });
+        private static global::System.ClientModel.Primitives.PipelineMessageClassifier PipelineMessageClassifier204 => _pipelineMessageClassifier204 = global::System.ClientModel.Primitives.PipelineMessageClassifier.Create(stackalloc ushort[] { 204 });
 
-        private static Classifier2xxAnd4xx PipelineMessageClassifier2xxAnd4xx => _pipelineMessageClassifier2xxAnd4xx ??= new Classifier2xxAnd4xx();
+        private static global::UnbrandedTypeSpec.UnbrandedTypeSpecClient.Classifier2xxAnd4xx PipelineMessageClassifier2xxAnd4xx => _pipelineMessageClassifier2xxAnd4xx ??= new global::UnbrandedTypeSpec.UnbrandedTypeSpecClient.Classifier2xxAnd4xx();
 
-        internal PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateSayHiRequest(string headParameter, string queryParameter, string optionalQuery, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "GET";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
             uri.AppendQuery("queryParameter", queryParameter, true);
-            if (optionalQuery != null)
+            if ((optionalQuery != null))
             {
                 uri.AppendQuery("optionalQuery", optionalQuery, true);
             }
@@ -45,13 +45,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateHelloAgainRequest(string p2, string p1, BinaryContent content, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateHelloAgainRequest(string p2, string p1, global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "GET";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/againHi/", false);
             uri.AppendPath(p2, true);
@@ -64,13 +64,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateNoContentTypeRequest(string p2, string p1, BinaryContent content, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateNoContentTypeRequest(string p2, string p1, global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "GET";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/noContentType/", false);
             uri.AppendPath(p2, true);
@@ -83,13 +83,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateHelloDemo2Request(RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateHelloDemo2Request(global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "GET";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/demoHi", false);
             request.Uri = uri.ToUri();
@@ -98,13 +98,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateCreateLiteralRequest(BinaryContent content, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateCreateLiteralRequest(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "POST";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/literal", false);
             request.Uri = uri.ToUri();
@@ -115,17 +115,17 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateHelloLiteralRequest(RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateHelloLiteralRequest(global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "GET";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/helloLiteral/", false);
             uri.AppendPath(123.ToString(), true);
-            uri.AppendQuery("p3", TypeFormatters.ConvertToString(true, null), true);
+            uri.AppendQuery("p3", global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(true, null), true);
             request.Uri = uri.ToUri();
             request.Headers.Set("p1", "test");
             request.Headers.Set("Accept", "application/json");
@@ -133,13 +133,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateTopActionRequest(DateTimeOffset action, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateTopActionRequest(global::System.DateTimeOffset action, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "GET";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top/", false);
             uri.AppendPath(action.ToString("O"), true);
@@ -149,13 +149,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateTopAction2Request(RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateTopAction2Request(global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "GET";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/top2", false);
             request.Uri = uri.ToUri();
@@ -164,13 +164,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreatePatchActionRequest(BinaryContent content, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreatePatchActionRequest(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "PATCH";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/patch", false);
             request.Uri = uri.ToUri();
@@ -181,13 +181,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateAnonymousBodyRequest(BinaryContent content, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateAnonymousBodyRequest(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "POST";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/anonymousBody", false);
             request.Uri = uri.ToUri();
@@ -198,13 +198,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateFriendlyModelRequest(BinaryContent content, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateFriendlyModelRequest(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "POST";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/friendlyName", false);
             request.Uri = uri.ToUri();
@@ -215,28 +215,28 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateAddTimeHeaderRequest(RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateAddTimeHeaderRequest(global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier204;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "GET";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             request.Uri = uri.ToUri();
-            request.Headers.Set("Repeatability-First-Sent", TypeFormatters.ConvertToString(DateTimeOffset.Now, "R"));
+            request.Headers.Set("Repeatability-First-Sent", global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(global::System.DateTimeOffset.Now, "R"));
             message.Apply(options);
             return message;
         }
 
-        internal PipelineMessage CreateProjectedNameModelRequest(BinaryContent content, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateProjectedNameModelRequest(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "POST";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/projectedName", false);
             request.Uri = uri.ToUri();
@@ -247,13 +247,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateReturnsAnonymousModelRequest(RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateReturnsAnonymousModelRequest(global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "POST";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/returnsAnonymousModel", false);
             request.Uri = uri.ToUri();
@@ -262,13 +262,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateGetUnknownValueRequest(string accept, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateGetUnknownValueRequest(string accept, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "GET";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/unknown-value", false);
             request.Uri = uri.ToUri();
@@ -277,13 +277,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateInternalProtocolRequest(BinaryContent content, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateInternalProtocolRequest(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier200;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "POST";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/internalProtocol", false);
             request.Uri = uri.ToUri();
@@ -294,13 +294,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateStillConvenientRequest(RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateStillConvenientRequest(global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier204;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "GET";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/stillConvenient", false);
             request.Uri = uri.ToUri();
@@ -308,13 +308,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateHeadAsBooleanRequest(string id, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateHeadAsBooleanRequest(string id, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier2xxAnd4xx;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "HEAD";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/headAsBoolean/", false);
             uri.AppendPath(id, true);
@@ -323,13 +323,13 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        internal PipelineMessage CreateWithApiVersionRequest(string p1, RequestOptions options)
+        internal global::System.ClientModel.Primitives.PipelineMessage CreateWithApiVersionRequest(string p1, global::System.ClientModel.Primitives.RequestOptions options)
         {
-            PipelineMessage message = Pipeline.CreateMessage();
+            global::System.ClientModel.Primitives.PipelineMessage message = Pipeline.CreateMessage();
             message.ResponseClassifier = PipelineMessageClassifier204;
-            PipelineRequest request = message.Request;
+            global::System.ClientModel.Primitives.PipelineRequest request = message.Request;
             request.Method = "GET";
-            ClientUriBuilder uri = new ClientUriBuilder();
+            global::UnbrandedTypeSpec.ClientUriBuilder uri = new global::UnbrandedTypeSpec.ClientUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/WithApiVersion", false);
             uri.AppendQuery("apiVersion", _apiVersion, true);
@@ -339,25 +339,25 @@ namespace UnbrandedTypeSpec
             return message;
         }
 
-        private class Classifier2xxAnd4xx : PipelineMessageClassifier
+        private class Classifier2xxAnd4xx : global::System.ClientModel.Primitives.PipelineMessageClassifier
         {
-            public override bool TryClassify(PipelineMessage message, out bool isError)
+            public override bool TryClassify(global::System.ClientModel.Primitives.PipelineMessage message, out bool isError)
             {
                 isError = false;
-                if (message.Response == null)
+                if ((message.Response == null))
                 {
                     return false;
                 }
                 isError = message.Response.Status switch
                 {
-                    >= 200 and < 300 => false,
-                    >= 400 and < 500 => false,
+                    ((>= 200) and (< 300)) => false,
+                    ((>= 400) and (< 500)) => false,
                     _ => true
                 };
                 return true;
             }
 
-            public override bool TryClassify(PipelineMessage message, Exception exception, out bool isRetryable)
+            public override bool TryClassify(global::System.ClientModel.Primitives.PipelineMessage message, global::System.Exception exception, out bool isRetryable)
             {
                 isRetryable = false;
                 return false;
