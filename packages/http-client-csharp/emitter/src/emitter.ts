@@ -23,6 +23,7 @@ import { Logger } from "./lib/logger.js";
 import { NetEmitterOptions, resolveOptions, resolveOutputFolder } from "./options.js";
 import { defaultSDKContextOptions } from "./sdk-context-options.js";
 import { Configuration } from "./type/configuration.js";
+import { Output, SourceDirectory, SourceFile, Declaration } from "@alloy-js/core/stc"
 
 /**
  * Look for the project root by looking up until a `package.json` is found.
@@ -173,14 +174,50 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
           if (result.stdout) Logger.getInstance().verbose(result.stdout);
           throw new Error(`Failed to generate SDK. Exit code: ${result.exitCode}`);
         }
+
+        var output;
+        if (options["use-alloy"]) {
+          const alloyFile = resolvePath(outputFolder, "domain-specific-metadata.json");
+
+          fs.readFile(alloyFile, { encoding: 'utf8' }, (err, data) => {
+            const json = JSON.parse(data);
+            console.log(`Directories: ${json.directories.length}`);
+            output = Output()
+              .children(Directories({ directories: json.directories }));
+          });
+        }
+
         if (!options["save-inputs"]) {
           // delete
           deleteFile(resolvePath(outputFolder, tspOutputFileName));
           deleteFile(resolvePath(outputFolder, configurationFileName));
         }
+
+        if (options["use-alloy"]) {
+          return output;
+        }
       }
     }
   }
+}
+
+function Directories(props: { directories: any[] }) {
+  return props.directories.map(directory => Directory({ directory}))
+}
+
+function Directory(props: { directory: any }) {
+  return SourceDirectory(props.directory.name)
+    .children(Files({files: props.directory.files}));
+}
+
+function Files(props: { files: any[] }) {
+  return props.files.map(file => SourceFile(file.name)
+    .children(File({ file })));
+}
+
+function File(props: { file: any }) {
+  return Declaration(props.file.typeDeclaration.name)
+    .children(props.file.typeDeclaration.content);
 }
 
 function constructCommandArg(arg: string): string {
