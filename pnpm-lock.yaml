@@ -824,6 +824,9 @@ importers:
       '@typespec/http':
         specifier: workspace:*
         version: link:../http
+      '@typespec/http-client-library':
+        specifier: workspace:*
+        version: link:../http-client-library
       '@typespec/json-schema':
         specifier: workspace:*
         version: link:../json-schema
@@ -845,7 +848,7 @@ importers:
         version: 0.15.4(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest)(@typespec/versioning@0.61.0(@typespec/compiler@packages+compiler))
       '@azure-tools/cadl-ranch-specs':
         specifier: 0.37.2
-        version: 0.37.2(@azure-tools/cadl-ranch-expect@0.15.4(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest)(@typespec/versioning@0.61.0(@typespec/compiler@packages+compiler)))(@azure-tools/typespec-azure-core@0.47.0(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest))(@types/express@4.17.21)(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest)(@typespec/versioning@0.61.0(@typespec/compiler@packages+compiler))(@typespec/xml@0.61.0(@typespec/compiler@packages+compiler))
+        version: 0.37.2(@azure-tools/cadl-ranch-expect@0.15.4(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest))(@azure-tools/typespec-azure-core@0.47.0(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest))(@types/express@4.17.21)(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest)(@typespec/streams@0.61.0(@typespec/compiler@packages+compiler))(@typespec/xml@0.61.0(@typespec/compiler@packages+compiler))
       '@babel/cli':
         specifier: ^7.24.8
         version: 7.25.9(@babel/core@7.25.8)
@@ -870,6 +873,9 @@ importers:
 
   packages/http-client-library:
     dependencies:
+      '@alloy-js/core':
+        specifier: 0.2.0
+        version: 0.2.0
       '@typespec/compiler':
         specifier: workspace:*
         version: link:../compiler
@@ -877,6 +883,18 @@ importers:
         specifier: workspace:*
         version: link:../http
     devDependencies:
+      '@alloy-js/babel-preset':
+        specifier: 0.1.1
+        version: 0.1.1(@babel/core@7.25.8)
+      '@babel/cli':
+        specifier: ^7.24.8
+        version: 7.25.9(@babel/core@7.25.8)
+      '@babel/core':
+        specifier: ^7.24.9
+        version: 7.25.8
+      '@rollup/plugin-babel':
+        specifier: ^6.0.4
+        version: 6.0.4(@babel/core@7.25.8)(@types/babel__core@7.20.5)(rollup@4.24.0)
       '@types/node':
         specifier: latest
         version: 22.8.5
@@ -7659,15 +7677,6 @@ packages:
       supports-color:
         optional: true
 
-  debug@4.3.5:
-    resolution: {integrity: sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-
   debug@4.3.7:
     resolution: {integrity: sha512-Er2nc/H7RrMXZBFCEim6TCmMk02Z8vLC2Rbi1KEBggpo0fS6l0S1nnapwmIi3yW/+GOJap1Krg4w0Hg80oCqgQ==}
     engines: {node: '>=6.0'}
@@ -9965,9 +9974,6 @@ packages:
 
   ms@2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
-
-  ms@2.1.2:
-    resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -12858,18 +12864,18 @@ snapshots:
     dependencies:
       '@babel/core': 7.25.8
       '@babel/helper-module-imports': 7.18.6
-      '@babel/plugin-syntax-jsx': 7.25.7(@babel/core@7.25.8)
-      '@babel/types': 7.25.8
+      '@babel/plugin-syntax-jsx': 7.25.9(@babel/core@7.25.8)
+      '@babel/types': 7.26.0
       html-entities: 2.3.3
       validate-html-nesting: 1.2.2
 
   '@alloy-js/babel-plugin@0.1.0(@babel/core@7.25.8)':
     dependencies:
       '@babel/core': 7.25.8
-      '@babel/generator': 7.25.7
+      '@babel/generator': 7.26.2
       '@babel/helper-module-imports': 7.18.6
-      '@babel/plugin-syntax-jsx': 7.25.7(@babel/core@7.25.8)
-      '@babel/types': 7.25.8
+      '@babel/plugin-syntax-jsx': 7.25.9(@babel/core@7.25.8)
+      '@babel/types': 7.26.0
 
   '@alloy-js/babel-preset@0.1.1(@babel/core@7.25.8)':
     dependencies:
@@ -13118,7 +13124,7 @@ snapshots:
       '@typespec/rest': 0.61.0(@typespec/compiler@0.61.2)(@typespec/http@0.61.0(@typespec/compiler@0.61.2)(@typespec/streams@0.61.0(@typespec/compiler@packages+compiler)))
       '@typespec/versioning': link:packages/versioning
 
-  '@azure-tools/cadl-ranch-expect@0.15.5(@typespec/compiler@0.61.2)(@typespec/http@0.61.0(@typespec/compiler@0.61.2))(@typespec/rest@0.61.0(@typespec/compiler@0.61.2)(@typespec/http@0.61.0(@typespec/compiler@0.61.2)))(@typespec/versioning@0.61.0(@typespec/compiler@packages+compiler))':
+  '@azure-tools/cadl-ranch-specs@0.37.2(@azure-tools/cadl-ranch-expect@0.15.4(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest))(@azure-tools/typespec-azure-core@0.47.0(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest))(@types/express@4.17.21)(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest)(@typespec/streams@0.61.0(@typespec/compiler@packages+compiler))(@typespec/xml@0.61.0(@typespec/compiler@packages+compiler))':
     dependencies:
       '@typespec/compiler': 0.61.2
       '@typespec/http': 0.61.0(@typespec/compiler@0.61.2)(@typespec/streams@0.61.0(@typespec/compiler@packages+compiler))
@@ -13136,7 +13142,7 @@ snapshots:
     dependencies:
       '@azure-tools/cadl-ranch': 0.14.7(@types/express@4.17.21)(@typespec/versioning@0.61.0(@typespec/compiler@packages+compiler))
       '@azure-tools/cadl-ranch-api': 0.4.7(@types/express@4.17.21)
-      '@azure-tools/cadl-ranch-expect': 0.15.4(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest)(@typespec/versioning@0.61.0(@typespec/compiler@packages+compiler))
+      '@azure-tools/cadl-ranch-expect': 0.15.4(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest)
       '@azure-tools/typespec-azure-core': 0.47.0(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest)
       '@typespec/compiler': link:packages/compiler
       '@typespec/http': link:packages/http
@@ -13201,7 +13207,7 @@ snapshots:
       - debug
       - supports-color
 
-  '@azure-tools/cadl-ranch@0.14.7(@types/express@4.17.21)(@typespec/versioning@0.61.0(@typespec/compiler@packages+compiler))':
+  '@azure-tools/typespec-azure-core@0.47.0(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@0.61.0(@typespec/compiler@packages+compiler)(@typespec/http@packages+http))':
     dependencies:
       '@azure-tools/cadl-ranch-api': 0.4.7(@types/express@4.17.21)
       '@azure-tools/cadl-ranch-coverage-sdk': 0.8.4
@@ -13248,7 +13254,7 @@ snapshots:
       '@typespec/http': link:packages/http
       '@typespec/rest': link:packages/rest
 
-  '@azure-tools/typespec-client-generator-core@0.47.1(@azure-tools/typespec-azure-core@0.47.0(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest))(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/openapi@packages+openapi)(@typespec/rest@packages+rest)(@typespec/versioning@packages+versioning)':
+  '@azure-tools/typespec-azure-core@0.47.0(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest)':
     dependencies:
       '@azure-tools/typespec-azure-core': 0.47.0(@typespec/compiler@packages+compiler)(@typespec/http@packages+http)(@typespec/rest@packages+rest)
       '@typespec/compiler': link:packages/compiler
@@ -13445,17 +13451,17 @@ snapshots:
   '@babel/core@7.25.8':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@babel/code-frame': 7.25.7
-      '@babel/generator': 7.25.7
+      '@babel/code-frame': 7.25.9
+      '@babel/generator': 7.26.2
       '@babel/helper-compilation-targets': 7.25.7
-      '@babel/helper-module-transforms': 7.25.7(@babel/core@7.25.8)
+      '@babel/helper-module-transforms': 7.26.0(@babel/core@7.25.8)
       '@babel/helpers': 7.25.7
-      '@babel/parser': 7.25.8
-      '@babel/template': 7.25.7
-      '@babel/traverse': 7.25.7
-      '@babel/types': 7.25.8
+      '@babel/parser': 7.26.2
+      '@babel/template': 7.25.9
+      '@babel/traverse': 7.25.9
+      '@babel/types': 7.26.0
       convert-source-map: 2.0.0
-      debug: 4.3.5
+      debug: 4.3.7(supports-color@8.1.1)
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -13546,7 +13552,7 @@ snapshots:
 
   '@babel/helper-module-imports@7.18.6':
     dependencies:
-      '@babel/types': 7.25.8
+      '@babel/types': 7.26.0
 
   '@babel/helper-module-imports@7.25.7':
     dependencies:
@@ -13566,9 +13572,9 @@ snapshots:
     dependencies:
       '@babel/core': 7.25.8
       '@babel/helper-module-imports': 7.25.9
-      '@babel/helper-simple-access': 7.25.9
-      '@babel/helper-validator-identifier': 7.25.9
-      '@babel/traverse': 7.25.9
+      '@babel/helper-simple-access': 7.25.7
+      '@babel/helper-validator-identifier': 7.25.7
+      '@babel/traverse': 7.25.7
     transitivePeerDependencies:
       - supports-color
 
@@ -13634,7 +13640,7 @@ snapshots:
   '@babel/helper-wrap-function@7.22.20':
     dependencies:
       '@babel/helper-function-name': 7.24.7
-      '@babel/template': 7.25.9
+      '@babel/template': 7.25.7
       '@babel/types': 7.26.0
 
   '@babel/helpers@7.25.7':
@@ -13822,7 +13828,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.25.8
       '@babel/helper-module-imports': 7.25.9
-      '@babel/helper-plugin-utils': 7.25.9
+      '@babel/helper-plugin-utils': 7.25.7
       '@babel/helper-remap-async-to-generator': 7.22.20(@babel/core@7.25.8)
     transitivePeerDependencies:
       - supports-color
@@ -16960,7 +16966,7 @@ snapshots:
   '@rollup/plugin-babel@6.0.4(@babel/core@7.25.8)(@types/babel__core@7.20.5)(rollup@4.24.0)':
     dependencies:
       '@babel/core': 7.25.8
-      '@babel/helper-module-imports': 7.25.7
+      '@babel/helper-module-imports': 7.25.9
       '@rollup/pluginutils': 5.1.2(rollup@4.24.0)
     optionalDependencies:
       '@types/babel__core': 7.20.5
@@ -19953,10 +19959,6 @@ snapshots:
   debug@3.2.7:
     dependencies:
       ms: 2.1.3
-
-  debug@4.3.5:
-    dependencies:
-      ms: 2.1.2
 
   debug@4.3.7(supports-color@8.1.1):
     dependencies:
@@ -22984,8 +22986,6 @@ snapshots:
   mrmime@2.0.0: {}
 
   ms@2.0.0: {}
-
-  ms@2.1.2: {}
 
   ms@2.1.3: {}
 
