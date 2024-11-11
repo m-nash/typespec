@@ -12,6 +12,8 @@ namespace Microsoft.Generator.CSharp
             PluginHandler pluginHandler = new();
             pluginHandler.LoadPlugin(options);
 
+            CodeModelPlugin.Instance.Configuration.UseAlloy = options.UseAlloy;
+
             var csharpGen = new CSharpGen();
             await csharpGen.ExecuteAsync(options);
         }

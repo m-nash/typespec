@@ -10,15 +10,15 @@ namespace UnbrandedTypeSpec
 {
     internal static partial class PipelineRequestHeadersExtensions
     {
-        public static void SetDelimited<T>(this global::System.ClientModel.Primitives.PipelineRequestHeaders headers, string name, global::System.Collections.Generic.IEnumerable<T> value, string delimiter)
+        public static void SetDelimited<T>(this PipelineRequestHeaders headers, string name, IEnumerable<T> value, string delimiter)
         {
-            global::System.Collections.Generic.IEnumerable<string> stringValues = value.Select(v => global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(v));
+            IEnumerable<string> stringValues = value.Select(v => TypeFormatters.ConvertToString(v));
             headers.Set(name, string.Join(delimiter, stringValues));
         }
 
-        public static void SetDelimited<T>(this global::System.ClientModel.Primitives.PipelineRequestHeaders headers, string name, global::System.Collections.Generic.IEnumerable<T> value, string delimiter, string format)
+        public static void SetDelimited<T>(this PipelineRequestHeaders headers, string name, IEnumerable<T> value, string delimiter, string format)
         {
-            global::System.Collections.Generic.IEnumerable<string> stringValues = value.Select(v => global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(v, format));
+            IEnumerable<string> stringValues = value.Select(v => TypeFormatters.ConvertToString(v, format));
             headers.Set(name, string.Join(delimiter, stringValues));
         }
     }

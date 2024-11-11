@@ -9,14 +9,14 @@ using System.Globalization;
 namespace UnbrandedTypeSpec.Models
 {
     /// <summary> Int based extensible enum. </summary>
-    public readonly partial struct IntExtensibleEnum : global::System.IEquatable<global::UnbrandedTypeSpec.Models.IntExtensibleEnum>
+    public readonly partial struct IntExtensibleEnum : IEquatable<IntExtensibleEnum>
     {
         private readonly int _value;
         private const int OneValue = 1;
         private const int TwoValue = 2;
         private const int FourValue = 4;
 
-        /// <summary> Initializes a new instance of <see cref="global::UnbrandedTypeSpec.Models.IntExtensibleEnum"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="IntExtensibleEnum"/>. </summary>
         /// <param name="value"> The value. </param>
         public IntExtensibleEnum(int value)
         {
@@ -24,39 +24,39 @@ namespace UnbrandedTypeSpec.Models
         }
 
         /// <summary> Gets the One. </summary>
-        public static global::UnbrandedTypeSpec.Models.IntExtensibleEnum One { get; } = new global::UnbrandedTypeSpec.Models.IntExtensibleEnum(OneValue);
+        public static IntExtensibleEnum One { get; } = new IntExtensibleEnum(OneValue);
 
         /// <summary> Gets the Two. </summary>
-        public static global::UnbrandedTypeSpec.Models.IntExtensibleEnum Two { get; } = new global::UnbrandedTypeSpec.Models.IntExtensibleEnum(TwoValue);
+        public static IntExtensibleEnum Two { get; } = new IntExtensibleEnum(TwoValue);
 
         /// <summary> Gets the Four. </summary>
-        public static global::UnbrandedTypeSpec.Models.IntExtensibleEnum Four { get; } = new global::UnbrandedTypeSpec.Models.IntExtensibleEnum(FourValue);
+        public static IntExtensibleEnum Four { get; } = new IntExtensibleEnum(FourValue);
 
-        /// <summary> Determines if two <see cref="global::UnbrandedTypeSpec.Models.IntExtensibleEnum"/> values are the same. </summary>
+        /// <summary> Determines if two <see cref="IntExtensibleEnum"/> values are the same. </summary>
         /// <param name="left"> The left value to compare. </param>
         /// <param name="right"> The right value to compare. </param>
-        public static bool operator ==(global::UnbrandedTypeSpec.Models.IntExtensibleEnum left, global::UnbrandedTypeSpec.Models.IntExtensibleEnum right) => left.Equals(right);
+        public static bool operator ==(IntExtensibleEnum left, IntExtensibleEnum right) => left.Equals(right);
 
-        /// <summary> Determines if two <see cref="global::UnbrandedTypeSpec.Models.IntExtensibleEnum"/> values are not the same. </summary>
+        /// <summary> Determines if two <see cref="IntExtensibleEnum"/> values are not the same. </summary>
         /// <param name="left"> The left value to compare. </param>
         /// <param name="right"> The right value to compare. </param>
-        public static bool operator !=(global::UnbrandedTypeSpec.Models.IntExtensibleEnum left, global::UnbrandedTypeSpec.Models.IntExtensibleEnum right) => !left.Equals(right);
+        public static bool operator !=(IntExtensibleEnum left, IntExtensibleEnum right) => !left.Equals(right);
 
-        /// <summary> Converts a string to a <see cref="global::UnbrandedTypeSpec.Models.IntExtensibleEnum"/>. </summary>
+        /// <summary> Converts a string to a <see cref="IntExtensibleEnum"/>. </summary>
         /// <param name="value"> The value. </param>
-        public static implicit operator global::UnbrandedTypeSpec.Models.IntExtensibleEnum(int value) => new global::UnbrandedTypeSpec.Models.IntExtensibleEnum(value);
+        public static implicit operator IntExtensibleEnum(int value) => new IntExtensibleEnum(value);
 
         /// <param name="obj"> The object to compare. </param>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public override bool Equals(object obj) => ((obj is global::UnbrandedTypeSpec.Models.IntExtensibleEnum other) && this.Equals(other));
+        [EditorBrowsableAttribute(EditorBrowsableState.Never)]
+        public override bool Equals(object obj) => ((obj is IntExtensibleEnum other) && this.Equals(other));
 
         /// <param name="other"> The instance to compare. </param>
-        public bool Equals(global::UnbrandedTypeSpec.Models.IntExtensibleEnum other) => int.Equals(_value, other._value);
+        public bool Equals(IntExtensibleEnum other) => int.Equals(_value, other._value);
 
         /// <inheritdoc/>
         public override int GetHashCode() => _value.GetHashCode();
 
         /// <inheritdoc/>
-        public override string ToString() => _value.ToString(global::System.Globalization.CultureInfo.InvariantCulture);
+        public override string ToString() => _value.ToString(CultureInfo.InvariantCulture);
     }
 }

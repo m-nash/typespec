@@ -10,27 +10,27 @@ using System.Threading.Tasks;
 
 namespace UnbrandedTypeSpec
 {
-    internal partial class Utf8JsonBinaryContent : global::System.ClientModel.BinaryContent
+    internal partial class Utf8JsonBinaryContent : BinaryContent
     {
-        private readonly global::System.IO.MemoryStream _stream;
-        private readonly global::System.ClientModel.BinaryContent _content;
+        private readonly MemoryStream _stream;
+        private readonly BinaryContent _content;
 
         public Utf8JsonBinaryContent()
         {
-            _stream = new global::System.IO.MemoryStream();
-            _content = global::System.ClientModel.BinaryContent.Create(_stream);
-            JsonWriter = new global::System.Text.Json.Utf8JsonWriter(_stream);
+            _stream = new MemoryStream();
+            _content = BinaryContent.Create(_stream);
+            JsonWriter = new Utf8JsonWriter(_stream);
         }
 
-        public global::System.Text.Json.Utf8JsonWriter JsonWriter { get; }
+        public Utf8JsonWriter JsonWriter { get; }
 
-        public override async global::System.Threading.Tasks.Task WriteToAsync(global::System.IO.Stream stream, global::System.Threading.CancellationToken cancellationToken = default)
+        public override async Task WriteToAsync(Stream stream, CancellationToken cancellationToken = default)
         {
             await JsonWriter.FlushAsync().ConfigureAwait(false);
             await _content.WriteToAsync(stream, cancellationToken).ConfigureAwait(false);
         }
 
-        public override void WriteTo(global::System.IO.Stream stream, global::System.Threading.CancellationToken cancellationToken = default)
+        public override void WriteTo(Stream stream, CancellationToken cancellationToken = default)
         {
             JsonWriter.Flush();
             _content.WriteTo(stream, cancellationToken);

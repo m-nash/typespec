@@ -11,23 +11,23 @@ namespace UnbrandedTypeSpec
 {
     internal static partial class BinaryContentHelper
     {
-        public static global::System.ClientModel.BinaryContent FromEnumerable<T>(global::System.Collections.Generic.IEnumerable<T> enumerable)
+        public static BinaryContent FromEnumerable<T>(IEnumerable<T> enumerable)
             where T : notnull 
         {
-            global::UnbrandedTypeSpec.Utf8JsonBinaryContent content = new global::UnbrandedTypeSpec.Utf8JsonBinaryContent();
+            Utf8JsonBinaryContent content = new Utf8JsonBinaryContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in enumerable)
             {
-                content.JsonWriter.WriteObjectValue<T>(item, global::UnbrandedTypeSpec.ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue<T>(item, ModelSerializationExtensions.WireOptions);
             }
             content.JsonWriter.WriteEndArray();
 
             return content;
         }
 
-        public static global::System.ClientModel.BinaryContent FromEnumerable(global::System.Collections.Generic.IEnumerable<global::System.BinaryData> enumerable)
+        public static BinaryContent FromEnumerable(IEnumerable<BinaryData> enumerable)
         {
-            global::UnbrandedTypeSpec.Utf8JsonBinaryContent content = new global::UnbrandedTypeSpec.Utf8JsonBinaryContent();
+            Utf8JsonBinaryContent content = new Utf8JsonBinaryContent();
             content.JsonWriter.WriteStartArray();
             foreach (var item in enumerable)
             {
@@ -40,9 +40,9 @@ namespace UnbrandedTypeSpec
 #if NET6_0_OR_GREATER
                     content.JsonWriter.WriteRawValue(item);
 #else
-                    using (global::System.Text.Json.JsonDocument document = global::System.Text.Json.JsonDocument.Parse(item))
+                    using (JsonDocument document = JsonDocument.Parse(item))
                     {
-                        global::System.Text.Json.JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
+                        JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
                     }
 #endif
                 }
@@ -52,39 +52,39 @@ namespace UnbrandedTypeSpec
             return content;
         }
 
-        public static global::System.ClientModel.BinaryContent FromEnumerable<T>(global::System.ReadOnlySpan<T> span)
+        public static BinaryContent FromEnumerable<T>(ReadOnlySpan<T> span)
             where T : notnull 
         {
-            global::UnbrandedTypeSpec.Utf8JsonBinaryContent content = new global::UnbrandedTypeSpec.Utf8JsonBinaryContent();
+            Utf8JsonBinaryContent content = new Utf8JsonBinaryContent();
             content.JsonWriter.WriteStartArray();
             int i = 0;
             for (; (i < span.Length); i++)
             {
-                content.JsonWriter.WriteObjectValue<T>(span[i], global::UnbrandedTypeSpec.ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue<T>(span[i], ModelSerializationExtensions.WireOptions);
             }
             content.JsonWriter.WriteEndArray();
 
             return content;
         }
 
-        public static global::System.ClientModel.BinaryContent FromDictionary<TValue>(global::System.Collections.Generic.IDictionary<string, TValue> dictionary)
+        public static BinaryContent FromDictionary<TValue>(IDictionary<string, TValue> dictionary)
             where TValue : notnull 
         {
-            global::UnbrandedTypeSpec.Utf8JsonBinaryContent content = new global::UnbrandedTypeSpec.Utf8JsonBinaryContent();
+            Utf8JsonBinaryContent content = new Utf8JsonBinaryContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in dictionary)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteObjectValue<TValue>(item.Value, global::UnbrandedTypeSpec.ModelSerializationExtensions.WireOptions);
+                content.JsonWriter.WriteObjectValue<TValue>(item.Value, ModelSerializationExtensions.WireOptions);
             }
             content.JsonWriter.WriteEndObject();
 
             return content;
         }
 
-        public static global::System.ClientModel.BinaryContent FromDictionary(global::System.Collections.Generic.IDictionary<string, global::System.BinaryData> dictionary)
+        public static BinaryContent FromDictionary(IDictionary<string, BinaryData> dictionary)
         {
-            global::UnbrandedTypeSpec.Utf8JsonBinaryContent content = new global::UnbrandedTypeSpec.Utf8JsonBinaryContent();
+            Utf8JsonBinaryContent content = new Utf8JsonBinaryContent();
             content.JsonWriter.WriteStartObject();
             foreach (var item in dictionary)
             {
@@ -98,9 +98,9 @@ namespace UnbrandedTypeSpec
 #if NET6_0_OR_GREATER
                     content.JsonWriter.WriteRawValue(item.Value);
 #else
-                    using (global::System.Text.Json.JsonDocument document = global::System.Text.Json.JsonDocument.Parse(item.Value))
+                    using (JsonDocument document = JsonDocument.Parse(item.Value))
                     {
-                        global::System.Text.Json.JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
+                        JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
                     }
 #endif
                 }
@@ -110,22 +110,22 @@ namespace UnbrandedTypeSpec
             return content;
         }
 
-        public static global::System.ClientModel.BinaryContent FromObject(object value)
+        public static BinaryContent FromObject(object value)
         {
-            global::UnbrandedTypeSpec.Utf8JsonBinaryContent content = new global::UnbrandedTypeSpec.Utf8JsonBinaryContent();
-            content.JsonWriter.WriteObjectValue<object>(value, global::UnbrandedTypeSpec.ModelSerializationExtensions.WireOptions);
+            Utf8JsonBinaryContent content = new Utf8JsonBinaryContent();
+            content.JsonWriter.WriteObjectValue<object>(value, ModelSerializationExtensions.WireOptions);
             return content;
         }
 
-        public static global::System.ClientModel.BinaryContent FromObject(global::System.BinaryData value)
+        public static BinaryContent FromObject(BinaryData value)
         {
-            global::UnbrandedTypeSpec.Utf8JsonBinaryContent content = new global::UnbrandedTypeSpec.Utf8JsonBinaryContent();
+            Utf8JsonBinaryContent content = new Utf8JsonBinaryContent();
 #if NET6_0_OR_GREATER
             content.JsonWriter.WriteRawValue(value);
 #else
-            using (global::System.Text.Json.JsonDocument document = global::System.Text.Json.JsonDocument.Parse(value))
+            using (JsonDocument document = JsonDocument.Parse(value))
             {
-                global::System.Text.Json.JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
+                JsonSerializer.Serialize(content.JsonWriter, document.RootElement);
             }
 #endif
             return content;

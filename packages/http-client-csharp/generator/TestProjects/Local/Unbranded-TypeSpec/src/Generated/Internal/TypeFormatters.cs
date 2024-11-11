@@ -16,42 +16,42 @@ namespace UnbrandedTypeSpec
 
         public static string ToString(bool value) => value ? "true" : "false";
 
-        public static string ToString(global::System.DateTime value, string format) => value.Kind switch
+        public static string ToString(DateTime value, string format) => value.Kind switch
         {
-            global::System.DateTimeKind.Utc => global::UnbrandedTypeSpec.TypeFormatters.ToString(((global::System.DateTimeOffset)value), format),
-            _ => throw new global::System.NotSupportedException($"DateTime {value} has a Kind of {value.Kind}. Generated clients require it to be UTC. You can call DateTime.SpecifyKind to change Kind property value to DateTimeKind.Utc.")
+            DateTimeKind.Utc => TypeFormatters.ToString(((DateTimeOffset)value), format),
+            _ => throw new NotSupportedException($"DateTime {value} has a Kind of {value.Kind}. Generated clients require it to be UTC. You can call DateTime.SpecifyKind to change Kind property value to DateTimeKind.Utc.")
         };
 
-        public static string ToString(global::System.DateTimeOffset value, string format) => format switch
+        public static string ToString(DateTimeOffset value, string format) => format switch
         {
-            "D" => value.ToString("yyyy-MM-dd", global::System.Globalization.CultureInfo.InvariantCulture),
-            "U" => value.ToUnixTimeSeconds().ToString(global::System.Globalization.CultureInfo.InvariantCulture),
-            "O" => value.ToUniversalTime().ToString(RoundtripZFormat, global::System.Globalization.CultureInfo.InvariantCulture),
-            "o" => value.ToUniversalTime().ToString(RoundtripZFormat, global::System.Globalization.CultureInfo.InvariantCulture),
-            "R" => value.ToString("r", global::System.Globalization.CultureInfo.InvariantCulture),
-            _ => value.ToString(format, global::System.Globalization.CultureInfo.InvariantCulture)
+            "D" => value.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+            "U" => value.ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture),
+            "O" => value.ToUniversalTime().ToString(RoundtripZFormat, CultureInfo.InvariantCulture),
+            "o" => value.ToUniversalTime().ToString(RoundtripZFormat, CultureInfo.InvariantCulture),
+            "R" => value.ToString("r", CultureInfo.InvariantCulture),
+            _ => value.ToString(format, CultureInfo.InvariantCulture)
         };
 
-        public static string ToString(global::System.TimeSpan value, string format) => format switch
+        public static string ToString(TimeSpan value, string format) => format switch
         {
-            "P" => global::System.Xml.XmlConvert.ToString(value),
-            _ => value.ToString(format, global::System.Globalization.CultureInfo.InvariantCulture)
+            "P" => XmlConvert.ToString(value),
+            _ => value.ToString(format, CultureInfo.InvariantCulture)
         };
 
-        public static string ToString(global::System.Byte[] value, string format) => format switch
+        public static string ToString(Byte[] value, string format) => format switch
         {
-            "U" => global::UnbrandedTypeSpec.TypeFormatters.ToBase64UrlString(value),
-            "D" => global::System.Convert.ToBase64String(value),
-            _ => throw new global::System.ArgumentException($"Format is not supported: '{format}'", nameof(format))
+            "U" => TypeFormatters.ToBase64UrlString(value),
+            "D" => Convert.ToBase64String(value),
+            _ => throw new ArgumentException($"Format is not supported: '{format}'", nameof(format))
         };
 
-        public static string ToBase64UrlString(global::System.Byte[] value)
+        public static string ToBase64UrlString(Byte[] value)
         {
             int numWholeOrPartialInputBlocks = (checked (value.Length + 2) / 3);
             int size = checked (numWholeOrPartialInputBlocks * 4);
-            global::System.Char[] output = new char[size];
+            Char[] output = new char[size];
 
-            int numBase64Chars = global::System.Convert.ToBase64CharArray(value, 0, value.Length, output, 0);
+            int numBase64Chars = Convert.ToBase64CharArray(value, 0, value.Length, output, 0);
 
             int i = 0;
             for (; (i < numBase64Chars); i++)
@@ -80,16 +80,16 @@ namespace UnbrandedTypeSpec
             return new string(output, 0, i);
         }
 
-        public static global::System.Byte[] FromBase64UrlString(string value)
+        public static Byte[] FromBase64UrlString(string value)
         {
             int paddingCharsToAdd = (value.Length % 4) switch
             {
                 0 => 0,
                 2 => 2,
                 3 => 1,
-                _ => throw new global::System.InvalidOperationException("Malformed input")
+                _ => throw new InvalidOperationException("Malformed input")
             };
-            global::System.Char[] output = new char[(value.Length + paddingCharsToAdd)];
+            Char[] output = new char[(value.Length + paddingCharsToAdd)];
             int i = 0;
             for (; (i < value.Length); i++)
             {
@@ -116,34 +116,34 @@ namespace UnbrandedTypeSpec
                 output[i] = '=';
             }
 
-            return global::System.Convert.FromBase64CharArray(output, 0, output.Length);
+            return Convert.FromBase64CharArray(output, 0, output.Length);
         }
 
-        public static global::System.DateTimeOffset ParseDateTimeOffset(string value, string format) => format switch
+        public static DateTimeOffset ParseDateTimeOffset(string value, string format) => format switch
         {
-            "U" => global::System.DateTimeOffset.FromUnixTimeSeconds(long.Parse(value, global::System.Globalization.CultureInfo.InvariantCulture)),
-            _ => global::System.DateTimeOffset.Parse(value, global::System.Globalization.CultureInfo.InvariantCulture, global::System.Globalization.DateTimeStyles.AssumeUniversal)
+            "U" => DateTimeOffset.FromUnixTimeSeconds(long.Parse(value, CultureInfo.InvariantCulture)),
+            _ => DateTimeOffset.Parse(value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal)
         };
 
-        public static global::System.TimeSpan ParseTimeSpan(string value, string format) => format switch
+        public static TimeSpan ParseTimeSpan(string value, string format) => format switch
         {
-            "P" => global::System.Xml.XmlConvert.ToTimeSpan(value),
-            _ => global::System.TimeSpan.ParseExact(value, format, global::System.Globalization.CultureInfo.InvariantCulture)
+            "P" => XmlConvert.ToTimeSpan(value),
+            _ => TimeSpan.ParseExact(value, format, CultureInfo.InvariantCulture)
         };
 
         public static string ConvertToString(object value, string format = ((string)null)) => value switch
         {
             null => "null",
             string s => s,
-            bool b => global::UnbrandedTypeSpec.TypeFormatters.ToString(b),
-            (int  or  (float  or  (double  or  (long  or  decimal)))) => ((global::System.IFormattable)value).ToString(DefaultNumberFormat, global::System.Globalization.CultureInfo.InvariantCulture),
-            global::System.Byte[] b0 when (format != null) => global::UnbrandedTypeSpec.TypeFormatters.ToString(b0, format),
-            global::System.Collections.Generic.IEnumerable<string> s0 => string.Join(",", s0),
-            global::System.DateTimeOffset dateTime when (format != null) => global::UnbrandedTypeSpec.TypeFormatters.ToString(dateTime, format),
-            global::System.TimeSpan timeSpan when (format != null) => global::UnbrandedTypeSpec.TypeFormatters.ToString(timeSpan, format),
-            global::System.TimeSpan timeSpan0 => global::System.Xml.XmlConvert.ToString(timeSpan0),
-            global::System.Guid guid => guid.ToString(),
-            global::System.BinaryData binaryData => global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(binaryData.ToArray(), format),
+            bool b => TypeFormatters.ToString(b),
+            (int  or  (float  or  (double  or  (long  or  decimal)))) => ((IFormattable)value).ToString(DefaultNumberFormat, CultureInfo.InvariantCulture),
+            Byte[] b0 when (format != null) => TypeFormatters.ToString(b0, format),
+            IEnumerable<string> s0 => string.Join(",", s0),
+            DateTimeOffset dateTime when (format != null) => TypeFormatters.ToString(dateTime, format),
+            TimeSpan timeSpan when (format != null) => TypeFormatters.ToString(timeSpan, format),
+            TimeSpan timeSpan0 => XmlConvert.ToString(timeSpan0),
+            Guid guid => guid.ToString(),
+            BinaryData binaryData => TypeFormatters.ConvertToString(binaryData.ToArray(), format),
             _ => value.ToString()
         };
     }

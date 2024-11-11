@@ -11,32 +11,32 @@ namespace UnbrandedTypeSpec
 {
     internal partial class ClientUriBuilder
     {
-        private global::System.UriBuilder _uriBuilder;
-        private global::System.Text.StringBuilder _pathBuilder;
-        private global::System.Text.StringBuilder _queryBuilder;
+        private UriBuilder _uriBuilder;
+        private StringBuilder _pathBuilder;
+        private StringBuilder _queryBuilder;
 
         public ClientUriBuilder()
         {
         }
 
-        private global::System.UriBuilder UriBuilder => (_uriBuilder  ??=  new global::System.UriBuilder());
+        private UriBuilder UriBuilder => (_uriBuilder  ??=  new UriBuilder());
 
-        private global::System.Text.StringBuilder PathBuilder => (_pathBuilder  ??=  new global::System.Text.StringBuilder(UriBuilder.Path));
+        private StringBuilder PathBuilder => (_pathBuilder  ??=  new StringBuilder(UriBuilder.Path));
 
-        private global::System.Text.StringBuilder QueryBuilder => (_queryBuilder  ??=  new global::System.Text.StringBuilder(UriBuilder.Query));
+        private StringBuilder QueryBuilder => (_queryBuilder  ??=  new StringBuilder(UriBuilder.Query));
 
-        public void Reset(global::System.Uri uri)
+        public void Reset(Uri uri)
         {
-            _uriBuilder = new global::System.UriBuilder(uri);
-            _pathBuilder = new global::System.Text.StringBuilder(UriBuilder.Path);
-            _queryBuilder = new global::System.Text.StringBuilder(UriBuilder.Query);
+            _uriBuilder = new UriBuilder(uri);
+            _pathBuilder = new StringBuilder(UriBuilder.Path);
+            _queryBuilder = new StringBuilder(UriBuilder.Query);
         }
 
         public void AppendPath(string value, bool escape)
         {
             if (escape)
             {
-                value = global::System.Uri.EscapeDataString(value);
+                value = Uri.EscapeDataString(value);
             }
             if ((((PathBuilder.Length > 0) && (PathBuilder[(PathBuilder.Length - 1)] == '/')) && (value[0] == '/')))
             {
@@ -46,25 +46,25 @@ namespace UnbrandedTypeSpec
             UriBuilder.Path = PathBuilder.ToString();
         }
 
-        public void AppendPath(bool value, bool escape = false) => AppendPath(global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendPath(bool value, bool escape = false) => AppendPath(TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendPath(float value, bool escape = true) => AppendPath(global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendPath(float value, bool escape = true) => AppendPath(TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendPath(double value, bool escape = true) => AppendPath(global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendPath(double value, bool escape = true) => AppendPath(TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendPath(int value, bool escape = true) => AppendPath(global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendPath(int value, bool escape = true) => AppendPath(TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendPath(global::System.Byte[] value, string format, bool escape = true) => AppendPath(global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value, format), escape);
+        public void AppendPath(Byte[] value, string format, bool escape = true) => AppendPath(TypeFormatters.ConvertToString(value, format), escape);
 
-        public void AppendPath(global::System.Collections.Generic.IEnumerable<string> value, bool escape = true) => AppendPath(global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendPath(IEnumerable<string> value, bool escape = true) => AppendPath(TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendPath(global::System.DateTimeOffset value, string format, bool escape = true) => AppendPath(global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value, format), escape);
+        public void AppendPath(DateTimeOffset value, string format, bool escape = true) => AppendPath(TypeFormatters.ConvertToString(value, format), escape);
 
-        public void AppendPath(global::System.TimeSpan value, string format, bool escape = true) => AppendPath(global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value, format), escape);
+        public void AppendPath(TimeSpan value, string format, bool escape = true) => AppendPath(TypeFormatters.ConvertToString(value, format), escape);
 
-        public void AppendPath(global::System.Guid value, bool escape = true) => AppendPath(global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendPath(Guid value, bool escape = true) => AppendPath(TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendPath(long value, bool escape = true) => AppendPath(global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendPath(long value, bool escape = true) => AppendPath(TypeFormatters.ConvertToString(value), escape);
 
         public void AppendQuery(string name, string value, bool escape)
         {
@@ -74,36 +74,36 @@ namespace UnbrandedTypeSpec
             }
             if (escape)
             {
-                value = global::System.Uri.EscapeDataString(value);
+                value = Uri.EscapeDataString(value);
             }
             QueryBuilder.Append(name);
             QueryBuilder.Append('=');
             QueryBuilder.Append(value);
         }
 
-        public void AppendQuery(string name, bool value, bool escape = false) => AppendQuery(name, global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendQuery(string name, bool value, bool escape = false) => AppendQuery(name, TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendQuery(string name, float value, bool escape = true) => AppendQuery(name, global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendQuery(string name, float value, bool escape = true) => AppendQuery(name, TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendQuery(string name, global::System.DateTimeOffset value, string format, bool escape = true) => AppendQuery(name, global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value, format), escape);
+        public void AppendQuery(string name, DateTimeOffset value, string format, bool escape = true) => AppendQuery(name, TypeFormatters.ConvertToString(value, format), escape);
 
-        public void AppendQuery(string name, global::System.TimeSpan value, string format, bool escape = true) => AppendQuery(name, global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value, format), escape);
+        public void AppendQuery(string name, TimeSpan value, string format, bool escape = true) => AppendQuery(name, TypeFormatters.ConvertToString(value, format), escape);
 
-        public void AppendQuery(string name, double value, bool escape = true) => AppendQuery(name, global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendQuery(string name, double value, bool escape = true) => AppendQuery(name, TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendQuery(string name, decimal value, bool escape = true) => AppendQuery(name, global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendQuery(string name, decimal value, bool escape = true) => AppendQuery(name, TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendQuery(string name, int value, bool escape = true) => AppendQuery(name, global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendQuery(string name, int value, bool escape = true) => AppendQuery(name, TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendQuery(string name, long value, bool escape = true) => AppendQuery(name, global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendQuery(string name, long value, bool escape = true) => AppendQuery(name, TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendQuery(string name, global::System.TimeSpan value, bool escape = true) => AppendQuery(name, global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendQuery(string name, TimeSpan value, bool escape = true) => AppendQuery(name, TypeFormatters.ConvertToString(value), escape);
 
-        public void AppendQuery(string name, global::System.Byte[] value, string format, bool escape = true) => AppendQuery(name, global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value, format), escape);
+        public void AppendQuery(string name, Byte[] value, string format, bool escape = true) => AppendQuery(name, TypeFormatters.ConvertToString(value, format), escape);
 
-        public void AppendQuery(string name, global::System.Guid value, bool escape = true) => AppendQuery(name, global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(value), escape);
+        public void AppendQuery(string name, Guid value, bool escape = true) => AppendQuery(name, TypeFormatters.ConvertToString(value), escape);
 
-        public global::System.Uri ToUri()
+        public Uri ToUri()
         {
             if ((_pathBuilder != null))
             {
@@ -116,15 +116,15 @@ namespace UnbrandedTypeSpec
             return UriBuilder.Uri;
         }
 
-        public void AppendQueryDelimited<T>(string name, global::System.Collections.Generic.IEnumerable<T> value, string delimiter, bool escape = true)
+        public void AppendQueryDelimited<T>(string name, IEnumerable<T> value, string delimiter, bool escape = true)
         {
-            global::System.Collections.Generic.IEnumerable<string> stringValues = value.Select(v => global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(v));
+            IEnumerable<string> stringValues = value.Select(v => TypeFormatters.ConvertToString(v));
             AppendQuery(name, string.Join(delimiter, stringValues), escape);
         }
 
-        public void AppendQueryDelimited<T>(string name, global::System.Collections.Generic.IEnumerable<T> value, string delimiter, string format, bool escape = true)
+        public void AppendQueryDelimited<T>(string name, IEnumerable<T> value, string delimiter, string format, bool escape = true)
         {
-            global::System.Collections.Generic.IEnumerable<string> stringValues = value.Select(v => global::UnbrandedTypeSpec.TypeFormatters.ConvertToString(v, format));
+            IEnumerable<string> stringValues = value.Select(v => TypeFormatters.ConvertToString(v, format));
             AppendQuery(name, string.Join(delimiter, stringValues), escape);
         }
     }

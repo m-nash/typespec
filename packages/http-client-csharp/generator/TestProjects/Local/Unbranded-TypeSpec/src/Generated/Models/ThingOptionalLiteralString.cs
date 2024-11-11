@@ -9,48 +9,48 @@ using UnbrandedTypeSpec;
 namespace UnbrandedTypeSpec.Models
 {
     /// <summary> The Thing_optionalLiteralString. </summary>
-    public readonly partial struct ThingOptionalLiteralString : global::System.IEquatable<global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString>
+    public readonly partial struct ThingOptionalLiteralString : IEquatable<ThingOptionalLiteralString>
     {
         private readonly string _value;
         /// <summary> reject. </summary>
         private const string RejectValue = "reject";
 
-        /// <summary> Initializes a new instance of <see cref="global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString"/>. </summary>
+        /// <summary> Initializes a new instance of <see cref="ThingOptionalLiteralString"/>. </summary>
         /// <param name="value"> The value. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="value"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ThingOptionalLiteralString(string value)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(value, nameof(value));
+            Argument.AssertNotNull(value, nameof(value));
 
             _value = value;
         }
 
         /// <summary> reject. </summary>
-        public static global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString Reject { get; } = new global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString(RejectValue);
+        public static ThingOptionalLiteralString Reject { get; } = new ThingOptionalLiteralString(RejectValue);
 
-        /// <summary> Determines if two <see cref="global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString"/> values are the same. </summary>
+        /// <summary> Determines if two <see cref="ThingOptionalLiteralString"/> values are the same. </summary>
         /// <param name="left"> The left value to compare. </param>
         /// <param name="right"> The right value to compare. </param>
-        public static bool operator ==(global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString left, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString right) => left.Equals(right);
+        public static bool operator ==(ThingOptionalLiteralString left, ThingOptionalLiteralString right) => left.Equals(right);
 
-        /// <summary> Determines if two <see cref="global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString"/> values are not the same. </summary>
+        /// <summary> Determines if two <see cref="ThingOptionalLiteralString"/> values are not the same. </summary>
         /// <param name="left"> The left value to compare. </param>
         /// <param name="right"> The right value to compare. </param>
-        public static bool operator !=(global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString left, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString right) => !left.Equals(right);
+        public static bool operator !=(ThingOptionalLiteralString left, ThingOptionalLiteralString right) => !left.Equals(right);
 
-        /// <summary> Converts a string to a <see cref="global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString"/>. </summary>
+        /// <summary> Converts a string to a <see cref="ThingOptionalLiteralString"/>. </summary>
         /// <param name="value"> The value. </param>
-        public static implicit operator global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString(string value) => new global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString(value);
+        public static implicit operator ThingOptionalLiteralString(string value) => new ThingOptionalLiteralString(value);
 
         /// <param name="obj"> The object to compare. </param>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public override bool Equals(object obj) => ((obj is global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString other) && this.Equals(other));
+        [EditorBrowsableAttribute(EditorBrowsableState.Never)]
+        public override bool Equals(object obj) => ((obj is ThingOptionalLiteralString other) && this.Equals(other));
 
         /// <param name="other"> The instance to compare. </param>
-        public bool Equals(global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString other) => string.Equals(_value, other._value, global::System.StringComparison.InvariantCultureIgnoreCase);
+        public bool Equals(ThingOptionalLiteralString other) => string.Equals(_value, other._value, StringComparison.InvariantCultureIgnoreCase);
 
         /// <inheritdoc/>
-        public override int GetHashCode() => (_value != null) ? global::System.StringComparer.InvariantCultureIgnoreCase.GetHashCode(_value) : 0;
+        public override int GetHashCode() => (_value != null) ? StringComparer.InvariantCultureIgnoreCase.GetHashCode(_value) : 0;
 
         /// <inheritdoc/>
         public override string ToString() => _value;

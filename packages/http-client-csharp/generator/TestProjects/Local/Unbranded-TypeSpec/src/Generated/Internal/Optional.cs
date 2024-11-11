@@ -9,19 +9,19 @@ namespace UnbrandedTypeSpec
 {
     internal static partial class Optional
     {
-        public static bool IsCollectionDefined<T>(global::System.Collections.Generic.IEnumerable<T> collection)
+        public static bool IsCollectionDefined<T>(IEnumerable<T> collection)
         {
-            return !((collection is global::UnbrandedTypeSpec.ChangeTrackingList<T> changeTrackingList) && changeTrackingList.IsUndefined);
+            return !((collection is ChangeTrackingList<T> changeTrackingList) && changeTrackingList.IsUndefined);
         }
 
-        public static bool IsCollectionDefined<TKey, TValue>(global::System.Collections.Generic.IDictionary<TKey, TValue> collection)
+        public static bool IsCollectionDefined<TKey, TValue>(IDictionary<TKey, TValue> collection)
         {
-            return !((collection is global::UnbrandedTypeSpec.ChangeTrackingDictionary<TKey, TValue> changeTrackingDictionary) && changeTrackingDictionary.IsUndefined);
+            return !((collection is ChangeTrackingDictionary<TKey, TValue> changeTrackingDictionary) && changeTrackingDictionary.IsUndefined);
         }
 
-        public static bool IsCollectionDefined<TKey, TValue>(global::System.Collections.Generic.IReadOnlyDictionary<TKey, TValue> collection)
+        public static bool IsCollectionDefined<TKey, TValue>(IReadOnlyDictionary<TKey, TValue> collection)
         {
-            return !((collection is global::UnbrandedTypeSpec.ChangeTrackingDictionary<TKey, TValue> changeTrackingDictionary) && changeTrackingDictionary.IsUndefined);
+            return !((collection is ChangeTrackingDictionary<TKey, TValue> changeTrackingDictionary) && changeTrackingDictionary.IsUndefined);
         }
 
         public static bool IsDefined<T>(T? value)
@@ -40,9 +40,9 @@ namespace UnbrandedTypeSpec
             return (value != null);
         }
 
-        public static bool IsDefined(global::System.Text.Json.JsonElement value)
+        public static bool IsDefined(JsonElement value)
         {
-            return (value.ValueKind != global::System.Text.Json.JsonValueKind.Undefined);
+            return (value.ValueKind != JsonValueKind.Undefined);
         }
     }
 }

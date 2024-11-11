@@ -15,10 +15,10 @@ namespace UnbrandedTypeSpec
     /// <summary></summary>
     public partial class UnbrandedTypeSpecClient
     {
-        private readonly global::System.Uri _endpoint;
+        private readonly Uri _endpoint;
         private const string AuthorizationHeader = "my-api-key";
         /// <summary> A credential used to authenticate to the service. </summary>
-        private readonly global::System.ClientModel.ApiKeyCredential _keyCredential;
+        private readonly ApiKeyCredential _keyCredential;
         private readonly string _apiVersion;
 
         /// <summary> Initializes a new instance of UnbrandedTypeSpecClient for mocking. </summary>
@@ -29,8 +29,8 @@ namespace UnbrandedTypeSpec
         /// <summary> Initializes a new instance of UnbrandedTypeSpecClient. </summary>
         /// <param name="endpoint"> Service endpoint. </param>
         /// <param name="keyCredential"> A credential used to authenticate to the service. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="keyCredential"/> is null. </exception>
-        public UnbrandedTypeSpecClient(global::System.Uri endpoint, global::System.ClientModel.ApiKeyCredential keyCredential) : this(endpoint, keyCredential, new global::UnbrandedTypeSpec.UnbrandedTypeSpecClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="keyCredential"/> is null. </exception>
+        public UnbrandedTypeSpecClient(Uri endpoint, ApiKeyCredential keyCredential) : this(endpoint, keyCredential, new UnbrandedTypeSpecClientOptions())
         {
         }
 
@@ -38,22 +38,22 @@ namespace UnbrandedTypeSpec
         /// <param name="endpoint"> Service endpoint. </param>
         /// <param name="keyCredential"> A credential used to authenticate to the service. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="keyCredential"/> is null. </exception>
-        public UnbrandedTypeSpecClient(global::System.Uri endpoint, global::System.ClientModel.ApiKeyCredential keyCredential, global::UnbrandedTypeSpec.UnbrandedTypeSpecClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="keyCredential"/> is null. </exception>
+        public UnbrandedTypeSpecClient(Uri endpoint, ApiKeyCredential keyCredential, UnbrandedTypeSpecClientOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(endpoint, nameof(endpoint));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(keyCredential, nameof(keyCredential));
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
+            Argument.AssertNotNull(keyCredential, nameof(keyCredential));
 
-            options ??= new global::UnbrandedTypeSpec.UnbrandedTypeSpecClientOptions();
+            options ??= new UnbrandedTypeSpecClientOptions();
 
             _endpoint = endpoint;
             _keyCredential = keyCredential;
-            Pipeline = global::System.ClientModel.Primitives.ClientPipeline.Create(options, Array.Empty<global::System.ClientModel.Primitives.PipelinePolicy>(), new global::System.ClientModel.Primitives.PipelinePolicy[] { global::System.ClientModel.Primitives.ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(_keyCredential, AuthorizationHeader) }, Array.Empty<global::System.ClientModel.Primitives.PipelinePolicy>());
+            Pipeline = ClientPipeline.Create(options, Array.Empty<PipelinePolicy>(), new PipelinePolicy[] { ApiKeyAuthenticationPolicy.CreateHeaderApiKeyPolicy(_keyCredential, AuthorizationHeader) }, Array.Empty<PipelinePolicy>());
             _apiVersion = options.Version;
         }
 
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
-        public global::System.ClientModel.Primitives.ClientPipeline Pipeline { get; }
+        public ClientPipeline Pipeline { get; }
 
         /// <summary>
         /// [Protocol Method] Return hi
@@ -67,16 +67,16 @@ namespace UnbrandedTypeSpec
         /// <param name="queryParameter"></param>
         /// <param name="optionalQuery"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult SayHi(string headParameter, string queryParameter, string optionalQuery, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult SayHi(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(headParameter, nameof(headParameter));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(queryParameter, nameof(queryParameter));
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateSayHiRequest(headParameter, queryParameter, optionalQuery, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateSayHiRequest(headParameter, queryParameter, optionalQuery, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -91,46 +91,46 @@ namespace UnbrandedTypeSpec
         /// <param name="queryParameter"></param>
         /// <param name="optionalQuery"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(headParameter, nameof(headParameter));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(queryParameter, nameof(queryParameter));
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateSayHiRequest(headParameter, queryParameter, optionalQuery, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateSayHiRequest(headParameter, queryParameter, optionalQuery, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Return hi. </summary>
         /// <param name="headParameter"></param>
         /// <param name="queryParameter"></param>
         /// <param name="optionalQuery"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing> SayHi(string headParameter, string queryParameter, string optionalQuery)
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult<Thing> SayHi(string headParameter, string queryParameter, string optionalQuery)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(headParameter, nameof(headParameter));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(queryParameter, nameof(queryParameter));
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            global::System.ClientModel.ClientResult result = this.SayHi(headParameter, queryParameter, optionalQuery, null);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = this.SayHi(headParameter, queryParameter, optionalQuery, null);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary> Return hi. </summary>
         /// <param name="headParameter"></param>
         /// <param name="queryParameter"></param>
         /// <param name="optionalQuery"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing>> SayHiAsync(string headParameter, string queryParameter, string optionalQuery)
+        /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult<Thing>> SayHiAsync(string headParameter, string queryParameter, string optionalQuery)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(headParameter, nameof(headParameter));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(queryParameter, nameof(queryParameter));
+            Argument.AssertNotNull(headParameter, nameof(headParameter));
+            Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            global::System.ClientModel.ClientResult result = await this.SayHiAsync(headParameter, queryParameter, optionalQuery, null).ConfigureAwait(false);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = await this.SayHiAsync(headParameter, queryParameter, optionalQuery, null).ConfigureAwait(false);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary>
@@ -145,17 +145,17 @@ namespace UnbrandedTypeSpec
         /// <param name="p1"></param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult HelloAgain(string p2, string p1, global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult HelloAgain(string p2, string p1, BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p2, nameof(p2));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p1, nameof(p1));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateHelloAgainRequest(p2, p1, content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateHelloAgainRequest(p2, p1, content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -170,49 +170,49 @@ namespace UnbrandedTypeSpec
         /// <param name="p1"></param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> HelloAgainAsync(string p2, string p1, global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> HelloAgainAsync(string p2, string p1, BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p2, nameof(p2));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p1, nameof(p1));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateHelloAgainRequest(p2, p1, content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateHelloAgainRequest(p2, p1, content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Return hi again. </summary>
         /// <param name="p2"></param>
         /// <param name="p1"></param>
         /// <param name="action"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.RoundTripModel> HelloAgain(string p2, string p1, global::UnbrandedTypeSpec.Models.RoundTripModel action)
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult<RoundTripModel> HelloAgain(string p2, string p1, RoundTripModel action)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p2, nameof(p2));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p1, nameof(p1));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(action, nameof(action));
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(action, nameof(action));
 
-            global::System.ClientModel.ClientResult result = this.HelloAgain(p2, p1, action, null);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.RoundTripModel)result), result.GetRawResponse());
+            ClientResult result = this.HelloAgain(p2, p1, action, null);
+            return ClientResult.FromValue(((RoundTripModel)result), result.GetRawResponse());
         }
 
         /// <summary> Return hi again. </summary>
         /// <param name="p2"></param>
         /// <param name="p1"></param>
         /// <param name="action"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.RoundTripModel>> HelloAgainAsync(string p2, string p1, global::UnbrandedTypeSpec.Models.RoundTripModel action)
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult<RoundTripModel>> HelloAgainAsync(string p2, string p1, RoundTripModel action)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p2, nameof(p2));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p1, nameof(p1));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(action, nameof(action));
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(action, nameof(action));
 
-            global::System.ClientModel.ClientResult result = await this.HelloAgainAsync(p2, p1, action, null).ConfigureAwait(false);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.RoundTripModel)result), result.GetRawResponse());
+            ClientResult result = await this.HelloAgainAsync(p2, p1, action, null).ConfigureAwait(false);
+            return ClientResult.FromValue(((RoundTripModel)result), result.GetRawResponse());
         }
 
         /// <summary>
@@ -227,17 +227,17 @@ namespace UnbrandedTypeSpec
         /// <param name="p1"></param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult NoContentType(string p2, string p1, global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult NoContentType(string p2, string p1, BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p2, nameof(p2));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p1, nameof(p1));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateNoContentTypeRequest(p2, p1, content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateNoContentTypeRequest(p2, p1, content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -252,17 +252,17 @@ namespace UnbrandedTypeSpec
         /// <param name="p1"></param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> NoContentTypeAsync(string p2, string p1, global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> NoContentTypeAsync(string p2, string p1, BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p2, nameof(p2));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p1, nameof(p1));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(p2, nameof(p2));
+            Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateNoContentTypeRequest(p2, p1, content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateNoContentTypeRequest(p2, p1, content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -274,12 +274,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult HelloDemo2(global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult HelloDemo2(RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateHelloDemo2Request(options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateHelloDemo2Request(options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -291,28 +291,28 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> HelloDemo2Async(global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> HelloDemo2Async(RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateHelloDemo2Request(options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateHelloDemo2Request(options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Return hi in demo2. </summary>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing> HelloDemo2()
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult<Thing> HelloDemo2()
         {
-            global::System.ClientModel.ClientResult result = this.HelloDemo2(null);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = this.HelloDemo2(null);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary> Return hi in demo2. </summary>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing>> HelloDemo2Async()
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult<Thing>> HelloDemo2Async()
         {
-            global::System.ClientModel.ClientResult result = await this.HelloDemo2Async(null).ConfigureAwait(false);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = await this.HelloDemo2Async(null).ConfigureAwait(false);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary>
@@ -325,15 +325,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult CreateLiteral(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult CreateLiteral(BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateCreateLiteralRequest(content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateCreateLiteralRequest(content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -346,39 +346,39 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> CreateLiteralAsync(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> CreateLiteralAsync(BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateCreateLiteralRequest(content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateCreateLiteralRequest(content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Create with literal value. </summary>
         /// <param name="body"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing> CreateLiteral(global::UnbrandedTypeSpec.Models.Thing body)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult<Thing> CreateLiteral(Thing body)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(body, nameof(body));
+            Argument.AssertNotNull(body, nameof(body));
 
-            global::System.ClientModel.ClientResult result = this.CreateLiteral(body, null);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = this.CreateLiteral(body, null);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary> Create with literal value. </summary>
         /// <param name="body"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing>> CreateLiteralAsync(global::UnbrandedTypeSpec.Models.Thing body)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult<Thing>> CreateLiteralAsync(Thing body)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(body, nameof(body));
+            Argument.AssertNotNull(body, nameof(body));
 
-            global::System.ClientModel.ClientResult result = await this.CreateLiteralAsync(body, null).ConfigureAwait(false);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = await this.CreateLiteralAsync(body, null).ConfigureAwait(false);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary>
@@ -390,12 +390,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult HelloLiteral(global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult HelloLiteral(RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateHelloLiteralRequest(options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateHelloLiteralRequest(options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -407,28 +407,28 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> HelloLiteralAsync(global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> HelloLiteralAsync(RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateHelloLiteralRequest(options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateHelloLiteralRequest(options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Send literal parameters. </summary>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing> HelloLiteral()
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult<Thing> HelloLiteral()
         {
-            global::System.ClientModel.ClientResult result = this.HelloLiteral(null);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = this.HelloLiteral(null);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary> Send literal parameters. </summary>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing>> HelloLiteralAsync()
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult<Thing>> HelloLiteralAsync()
         {
-            global::System.ClientModel.ClientResult result = await this.HelloLiteralAsync(null).ConfigureAwait(false);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = await this.HelloLiteralAsync(null).ConfigureAwait(false);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary>
@@ -441,12 +441,12 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="action"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult TopAction(global::System.DateTimeOffset action, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult TopAction(DateTimeOffset action, RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateTopActionRequest(action, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateTopActionRequest(action, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -459,30 +459,30 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="action"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> TopActionAsync(global::System.DateTimeOffset action, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> TopActionAsync(DateTimeOffset action, RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateTopActionRequest(action, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateTopActionRequest(action, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> top level method. </summary>
         /// <param name="action"></param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing> TopAction(global::System.DateTimeOffset action)
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult<Thing> TopAction(DateTimeOffset action)
         {
-            global::System.ClientModel.ClientResult result = this.TopAction(action, null);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = this.TopAction(action, null);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary> top level method. </summary>
         /// <param name="action"></param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing>> TopActionAsync(global::System.DateTimeOffset action)
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult<Thing>> TopActionAsync(DateTimeOffset action)
         {
-            global::System.ClientModel.ClientResult result = await this.TopActionAsync(action, null).ConfigureAwait(false);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = await this.TopActionAsync(action, null).ConfigureAwait(false);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary>
@@ -494,12 +494,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult TopAction2(global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult TopAction2(RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateTopAction2Request(options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateTopAction2Request(options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -511,12 +511,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> TopAction2Async(global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> TopAction2Async(RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateTopAction2Request(options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateTopAction2Request(options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -529,15 +529,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult PatchAction(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult PatchAction(BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreatePatchActionRequest(content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreatePatchActionRequest(content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -550,15 +550,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> PatchActionAsync(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> PatchActionAsync(BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreatePatchActionRequest(content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreatePatchActionRequest(content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -571,15 +571,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult AnonymousBody(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult AnonymousBody(BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateAnonymousBodyRequest(content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateAnonymousBodyRequest(content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -592,15 +592,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> AnonymousBodyAsync(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> AnonymousBodyAsync(BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateAnonymousBodyRequest(content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateAnonymousBodyRequest(content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> body parameter without body decorator. </summary>
@@ -617,15 +617,15 @@ namespace UnbrandedTypeSpec
         /// <param name="optionalLiteralFloat"> optional literal float. </param>
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="optionalNullableList"> optional nullable collection. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing> AnonymousBody(string name, global::System.BinaryData requiredUnion, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralString requiredLiteralString, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt requiredLiteralInt, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, string requiredBadDescription, global::System.Collections.Generic.IEnumerable<int> requiredNullableList, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString? optionalLiteralString = default, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralInt? optionalLiteralInt = default, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralFloat? optionalLiteralFloat = default, bool? optionalLiteralBool = default, global::System.Collections.Generic.IEnumerable<int> optionalNullableList = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult<Thing> AnonymousBody(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingOptionalLiteralString? optionalLiteralString = default, ThingOptionalLiteralInt? optionalLiteralInt = default, ThingOptionalLiteralFloat? optionalLiteralFloat = default, bool? optionalLiteralBool = default, IEnumerable<int> optionalNullableList = default)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(name, nameof(name));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+            Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            global::UnbrandedTypeSpec.Models.Thing spreadModel = new global::UnbrandedTypeSpec.Models.Thing(
+            Thing spreadModel = new Thing(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -637,11 +637,11 @@ namespace UnbrandedTypeSpec
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                (optionalNullableList?.ToList() as global::System.Collections.Generic.IList<int> ?? new global::UnbrandedTypeSpec.ChangeTrackingList<int>()),
-                (requiredNullableList?.ToList() as global::System.Collections.Generic.IList<int> ?? new global::UnbrandedTypeSpec.ChangeTrackingList<int>()),
+                (optionalNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>()),
+                (requiredNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>()),
                 null);
-            global::System.ClientModel.ClientResult result = this.AnonymousBody(spreadModel, null);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = this.AnonymousBody(spreadModel, null);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary> body parameter without body decorator. </summary>
@@ -658,15 +658,15 @@ namespace UnbrandedTypeSpec
         /// <param name="optionalLiteralFloat"> optional literal float. </param>
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="optionalNullableList"> optional nullable collection. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing>> AnonymousBodyAsync(string name, global::System.BinaryData requiredUnion, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralString requiredLiteralString, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralInt requiredLiteralInt, global::UnbrandedTypeSpec.Models.ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, string requiredBadDescription, global::System.Collections.Generic.IEnumerable<int> requiredNullableList, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralString? optionalLiteralString = default, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralInt? optionalLiteralInt = default, global::UnbrandedTypeSpec.Models.ThingOptionalLiteralFloat? optionalLiteralFloat = default, bool? optionalLiteralBool = default, global::System.Collections.Generic.IEnumerable<int> optionalNullableList = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult<Thing>> AnonymousBodyAsync(string name, BinaryData requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, string requiredBadDescription, IEnumerable<int> requiredNullableList, ThingOptionalLiteralString? optionalLiteralString = default, ThingOptionalLiteralInt? optionalLiteralInt = default, ThingOptionalLiteralFloat? optionalLiteralFloat = default, bool? optionalLiteralBool = default, IEnumerable<int> optionalNullableList = default)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(name, nameof(name));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
+            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+            Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
-            global::UnbrandedTypeSpec.Models.Thing spreadModel = new global::UnbrandedTypeSpec.Models.Thing(
+            Thing spreadModel = new Thing(
                 name,
                 requiredUnion,
                 requiredLiteralString,
@@ -678,11 +678,11 @@ namespace UnbrandedTypeSpec
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                (optionalNullableList?.ToList() as global::System.Collections.Generic.IList<int> ?? new global::UnbrandedTypeSpec.ChangeTrackingList<int>()),
-                (requiredNullableList?.ToList() as global::System.Collections.Generic.IList<int> ?? new global::UnbrandedTypeSpec.ChangeTrackingList<int>()),
+                (optionalNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>()),
+                (requiredNullableList?.ToList() as IList<int> ?? new ChangeTrackingList<int>()),
                 null);
-            global::System.ClientModel.ClientResult result = await this.AnonymousBodyAsync(spreadModel, null).ConfigureAwait(false);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = await this.AnonymousBodyAsync(spreadModel, null).ConfigureAwait(false);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary>
@@ -695,15 +695,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult FriendlyModel(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult FriendlyModel(BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateFriendlyModelRequest(content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateFriendlyModelRequest(content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -716,41 +716,41 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> FriendlyModelAsync(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> FriendlyModelAsync(BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateFriendlyModelRequest(content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateFriendlyModelRequest(content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Model can have its friendly name. </summary>
         /// <param name="name"> name of the NotFriend. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Friend> FriendlyModel(string name)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult<Friend> FriendlyModel(string name)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(name, nameof(name));
 
-            global::UnbrandedTypeSpec.Models.Friend spreadModel = new global::UnbrandedTypeSpec.Models.Friend(name, null);
-            global::System.ClientModel.ClientResult result = this.FriendlyModel(spreadModel, null);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Friend)result), result.GetRawResponse());
+            Friend spreadModel = new Friend(name, null);
+            ClientResult result = this.FriendlyModel(spreadModel, null);
+            return ClientResult.FromValue(((Friend)result), result.GetRawResponse());
         }
 
         /// <summary> Model can have its friendly name. </summary>
         /// <param name="name"> name of the NotFriend. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Friend>> FriendlyModelAsync(string name)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult<Friend>> FriendlyModelAsync(string name)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(name, nameof(name));
 
-            global::UnbrandedTypeSpec.Models.Friend spreadModel = new global::UnbrandedTypeSpec.Models.Friend(name, null);
-            global::System.ClientModel.ClientResult result = await this.FriendlyModelAsync(spreadModel, null).ConfigureAwait(false);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Friend)result), result.GetRawResponse());
+            Friend spreadModel = new Friend(name, null);
+            ClientResult result = await this.FriendlyModelAsync(spreadModel, null).ConfigureAwait(false);
+            return ClientResult.FromValue(((Friend)result), result.GetRawResponse());
         }
 
         /// <summary>
@@ -762,12 +762,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult AddTimeHeader(global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult AddTimeHeader(RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateAddTimeHeaderRequest(options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateAddTimeHeaderRequest(options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -779,24 +779,24 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> AddTimeHeaderAsync(global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> AddTimeHeaderAsync(RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateAddTimeHeaderRequest(options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateAddTimeHeaderRequest(options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> addTimeHeader. </summary>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult AddTimeHeader()
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult AddTimeHeader()
         {
             return this.AddTimeHeader(null);
         }
 
         /// <summary> addTimeHeader. </summary>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> AddTimeHeaderAsync()
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult> AddTimeHeaderAsync()
         {
             return await this.AddTimeHeaderAsync(null).ConfigureAwait(false);
         }
@@ -811,15 +811,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult ProjectedNameModel(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult ProjectedNameModel(BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateProjectedNameModelRequest(content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateProjectedNameModelRequest(content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -832,41 +832,41 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> ProjectedNameModelAsync(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> ProjectedNameModelAsync(BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateProjectedNameModelRequest(content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateProjectedNameModelRequest(content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Model can have its projected name. </summary>
         /// <param name="name"> name of the ModelWithProjectedName. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.ProjectedModel> ProjectedNameModel(string name)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult<ProjectedModel> ProjectedNameModel(string name)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(name, nameof(name));
 
-            global::UnbrandedTypeSpec.Models.ProjectedModel spreadModel = new global::UnbrandedTypeSpec.Models.ProjectedModel(name, null);
-            global::System.ClientModel.ClientResult result = this.ProjectedNameModel(spreadModel, null);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.ProjectedModel)result), result.GetRawResponse());
+            ProjectedModel spreadModel = new ProjectedModel(name, null);
+            ClientResult result = this.ProjectedNameModel(spreadModel, null);
+            return ClientResult.FromValue(((ProjectedModel)result), result.GetRawResponse());
         }
 
         /// <summary> Model can have its projected name. </summary>
         /// <param name="name"> name of the ModelWithProjectedName. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.ProjectedModel>> ProjectedNameModelAsync(string name)
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult<ProjectedModel>> ProjectedNameModelAsync(string name)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(name, nameof(name));
 
-            global::UnbrandedTypeSpec.Models.ProjectedModel spreadModel = new global::UnbrandedTypeSpec.Models.ProjectedModel(name, null);
-            global::System.ClientModel.ClientResult result = await this.ProjectedNameModelAsync(spreadModel, null).ConfigureAwait(false);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.ProjectedModel)result), result.GetRawResponse());
+            ProjectedModel spreadModel = new ProjectedModel(name, null);
+            ClientResult result = await this.ProjectedNameModelAsync(spreadModel, null).ConfigureAwait(false);
+            return ClientResult.FromValue(((ProjectedModel)result), result.GetRawResponse());
         }
 
         /// <summary>
@@ -878,12 +878,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult ReturnsAnonymousModel(global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult ReturnsAnonymousModel(RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateReturnsAnonymousModelRequest(options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateReturnsAnonymousModelRequest(options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -895,28 +895,28 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> ReturnsAnonymousModelAsync(global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> ReturnsAnonymousModelAsync(RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateReturnsAnonymousModelRequest(options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateReturnsAnonymousModelRequest(options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> return anonymous model. </summary>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.ReturnsAnonymousModelResponse> ReturnsAnonymousModel()
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult<ReturnsAnonymousModelResponse> ReturnsAnonymousModel()
         {
-            global::System.ClientModel.ClientResult result = this.ReturnsAnonymousModel(null);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.ReturnsAnonymousModelResponse)result), result.GetRawResponse());
+            ClientResult result = this.ReturnsAnonymousModel(null);
+            return ClientResult.FromValue(((ReturnsAnonymousModelResponse)result), result.GetRawResponse());
         }
 
         /// <summary> return anonymous model. </summary>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync()
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult<ReturnsAnonymousModelResponse>> ReturnsAnonymousModelAsync()
         {
-            global::System.ClientModel.ClientResult result = await this.ReturnsAnonymousModelAsync(null).ConfigureAwait(false);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.ReturnsAnonymousModelResponse)result), result.GetRawResponse());
+            ClientResult result = await this.ReturnsAnonymousModelAsync(null).ConfigureAwait(false);
+            return ClientResult.FromValue(((ReturnsAnonymousModelResponse)result), result.GetRawResponse());
         }
 
         /// <summary>
@@ -929,15 +929,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="accept"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="accept"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="accept"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult GetUnknownValue(string accept, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult GetUnknownValue(string accept, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(accept, nameof(accept));
+            Argument.AssertNotNull(accept, nameof(accept));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateGetUnknownValueRequest(accept, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateGetUnknownValueRequest(accept, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -950,39 +950,39 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="accept"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="accept"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="accept"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> GetUnknownValueAsync(string accept, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> GetUnknownValueAsync(string accept, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(accept, nameof(accept));
+            Argument.AssertNotNull(accept, nameof(accept));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateGetUnknownValueRequest(accept, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateGetUnknownValueRequest(accept, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> get extensible enum. </summary>
         /// <param name="accept"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="accept"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult<string> GetUnknownValue(string accept)
+        /// <exception cref="ArgumentNullException"> <paramref name="accept"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult<string> GetUnknownValue(string accept)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(accept, nameof(accept));
+            Argument.AssertNotNull(accept, nameof(accept));
 
-            global::System.ClientModel.ClientResult result = this.GetUnknownValue(accept, null);
-            return global::System.ClientModel.ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
+            ClientResult result = this.GetUnknownValue(accept, null);
+            return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
         }
 
         /// <summary> get extensible enum. </summary>
         /// <param name="accept"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="accept"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult<string>> GetUnknownValueAsync(string accept)
+        /// <exception cref="ArgumentNullException"> <paramref name="accept"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult<string>> GetUnknownValueAsync(string accept)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(accept, nameof(accept));
+            Argument.AssertNotNull(accept, nameof(accept));
 
-            global::System.ClientModel.ClientResult result = await this.GetUnknownValueAsync(accept, null).ConfigureAwait(false);
-            return global::System.ClientModel.ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
+            ClientResult result = await this.GetUnknownValueAsync(accept, null).ConfigureAwait(false);
+            return ClientResult.FromValue(result.GetRawResponse().Content.ToObjectFromJson<string>(), result.GetRawResponse());
         }
 
         /// <summary>
@@ -995,15 +995,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult InternalProtocol(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult InternalProtocol(BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateInternalProtocolRequest(content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateInternalProtocolRequest(content, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -1016,39 +1016,39 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="content"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> InternalProtocolAsync(global::System.ClientModel.BinaryContent content, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> InternalProtocolAsync(BinaryContent content, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(content, nameof(content));
+            Argument.AssertNotNull(content, nameof(content));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateInternalProtocolRequest(content, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateInternalProtocolRequest(content, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
         /// <param name="body"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing> InternalProtocol(global::UnbrandedTypeSpec.Models.Thing body)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult<Thing> InternalProtocol(Thing body)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(body, nameof(body));
+            Argument.AssertNotNull(body, nameof(body));
 
-            global::System.ClientModel.ClientResult result = this.InternalProtocol(body, null);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = this.InternalProtocol(body, null);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
         /// <param name="body"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult<global::UnbrandedTypeSpec.Models.Thing>> InternalProtocolAsync(global::UnbrandedTypeSpec.Models.Thing body)
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult<Thing>> InternalProtocolAsync(Thing body)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(body, nameof(body));
+            Argument.AssertNotNull(body, nameof(body));
 
-            global::System.ClientModel.ClientResult result = await this.InternalProtocolAsync(body, null).ConfigureAwait(false);
-            return global::System.ClientModel.ClientResult.FromValue(((global::UnbrandedTypeSpec.Models.Thing)result), result.GetRawResponse());
+            ClientResult result = await this.InternalProtocolAsync(body, null).ConfigureAwait(false);
+            return ClientResult.FromValue(((Thing)result), result.GetRawResponse());
         }
 
         /// <summary>
@@ -1060,12 +1060,12 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult StillConvenient(global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult StillConvenient(RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateStillConvenientRequest(options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateStillConvenientRequest(options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -1077,24 +1077,24 @@ namespace UnbrandedTypeSpec
         /// </list>
         /// </summary>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> StillConvenientAsync(global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> StillConvenientAsync(RequestOptions options)
         {
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateStillConvenientRequest(options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateStillConvenientRequest(options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult StillConvenient()
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult StillConvenient()
         {
             return this.StillConvenient(null);
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> StillConvenientAsync()
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult> StillConvenientAsync()
         {
             return await this.StillConvenientAsync(null).ConfigureAwait(false);
         }
@@ -1109,15 +1109,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="id"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="id"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult HeadAsBoolean(string id, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult HeadAsBoolean(string id, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(id, nameof(id));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateHeadAsBooleanRequest(id, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateHeadAsBooleanRequest(id, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -1130,35 +1130,35 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="id"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="id"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> HeadAsBooleanAsync(string id, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> HeadAsBooleanAsync(string id, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(id, nameof(id));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateHeadAsBooleanRequest(id, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateHeadAsBooleanRequest(id, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> head as boolean. </summary>
         /// <param name="id"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="id"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult HeadAsBoolean(string id)
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult HeadAsBoolean(string id)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(id, nameof(id));
 
             return this.HeadAsBoolean(id, null);
         }
 
         /// <summary> head as boolean. </summary>
         /// <param name="id"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="id"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> HeadAsBooleanAsync(string id)
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult> HeadAsBooleanAsync(string id)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(id, nameof(id));
+            Argument.AssertNotNull(id, nameof(id));
 
             return await this.HeadAsBooleanAsync(id, null).ConfigureAwait(false);
         }
@@ -1173,15 +1173,15 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="p1"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="p1"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="p1"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual global::System.ClientModel.ClientResult WithApiVersion(string p1, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual ClientResult WithApiVersion(string p1, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(p1, nameof(p1));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateWithApiVersionRequest(p1, options);
-            return global::System.ClientModel.ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
+            using PipelineMessage message = this.CreateWithApiVersionRequest(p1, options);
+            return ClientResult.FromResponse(Pipeline.ProcessMessage(message, options));
         }
 
         /// <summary>
@@ -1194,35 +1194,35 @@ namespace UnbrandedTypeSpec
         /// </summary>
         /// <param name="p1"></param>
         /// <param name="options"> The request options, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="p1"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="p1"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> WithApiVersionAsync(string p1, global::System.ClientModel.Primitives.RequestOptions options)
+        public virtual async Task<ClientResult> WithApiVersionAsync(string p1, RequestOptions options)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(p1, nameof(p1));
 
-            using global::System.ClientModel.Primitives.PipelineMessage message = this.CreateWithApiVersionRequest(p1, options);
-            return global::System.ClientModel.ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
+            using PipelineMessage message = this.CreateWithApiVersionRequest(p1, options);
+            return ClientResult.FromResponse(await Pipeline.ProcessMessageAsync(message, options).ConfigureAwait(false));
         }
 
         /// <summary> Return hi again. </summary>
         /// <param name="p1"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="p1"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual global::System.ClientModel.ClientResult WithApiVersion(string p1)
+        /// <exception cref="ArgumentNullException"> <paramref name="p1"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual ClientResult WithApiVersion(string p1)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(p1, nameof(p1));
 
             return this.WithApiVersion(p1, null);
         }
 
         /// <summary> Return hi again. </summary>
         /// <param name="p1"></param>
-        /// <exception cref="global::System.ArgumentNullException"> <paramref name="p1"/> is null. </exception>
-        /// <exception cref="global::System.ClientModel.ClientResultException"> Service returned a non-success status code. </exception>
-        public virtual async global::System.Threading.Tasks.Task<global::System.ClientModel.ClientResult> WithApiVersionAsync(string p1)
+        /// <exception cref="ArgumentNullException"> <paramref name="p1"/> is null. </exception>
+        /// <exception cref="ClientResultException"> Service returned a non-success status code. </exception>
+        public virtual async Task<ClientResult> WithApiVersionAsync(string p1)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(p1, nameof(p1));
+            Argument.AssertNotNull(p1, nameof(p1));
 
             return await this.WithApiVersionAsync(p1, null).ConfigureAwait(false);
         }

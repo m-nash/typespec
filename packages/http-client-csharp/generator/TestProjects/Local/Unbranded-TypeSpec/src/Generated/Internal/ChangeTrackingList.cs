@@ -9,15 +9,15 @@ using System.Linq;
 
 namespace UnbrandedTypeSpec
 {
-    internal partial class ChangeTrackingList<T> : global::System.Collections.Generic.IList<T>, global::System.Collections.Generic.IReadOnlyList<T>
+    internal partial class ChangeTrackingList<T> : IList<T>, IReadOnlyList<T>
     {
-        private global::System.Collections.Generic.IList<T> _innerList;
+        private IList<T> _innerList;
 
         public ChangeTrackingList()
         {
         }
 
-        public ChangeTrackingList(global::System.Collections.Generic.IList<T> innerList)
+        public ChangeTrackingList(IList<T> innerList)
         {
             if ((innerList != null))
             {
@@ -25,7 +25,7 @@ namespace UnbrandedTypeSpec
             }
         }
 
-        public ChangeTrackingList(global::System.Collections.Generic.IReadOnlyList<T> innerList)
+        public ChangeTrackingList(IReadOnlyList<T> innerList)
         {
             if ((innerList != null))
             {
@@ -45,7 +45,7 @@ namespace UnbrandedTypeSpec
             {
                 if (this.IsUndefined)
                 {
-                    throw new global::System.ArgumentOutOfRangeException(nameof(index));
+                    throw new ArgumentOutOfRangeException(nameof(index));
                 }
                 return this.EnsureList()[index];
             }
@@ -53,7 +53,7 @@ namespace UnbrandedTypeSpec
             {
                 if (this.IsUndefined)
                 {
-                    throw new global::System.ArgumentOutOfRangeException(nameof(index));
+                    throw new ArgumentOutOfRangeException(nameof(index));
                 }
                 this.EnsureList()[index] = value;
             }
@@ -64,11 +64,11 @@ namespace UnbrandedTypeSpec
             _innerList = null;
         }
 
-        public global::System.Collections.Generic.IEnumerator<T> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             if (this.IsUndefined)
             {
-                global::System.Collections.Generic.IEnumerator<T> enumerateEmpty()
+                IEnumerator<T> enumerateEmpty()
                 {
                     yield break;
                 }
@@ -77,7 +77,7 @@ namespace UnbrandedTypeSpec
             return this.EnsureList().GetEnumerator();
         }
 
-        global::System.Collections.IEnumerator global::System.Collections.IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
         }
@@ -137,14 +137,14 @@ namespace UnbrandedTypeSpec
         {
             if (this.IsUndefined)
             {
-                throw new global::System.ArgumentOutOfRangeException(nameof(index));
+                throw new ArgumentOutOfRangeException(nameof(index));
             }
             this.EnsureList().RemoveAt(index);
         }
 
-        public global::System.Collections.Generic.IList<T> EnsureList()
+        public IList<T> EnsureList()
         {
-            return (_innerList ??= new global::System.Collections.Generic.List<T>());
+            return (_innerList ??= new List<T>());
         }
     }
 }

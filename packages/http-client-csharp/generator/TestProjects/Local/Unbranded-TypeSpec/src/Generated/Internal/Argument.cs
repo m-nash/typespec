@@ -14,7 +14,7 @@ namespace UnbrandedTypeSpec
         {
             if ((value is null))
             {
-                throw new global::System.ArgumentNullException(name);
+                throw new ArgumentNullException(name);
             }
         }
 
@@ -23,28 +23,28 @@ namespace UnbrandedTypeSpec
         {
             if (!value.HasValue)
             {
-                throw new global::System.ArgumentNullException(name);
+                throw new ArgumentNullException(name);
             }
         }
 
-        public static void AssertNotNullOrEmpty<T>(global::System.Collections.Generic.IEnumerable<T> value, string name)
+        public static void AssertNotNullOrEmpty<T>(IEnumerable<T> value, string name)
         {
             if ((value is null))
             {
-                throw new global::System.ArgumentNullException(name);
+                throw new ArgumentNullException(name);
             }
-            if (((value is global::System.Collections.Generic.ICollection<T> collectionOfT) && (collectionOfT.Count == 0)))
+            if (((value is ICollection<T> collectionOfT) && (collectionOfT.Count == 0)))
             {
-                throw new global::System.ArgumentException("Value cannot be an empty collection.", name);
+                throw new ArgumentException("Value cannot be an empty collection.", name);
             }
-            if (((value is global::System.Collections.ICollection collection) && (collection.Count == 0)))
+            if (((value is ICollection collection) && (collection.Count == 0)))
             {
-                throw new global::System.ArgumentException("Value cannot be an empty collection.", name);
+                throw new ArgumentException("Value cannot be an empty collection.", name);
             }
-            using global::System.Collections.Generic.IEnumerator<T> e = value.GetEnumerator();
+            using IEnumerator<T> e = value.GetEnumerator();
             if (!e.MoveNext())
             {
-                throw new global::System.ArgumentException("Value cannot be an empty collection.", name);
+                throw new ArgumentException("Value cannot be an empty collection.", name);
             }
         }
 
@@ -52,11 +52,11 @@ namespace UnbrandedTypeSpec
         {
             if ((value is null))
             {
-                throw new global::System.ArgumentNullException(name);
+                throw new ArgumentNullException(name);
             }
             if ((value.Length == 0))
             {
-                throw new global::System.ArgumentException("Value cannot be an empty string.", name);
+                throw new ArgumentException("Value cannot be an empty string.", name);
             }
         }
 
@@ -64,54 +64,54 @@ namespace UnbrandedTypeSpec
         {
             if ((value is null))
             {
-                throw new global::System.ArgumentNullException(name);
+                throw new ArgumentNullException(name);
             }
             if (string.IsNullOrWhiteSpace(value))
             {
-                throw new global::System.ArgumentException("Value cannot be empty or contain only white-space characters.", name);
+                throw new ArgumentException("Value cannot be empty or contain only white-space characters.", name);
             }
         }
 
         public static void AssertNotDefault<T>(ref T value, string name)
-            where T : struct, global::System.IEquatable<T> 
+            where T : struct, IEquatable<T> 
         {
             if (value.Equals(default))
             {
-                throw new global::System.ArgumentException("Value cannot be empty.", name);
+                throw new ArgumentException("Value cannot be empty.", name);
             }
         }
 
         public static void AssertInRange<T>(T value, T minimum, T maximum, string name)
-            where T : notnull, global::System.IComparable<T> 
+            where T : notnull, IComparable<T> 
         {
             if ((minimum.CompareTo(value) > 0))
             {
-                throw new global::System.ArgumentOutOfRangeException(name, "Value is less than the minimum allowed.");
+                throw new ArgumentOutOfRangeException(name, "Value is less than the minimum allowed.");
             }
             if ((maximum.CompareTo(value) < 0))
             {
-                throw new global::System.ArgumentOutOfRangeException(name, "Value is greater than the maximum allowed.");
+                throw new ArgumentOutOfRangeException(name, "Value is greater than the maximum allowed.");
             }
         }
 
-        public static void AssertEnumDefined(global::System.Type enumType, object value, string name)
+        public static void AssertEnumDefined(Type enumType, object value, string name)
         {
-            if (!global::System.Enum.IsDefined(enumType, value))
+            if (!Enum.IsDefined(enumType, value))
             {
-                throw new global::System.ArgumentException($"Value not defined for {enumType.FullName}.", name);
+                throw new ArgumentException($"Value not defined for {enumType.FullName}.", name);
             }
         }
 
         public static T CheckNotNull<T>(T value, string name)
             where T : class 
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNull(value, name);
+            Argument.AssertNotNull(value, name);
             return value;
         }
 
         public static string CheckNotNullOrEmpty(string value, string name)
         {
-            global::UnbrandedTypeSpec.Argument.AssertNotNullOrEmpty(value, name);
+            Argument.AssertNotNullOrEmpty(value, name);
             return value;
         }
 
@@ -119,7 +119,7 @@ namespace UnbrandedTypeSpec
         {
             if ((value != null))
             {
-                throw new global::System.ArgumentException((message ?? "Value must be null."), name);
+                throw new ArgumentException((message ?? "Value must be null."), name);
             }
         }
     }
