@@ -54,6 +54,21 @@ namespace Microsoft.Generator.CSharp.Writers
                     writer.WriteStringValue(typeWriter.Write().Content);
                     writer.WriteEndObject();
                     writer.WriteEndObject();
+                    foreach (var serialization in type.SerializationProviders)
+                    {
+                        writer.WriteStartObject();
+                        writer.WritePropertyName("name");
+                        writer.WriteStringValue(Path.GetFileName(serialization.RelativeFilePath));
+                        writer.WritePropertyName("typeDeclaration");
+                        writer.WriteStartObject();
+                        writer.WritePropertyName("name");
+                        writer.WriteStringValue(serialization.Name);
+                        writer.WritePropertyName("content");
+                        typeWriter = new(serialization);
+                        writer.WriteStringValue(typeWriter.Write().Content);
+                        writer.WriteEndObject();
+                        writer.WriteEndObject();
+                    }
                 }
                 writer.WriteEndArray();
                 writer.WriteEndObject();

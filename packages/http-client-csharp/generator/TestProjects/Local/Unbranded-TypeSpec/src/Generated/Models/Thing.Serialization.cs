@@ -21,7 +21,7 @@ namespace UnbrandedTypeSpec.Models
         void IJsonModel<Thing>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
+            this.JsonModelWriteCore(writer, options);
             writer.WriteEndObject();
         }
 
@@ -29,8 +29,8 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            string format = (options.Format == "W") ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
+            if ((format != "J"))
             {
                 throw new FormatException($"The model {nameof(Thing)} does not support writing '{format}' format.");
             }
@@ -77,7 +77,7 @@ namespace UnbrandedTypeSpec.Models
             writer.WriteStringValue(RequiredBadDescription);
             if (Optional.IsCollectionDefined(OptionalNullableList))
             {
-                if (OptionalNullableList != null)
+                if ((OptionalNullableList != null))
                 {
                     writer.WritePropertyName("optionalNullableList"u8);
                     writer.WriteStartArray();
@@ -92,7 +92,7 @@ namespace UnbrandedTypeSpec.Models
                     writer.WriteNull("optionalNullableList"u8);
                 }
             }
-            if (RequiredNullableList != null && Optional.IsCollectionDefined(RequiredNullableList))
+            if (((RequiredNullableList != null) && Optional.IsCollectionDefined(RequiredNullableList)))
             {
                 writer.WritePropertyName("requiredNullableList"u8);
                 writer.WriteStartArray();
@@ -106,7 +106,7 @@ namespace UnbrandedTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableList"u8);
             }
-            if (options.Format != "W" && _additionalBinaryDataProperties != null)
+            if (((options.Format != "W") && (_additionalBinaryDataProperties != null)))
             {
                 foreach (var item in _additionalBinaryDataProperties)
                 {
@@ -123,24 +123,24 @@ namespace UnbrandedTypeSpec.Models
             }
         }
 
-        Thing IJsonModel<Thing>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => JsonModelCreateCore(ref reader, options);
+        Thing IJsonModel<Thing>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((Thing)this.JsonModelCreateCore(ref reader, options));
 
         /// <param name="reader"> The JSON reader. </param>
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual Thing JsonModelCreateCore(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            string format = (options.Format == "W") ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
+            if ((format != "J"))
             {
                 throw new FormatException($"The model {nameof(Thing)} does not support reading '{format}' format.");
             }
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeThing(document.RootElement, options);
+            return Thing.DeserializeThing(document.RootElement, options);
         }
 
         internal static Thing DeserializeThing(JsonElement element, ModelReaderWriterOptions options)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            if ((element.ValueKind == JsonValueKind.Null))
             {
                 return null;
             }
@@ -192,7 +192,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("optionalLiteralString"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -201,7 +201,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("optionalLiteralInt"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -210,7 +210,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("optionalLiteralFloat"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -219,7 +219,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("optionalLiteralBool"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -233,7 +233,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("optionalNullableList"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -247,7 +247,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("requiredNullableList"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         requiredNullableList = new ChangeTrackingList<int>();
                         continue;
@@ -260,7 +260,7 @@ namespace UnbrandedTypeSpec.Models
                     requiredNullableList = array;
                     continue;
                 }
-                if (options.Format != "W")
+                if ((options.Format != "W"))
                 {
                     additionalBinaryDataProperties.Add(prop.Name, BinaryData.FromString(prop.Value.GetRawText()));
                 }
@@ -277,17 +277,17 @@ namespace UnbrandedTypeSpec.Models
                 optionalLiteralFloat,
                 optionalLiteralBool,
                 requiredBadDescription,
-                optionalNullableList ?? new ChangeTrackingList<int>(),
+                (optionalNullableList ?? new ChangeTrackingList<int>()),
                 requiredNullableList,
                 additionalBinaryDataProperties);
         }
 
-        BinaryData IPersistableModel<Thing>.Write(ModelReaderWriterOptions options) => PersistableModelWriteCore(options);
+        BinaryData IPersistableModel<Thing>.Write(ModelReaderWriterOptions options) => this.PersistableModelWriteCore(options);
 
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual BinaryData PersistableModelWriteCore(ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
+            string format = (options.Format == "W") ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
             switch (format)
             {
                 case "J":
@@ -297,19 +297,19 @@ namespace UnbrandedTypeSpec.Models
             }
         }
 
-        Thing IPersistableModel<Thing>.Create(BinaryData data, ModelReaderWriterOptions options) => PersistableModelCreateCore(data, options);
+        Thing IPersistableModel<Thing>.Create(BinaryData data, ModelReaderWriterOptions options) => ((Thing)this.PersistableModelCreateCore(data, options));
 
         /// <param name="data"> The data to parse. </param>
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual Thing PersistableModelCreateCore(BinaryData data, ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
+            string format = (options.Format == "W") ? ((IPersistableModel<Thing>)this).GetFormatFromOptions(options) : options.Format;
             switch (format)
             {
                 case "J":
                     using (JsonDocument document = JsonDocument.Parse(data))
                     {
-                        return DeserializeThing(document.RootElement, options);
+                        return Thing.DeserializeThing(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(Thing)} does not support reading '{options.Format}' format.");
@@ -321,7 +321,7 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="thing"> The <see cref="Thing"/> to serialize into <see cref="BinaryContent"/>. </param>
         public static implicit operator BinaryContent(Thing thing)
         {
-            if (thing == null)
+            if ((thing == null))
             {
                 return null;
             }
@@ -333,7 +333,7 @@ namespace UnbrandedTypeSpec.Models
         {
             using PipelineResponse response = result.GetRawResponse();
             using JsonDocument document = JsonDocument.Parse(response.Content);
-            return DeserializeThing(document.RootElement, ModelSerializationExtensions.WireOptions);
+            return Thing.DeserializeThing(document.RootElement, ModelSerializationExtensions.WireOptions);
         }
     }
 }

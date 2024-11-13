@@ -21,7 +21,7 @@ namespace UnbrandedTypeSpec.Models
         void IJsonModel<RoundTripModel>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
+            this.JsonModelWriteCore(writer, options);
             writer.WriteEndObject();
         }
 
@@ -29,8 +29,8 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            string format = (options.Format == "W") ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+            if ((format != "J"))
             {
                 throw new FormatException($"The model {nameof(RoundTripModel)} does not support writing '{format}' format.");
             }
@@ -54,7 +54,7 @@ namespace UnbrandedTypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
-            writer.WriteObjectValue(RequiredModel, options);
+            writer.WriteObjectValue<Thing>(RequiredModel, options);
             if (Optional.IsDefined(IntExtensibleEnum))
             {
                 writer.WritePropertyName("intExtensibleEnum"u8);
@@ -98,7 +98,7 @@ namespace UnbrandedTypeSpec.Models
             if (Optional.IsDefined(FloatFixedEnumWithIntValue))
             {
                 writer.WritePropertyName("floatFixedEnumWithIntValue"u8);
-                writer.WriteNumberValue((int)FloatFixedEnumWithIntValue.Value);
+                writer.WriteNumberValue(((int)FloatFixedEnumWithIntValue.Value));
             }
             if (Optional.IsCollectionDefined(FloatFixedEnumCollection))
             {
@@ -113,7 +113,7 @@ namespace UnbrandedTypeSpec.Models
             if (Optional.IsDefined(IntFixedEnum))
             {
                 writer.WritePropertyName("intFixedEnum"u8);
-                writer.WriteNumberValue((int)IntFixedEnum.Value);
+                writer.WriteNumberValue(((int)IntFixedEnum.Value));
             }
             if (Optional.IsCollectionDefined(IntFixedEnumCollection))
             {
@@ -121,7 +121,7 @@ namespace UnbrandedTypeSpec.Models
                 writer.WriteStartArray();
                 foreach (IntFixedEnum item in IntFixedEnumCollection)
                 {
-                    writer.WriteNumberValue((int)item);
+                    writer.WriteNumberValue(((int)item));
                 }
                 writer.WriteEndArray();
             }
@@ -156,7 +156,7 @@ namespace UnbrandedTypeSpec.Models
             foreach (var item in RequiredRecordUnknown)
             {
                 writer.WritePropertyName(item.Key);
-                if (item.Value == null)
+                if ((item.Value == null))
                 {
                     writer.WriteNullValue();
                     continue;
@@ -178,7 +178,7 @@ namespace UnbrandedTypeSpec.Models
                 foreach (var item in OptionalRecordUnknown)
                 {
                     writer.WritePropertyName(item.Key);
-                    if (item.Value == null)
+                    if ((item.Value == null))
                     {
                         writer.WriteNullValue();
                         continue;
@@ -194,14 +194,14 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W")
+            if ((options.Format != "W"))
             {
                 writer.WritePropertyName("readOnlyRequiredRecordUnknown"u8);
                 writer.WriteStartObject();
                 foreach (var item in ReadOnlyRequiredRecordUnknown)
                 {
                     writer.WritePropertyName(item.Key);
-                    if (item.Value == null)
+                    if ((item.Value == null))
                     {
                         writer.WriteNullValue();
                         continue;
@@ -217,14 +217,14 @@ namespace UnbrandedTypeSpec.Models
                 }
                 writer.WriteEndObject();
             }
-            if (options.Format != "W" && Optional.IsCollectionDefined(ReadOnlyOptionalRecordUnknown))
+            if (((options.Format != "W") && Optional.IsCollectionDefined(ReadOnlyOptionalRecordUnknown)))
             {
                 writer.WritePropertyName("readOnlyOptionalRecordUnknown"u8);
                 writer.WriteStartObject();
                 foreach (var item in ReadOnlyOptionalRecordUnknown)
                 {
                     writer.WritePropertyName(item.Key);
-                    if (item.Value == null)
+                    if ((item.Value == null))
                     {
                         writer.WriteNullValue();
                         continue;
@@ -241,10 +241,10 @@ namespace UnbrandedTypeSpec.Models
                 writer.WriteEndObject();
             }
             writer.WritePropertyName("modelWithRequiredNullable"u8);
-            writer.WriteObjectValue(ModelWithRequiredNullable, options);
+            writer.WriteObjectValue<ModelWithRequiredNullableProperties>(ModelWithRequiredNullable, options);
             writer.WritePropertyName("requiredBytes"u8);
             writer.WriteBase64StringValue(RequiredBytes.ToArray(), "D");
-            if (options.Format != "W" && _additionalBinaryDataProperties != null)
+            if (((options.Format != "W") && (_additionalBinaryDataProperties != null)))
             {
                 foreach (var item in _additionalBinaryDataProperties)
                 {
@@ -261,24 +261,24 @@ namespace UnbrandedTypeSpec.Models
             }
         }
 
-        RoundTripModel IJsonModel<RoundTripModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => JsonModelCreateCore(ref reader, options);
+        RoundTripModel IJsonModel<RoundTripModel>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((RoundTripModel)this.JsonModelCreateCore(ref reader, options));
 
         /// <param name="reader"> The JSON reader. </param>
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual RoundTripModel JsonModelCreateCore(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            string format = (options.Format == "W") ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+            if ((format != "J"))
             {
                 throw new FormatException($"The model {nameof(RoundTripModel)} does not support reading '{format}' format.");
             }
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeRoundTripModel(document.RootElement, options);
+            return RoundTripModel.DeserializeRoundTripModel(document.RootElement, options);
         }
 
         internal static RoundTripModel DeserializeRoundTripModel(JsonElement element, ModelReaderWriterOptions options)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            if ((element.ValueKind == JsonValueKind.Null))
             {
                 return null;
             }
@@ -346,7 +346,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("intExtensibleEnum"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -355,7 +355,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("intExtensibleEnumCollection"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -369,7 +369,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("floatExtensibleEnum"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -378,7 +378,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("floatExtensibleEnumWithIntValue"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -387,7 +387,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("floatExtensibleEnumCollection"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -401,7 +401,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("floatFixedEnum"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -410,7 +410,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("floatFixedEnumWithIntValue"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -419,7 +419,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("floatFixedEnumCollection"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -433,7 +433,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("intFixedEnum"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -442,7 +442,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("intFixedEnumCollection"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -456,7 +456,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("stringFixedEnum"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -470,7 +470,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("optionalUnknown"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
@@ -482,7 +482,7 @@ namespace UnbrandedTypeSpec.Models
                     Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
                     foreach (var prop0 in prop.Value.EnumerateObject())
                     {
-                        if (prop0.Value.ValueKind == JsonValueKind.Null)
+                        if ((prop0.Value.ValueKind == JsonValueKind.Null))
                         {
                             dictionary.Add(prop0.Name, null);
                         }
@@ -496,14 +496,14 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("optionalRecordUnknown"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
                     Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
                     foreach (var prop0 in prop.Value.EnumerateObject())
                     {
-                        if (prop0.Value.ValueKind == JsonValueKind.Null)
+                        if ((prop0.Value.ValueKind == JsonValueKind.Null))
                         {
                             dictionary.Add(prop0.Name, null);
                         }
@@ -520,7 +520,7 @@ namespace UnbrandedTypeSpec.Models
                     Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
                     foreach (var prop0 in prop.Value.EnumerateObject())
                     {
-                        if (prop0.Value.ValueKind == JsonValueKind.Null)
+                        if ((prop0.Value.ValueKind == JsonValueKind.Null))
                         {
                             dictionary.Add(prop0.Name, null);
                         }
@@ -534,14 +534,14 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("readOnlyOptionalRecordUnknown"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         continue;
                     }
                     Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
                     foreach (var prop0 in prop.Value.EnumerateObject())
                     {
-                        if (prop0.Value.ValueKind == JsonValueKind.Null)
+                        if ((prop0.Value.ValueKind == JsonValueKind.Null))
                         {
                             dictionary.Add(prop0.Name, null);
                         }
@@ -563,7 +563,7 @@ namespace UnbrandedTypeSpec.Models
                     requiredBytes = BinaryData.FromBytes(prop.Value.GetBytesFromBase64("D"));
                     continue;
                 }
-                if (options.Format != "W")
+                if ((options.Format != "W"))
                 {
                     additionalBinaryDataProperties.Add(prop.Name, BinaryData.FromString(prop.Value.GetRawText()));
                 }
@@ -575,33 +575,33 @@ namespace UnbrandedTypeSpec.Models
                 requiredDictionary,
                 requiredModel,
                 intExtensibleEnum,
-                intExtensibleEnumCollection ?? new ChangeTrackingList<IntExtensibleEnum>(),
+                (intExtensibleEnumCollection ?? new ChangeTrackingList<IntExtensibleEnum>()),
                 floatExtensibleEnum,
                 floatExtensibleEnumWithIntValue,
-                floatExtensibleEnumCollection ?? new ChangeTrackingList<FloatExtensibleEnum>(),
+                (floatExtensibleEnumCollection ?? new ChangeTrackingList<FloatExtensibleEnum>()),
                 floatFixedEnum,
                 floatFixedEnumWithIntValue,
-                floatFixedEnumCollection ?? new ChangeTrackingList<FloatFixedEnum>(),
+                (floatFixedEnumCollection ?? new ChangeTrackingList<FloatFixedEnum>()),
                 intFixedEnum,
-                intFixedEnumCollection ?? new ChangeTrackingList<IntFixedEnum>(),
+                (intFixedEnumCollection ?? new ChangeTrackingList<IntFixedEnum>()),
                 stringFixedEnum,
                 requiredUnknown,
                 optionalUnknown,
                 requiredRecordUnknown,
-                optionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
+                (optionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>()),
                 readOnlyRequiredRecordUnknown,
-                readOnlyOptionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>(),
+                (readOnlyOptionalRecordUnknown ?? new ChangeTrackingDictionary<string, BinaryData>()),
                 modelWithRequiredNullable,
                 requiredBytes,
                 additionalBinaryDataProperties);
         }
 
-        BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options) => PersistableModelWriteCore(options);
+        BinaryData IPersistableModel<RoundTripModel>.Write(ModelReaderWriterOptions options) => this.PersistableModelWriteCore(options);
 
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual BinaryData PersistableModelWriteCore(ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+            string format = (options.Format == "W") ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
             switch (format)
             {
                 case "J":
@@ -611,19 +611,19 @@ namespace UnbrandedTypeSpec.Models
             }
         }
 
-        RoundTripModel IPersistableModel<RoundTripModel>.Create(BinaryData data, ModelReaderWriterOptions options) => PersistableModelCreateCore(data, options);
+        RoundTripModel IPersistableModel<RoundTripModel>.Create(BinaryData data, ModelReaderWriterOptions options) => ((RoundTripModel)this.PersistableModelCreateCore(data, options));
 
         /// <param name="data"> The data to parse. </param>
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual RoundTripModel PersistableModelCreateCore(BinaryData data, ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
+            string format = (options.Format == "W") ? ((IPersistableModel<RoundTripModel>)this).GetFormatFromOptions(options) : options.Format;
             switch (format)
             {
                 case "J":
                     using (JsonDocument document = JsonDocument.Parse(data))
                     {
-                        return DeserializeRoundTripModel(document.RootElement, options);
+                        return RoundTripModel.DeserializeRoundTripModel(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(RoundTripModel)} does not support reading '{options.Format}' format.");
@@ -635,7 +635,7 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="roundTripModel"> The <see cref="RoundTripModel"/> to serialize into <see cref="BinaryContent"/>. </param>
         public static implicit operator BinaryContent(RoundTripModel roundTripModel)
         {
-            if (roundTripModel == null)
+            if ((roundTripModel == null))
             {
                 return null;
             }
@@ -647,7 +647,7 @@ namespace UnbrandedTypeSpec.Models
         {
             using PipelineResponse response = result.GetRawResponse();
             using JsonDocument document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripModel(document.RootElement, ModelSerializationExtensions.WireOptions);
+            return RoundTripModel.DeserializeRoundTripModel(document.RootElement, ModelSerializationExtensions.WireOptions);
         }
     }
 }

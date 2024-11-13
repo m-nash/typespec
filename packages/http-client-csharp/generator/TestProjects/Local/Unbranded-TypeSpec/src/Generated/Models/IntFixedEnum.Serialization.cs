@@ -10,15 +10,15 @@ namespace UnbrandedTypeSpec.Models
     {
         public static IntFixedEnum ToIntFixedEnum(this int value)
         {
-            if (value == 1)
+            if ((value == 1))
             {
                 return IntFixedEnum.One;
             }
-            if (value == 2)
+            if ((value == 2))
             {
                 return IntFixedEnum.Two;
             }
-            if (value == 4)
+            if ((value == 4))
             {
                 return IntFixedEnum.Four;
             }

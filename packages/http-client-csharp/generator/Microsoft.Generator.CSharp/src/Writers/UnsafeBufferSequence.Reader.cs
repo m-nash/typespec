@@ -227,7 +227,7 @@ internal partial class UnsafeBufferSequence
                 }
             }
 
-            return ReadOnlySpan<char>.Empty;
+            return [];
         }
 
         public static int ExtractTypeName(Span<char> input, int startIndex)

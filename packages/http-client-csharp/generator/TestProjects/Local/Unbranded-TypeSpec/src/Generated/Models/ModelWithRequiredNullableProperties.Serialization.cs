@@ -21,7 +21,7 @@ namespace UnbrandedTypeSpec.Models
         void IJsonModel<ModelWithRequiredNullableProperties>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
+            this.JsonModelWriteCore(writer, options);
             writer.WriteEndObject();
         }
 
@@ -29,12 +29,12 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            string format = (options.Format == "W") ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if ((format != "J"))
             {
                 throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support writing '{format}' format.");
             }
-            if (RequiredNullablePrimitive != null)
+            if ((RequiredNullablePrimitive != null))
             {
                 writer.WritePropertyName("requiredNullablePrimitive"u8);
                 writer.WriteNumberValue(RequiredNullablePrimitive.Value);
@@ -43,7 +43,7 @@ namespace UnbrandedTypeSpec.Models
             {
                 writer.WriteNull("requiredNullablePrimitive"u8);
             }
-            if (RequiredExtensibleEnum != null)
+            if ((RequiredExtensibleEnum != null))
             {
                 writer.WritePropertyName("requiredExtensibleEnum"u8);
                 writer.WriteStringValue(RequiredExtensibleEnum.Value.ToString());
@@ -52,7 +52,7 @@ namespace UnbrandedTypeSpec.Models
             {
                 writer.WriteNull("requiredExtensibleEnum"u8);
             }
-            if (RequiredFixedEnum != null)
+            if ((RequiredFixedEnum != null))
             {
                 writer.WritePropertyName("requiredFixedEnum"u8);
                 writer.WriteStringValue(RequiredFixedEnum.Value.ToSerialString());
@@ -61,7 +61,7 @@ namespace UnbrandedTypeSpec.Models
             {
                 writer.WriteNull("requiredFixedEnum"u8);
             }
-            if (options.Format != "W" && _additionalBinaryDataProperties != null)
+            if (((options.Format != "W") && (_additionalBinaryDataProperties != null)))
             {
                 foreach (var item in _additionalBinaryDataProperties)
                 {
@@ -78,24 +78,24 @@ namespace UnbrandedTypeSpec.Models
             }
         }
 
-        ModelWithRequiredNullableProperties IJsonModel<ModelWithRequiredNullableProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => JsonModelCreateCore(ref reader, options);
+        ModelWithRequiredNullableProperties IJsonModel<ModelWithRequiredNullableProperties>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((ModelWithRequiredNullableProperties)this.JsonModelCreateCore(ref reader, options));
 
         /// <param name="reader"> The JSON reader. </param>
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual ModelWithRequiredNullableProperties JsonModelCreateCore(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            string format = (options.Format == "W") ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;
+            if ((format != "J"))
             {
                 throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support reading '{format}' format.");
             }
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
+            return ModelWithRequiredNullableProperties.DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
         }
 
         internal static ModelWithRequiredNullableProperties DeserializeModelWithRequiredNullableProperties(JsonElement element, ModelReaderWriterOptions options)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            if ((element.ValueKind == JsonValueKind.Null))
             {
                 return null;
             }
@@ -107,7 +107,7 @@ namespace UnbrandedTypeSpec.Models
             {
                 if (prop.NameEquals("requiredNullablePrimitive"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         requiredNullablePrimitive = null;
                         continue;
@@ -117,7 +117,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("requiredExtensibleEnum"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         requiredExtensibleEnum = null;
                         continue;
@@ -127,7 +127,7 @@ namespace UnbrandedTypeSpec.Models
                 }
                 if (prop.NameEquals("requiredFixedEnum"u8))
                 {
-                    if (prop.Value.ValueKind == JsonValueKind.Null)
+                    if ((prop.Value.ValueKind == JsonValueKind.Null))
                     {
                         requiredFixedEnum = null;
                         continue;
@@ -135,7 +135,7 @@ namespace UnbrandedTypeSpec.Models
                     requiredFixedEnum = prop.Value.GetString().ToStringFixedEnum();
                     continue;
                 }
-                if (options.Format != "W")
+                if ((options.Format != "W"))
                 {
                     additionalBinaryDataProperties.Add(prop.Name, BinaryData.FromString(prop.Value.GetRawText()));
                 }
@@ -143,12 +143,12 @@ namespace UnbrandedTypeSpec.Models
             return new ModelWithRequiredNullableProperties(requiredNullablePrimitive, requiredExtensibleEnum, requiredFixedEnum, additionalBinaryDataProperties);
         }
 
-        BinaryData IPersistableModel<ModelWithRequiredNullableProperties>.Write(ModelReaderWriterOptions options) => PersistableModelWriteCore(options);
+        BinaryData IPersistableModel<ModelWithRequiredNullableProperties>.Write(ModelReaderWriterOptions options) => this.PersistableModelWriteCore(options);
 
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual BinaryData PersistableModelWriteCore(ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;
+            string format = (options.Format == "W") ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;
             switch (format)
             {
                 case "J":
@@ -158,19 +158,19 @@ namespace UnbrandedTypeSpec.Models
             }
         }
 
-        ModelWithRequiredNullableProperties IPersistableModel<ModelWithRequiredNullableProperties>.Create(BinaryData data, ModelReaderWriterOptions options) => PersistableModelCreateCore(data, options);
+        ModelWithRequiredNullableProperties IPersistableModel<ModelWithRequiredNullableProperties>.Create(BinaryData data, ModelReaderWriterOptions options) => ((ModelWithRequiredNullableProperties)this.PersistableModelCreateCore(data, options));
 
         /// <param name="data"> The data to parse. </param>
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual ModelWithRequiredNullableProperties PersistableModelCreateCore(BinaryData data, ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;
+            string format = (options.Format == "W") ? ((IPersistableModel<ModelWithRequiredNullableProperties>)this).GetFormatFromOptions(options) : options.Format;
             switch (format)
             {
                 case "J":
                     using (JsonDocument document = JsonDocument.Parse(data))
                     {
-                        return DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
+                        return ModelWithRequiredNullableProperties.DeserializeModelWithRequiredNullableProperties(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(ModelWithRequiredNullableProperties)} does not support reading '{options.Format}' format.");
@@ -182,7 +182,7 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="modelWithRequiredNullableProperties"> The <see cref="ModelWithRequiredNullableProperties"/> to serialize into <see cref="BinaryContent"/>. </param>
         public static implicit operator BinaryContent(ModelWithRequiredNullableProperties modelWithRequiredNullableProperties)
         {
-            if (modelWithRequiredNullableProperties == null)
+            if ((modelWithRequiredNullableProperties == null))
             {
                 return null;
             }
@@ -194,7 +194,7 @@ namespace UnbrandedTypeSpec.Models
         {
             using PipelineResponse response = result.GetRawResponse();
             using JsonDocument document = JsonDocument.Parse(response.Content);
-            return DeserializeModelWithRequiredNullableProperties(document.RootElement, ModelSerializationExtensions.WireOptions);
+            return ModelWithRequiredNullableProperties.DeserializeModelWithRequiredNullableProperties(document.RootElement, ModelSerializationExtensions.WireOptions);
         }
     }
 }

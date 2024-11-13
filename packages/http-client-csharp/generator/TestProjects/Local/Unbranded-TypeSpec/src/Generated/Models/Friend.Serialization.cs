@@ -21,7 +21,7 @@ namespace UnbrandedTypeSpec.Models
         void IJsonModel<Friend>.Write(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
             writer.WriteStartObject();
-            JsonModelWriteCore(writer, options);
+            this.JsonModelWriteCore(writer, options);
             writer.WriteEndObject();
         }
 
@@ -29,14 +29,14 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual void JsonModelWriteCore(Utf8JsonWriter writer, ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            string format = (options.Format == "W") ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
+            if ((format != "J"))
             {
                 throw new FormatException($"The model {nameof(Friend)} does not support writing '{format}' format.");
             }
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            if (options.Format != "W" && _additionalBinaryDataProperties != null)
+            if (((options.Format != "W") && (_additionalBinaryDataProperties != null)))
             {
                 foreach (var item in _additionalBinaryDataProperties)
                 {
@@ -53,24 +53,24 @@ namespace UnbrandedTypeSpec.Models
             }
         }
 
-        Friend IJsonModel<Friend>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => JsonModelCreateCore(ref reader, options);
+        Friend IJsonModel<Friend>.Create(ref Utf8JsonReader reader, ModelReaderWriterOptions options) => ((Friend)this.JsonModelCreateCore(ref reader, options));
 
         /// <param name="reader"> The JSON reader. </param>
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual Friend JsonModelCreateCore(ref Utf8JsonReader reader, ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
-            if (format != "J")
+            string format = (options.Format == "W") ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
+            if ((format != "J"))
             {
                 throw new FormatException($"The model {nameof(Friend)} does not support reading '{format}' format.");
             }
             using JsonDocument document = JsonDocument.ParseValue(ref reader);
-            return DeserializeFriend(document.RootElement, options);
+            return Friend.DeserializeFriend(document.RootElement, options);
         }
 
         internal static Friend DeserializeFriend(JsonElement element, ModelReaderWriterOptions options)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            if ((element.ValueKind == JsonValueKind.Null))
             {
                 return null;
             }
@@ -83,7 +83,7 @@ namespace UnbrandedTypeSpec.Models
                     name = prop.Value.GetString();
                     continue;
                 }
-                if (options.Format != "W")
+                if ((options.Format != "W"))
                 {
                     additionalBinaryDataProperties.Add(prop.Name, BinaryData.FromString(prop.Value.GetRawText()));
                 }
@@ -91,12 +91,12 @@ namespace UnbrandedTypeSpec.Models
             return new Friend(name, additionalBinaryDataProperties);
         }
 
-        BinaryData IPersistableModel<Friend>.Write(ModelReaderWriterOptions options) => PersistableModelWriteCore(options);
+        BinaryData IPersistableModel<Friend>.Write(ModelReaderWriterOptions options) => this.PersistableModelWriteCore(options);
 
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual BinaryData PersistableModelWriteCore(ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
+            string format = (options.Format == "W") ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
             switch (format)
             {
                 case "J":
@@ -106,19 +106,19 @@ namespace UnbrandedTypeSpec.Models
             }
         }
 
-        Friend IPersistableModel<Friend>.Create(BinaryData data, ModelReaderWriterOptions options) => PersistableModelCreateCore(data, options);
+        Friend IPersistableModel<Friend>.Create(BinaryData data, ModelReaderWriterOptions options) => ((Friend)this.PersistableModelCreateCore(data, options));
 
         /// <param name="data"> The data to parse. </param>
         /// <param name="options"> The client options for reading and writing models. </param>
         protected virtual Friend PersistableModelCreateCore(BinaryData data, ModelReaderWriterOptions options)
         {
-            string format = options.Format == "W" ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
+            string format = (options.Format == "W") ? ((IPersistableModel<Friend>)this).GetFormatFromOptions(options) : options.Format;
             switch (format)
             {
                 case "J":
                     using (JsonDocument document = JsonDocument.Parse(data))
                     {
-                        return DeserializeFriend(document.RootElement, options);
+                        return Friend.DeserializeFriend(document.RootElement, options);
                     }
                 default:
                     throw new FormatException($"The model {nameof(Friend)} does not support reading '{options.Format}' format.");
@@ -130,7 +130,7 @@ namespace UnbrandedTypeSpec.Models
         /// <param name="friend"> The <see cref="Friend"/> to serialize into <see cref="BinaryContent"/>. </param>
         public static implicit operator BinaryContent(Friend friend)
         {
-            if (friend == null)
+            if ((friend == null))
             {
                 return null;
             }
@@ -142,7 +142,7 @@ namespace UnbrandedTypeSpec.Models
         {
             using PipelineResponse response = result.GetRawResponse();
             using JsonDocument document = JsonDocument.Parse(response.Content);
-            return DeserializeFriend(document.RootElement, ModelSerializationExtensions.WireOptions);
+            return Friend.DeserializeFriend(document.RootElement, ModelSerializationExtensions.WireOptions);
         }
     }
 }

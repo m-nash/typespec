@@ -18,15 +18,15 @@ namespace UnbrandedTypeSpec.Models
 
         public static FloatFixedEnum ToFloatFixedEnum(this float value)
         {
-            if (value == 1.1F)
+            if ((value == 1.1F))
             {
                 return FloatFixedEnum.OneDotOne;
             }
-            if (value == 2.2F)
+            if ((value == 2.2F))
             {
                 return FloatFixedEnum.TwoDotTwo;
             }
-            if (value == 4.4F)
+            if ((value == 4.4F))
             {
                 return FloatFixedEnum.FourDotFour;
             }
