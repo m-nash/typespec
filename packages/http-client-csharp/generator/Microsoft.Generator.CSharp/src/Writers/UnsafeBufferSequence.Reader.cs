@@ -97,16 +97,16 @@ internal partial class UnsafeBufferSequence
 
         private void ReduceBuffer(ref UnsafeBufferSegment buffer, IEnumerable<string> namespaces, HashSet<string> types)
         {
+            const string global = "global::";
             var span = buffer.Array.AsSpan(0, buffer.Written);
-            var typeStartIndex = span.IndexOf("global::");
+            var typeStartIndex = span.IndexOf(global);
             int offset = 0;
-            List<(int, int)> shiftPairs = new List<(int, int)>();
+            List<(int Start, int Length)> shiftPairs = new List<(int, int)>();
             while (typeStartIndex != -1 && typeStartIndex < span.Length) //while there are more global:: to find
             {
-                shiftPairs.Add((offset + typeStartIndex, offset + typeStartIndex + 8));
-                typeStartIndex += 8 + offset; //skip past global::
+                shiftPairs.Add((offset + typeStartIndex, global.Length));
+                typeStartIndex += global.Length + offset; //skip past global::
 
-                //make sure we get an actual type not a static property or method
                 var end = ExtractTypeName(span, typeStartIndex);
                 string typeName = GetName(span, typeStartIndex, end);
 
@@ -125,8 +125,8 @@ internal partial class UnsafeBufferSequence
                         if (span[startWithoutOverlap] == '.')
                             startWithoutOverlap++;
                         string testName = overlap.IsEmpty
-                            ? $"global::{ns}.{GetName(span, startWithoutOverlap, end)}"
-                            : $"global::{nsSpan.Slice(0, overlap.Length)}.{GetName(span, startWithoutOverlap, end)}";
+                            ? $"{global}{ns}.{GetName(span, startWithoutOverlap, end)}"
+                            : $"{global}{nsSpan.Slice(0, overlap.Length)}.{GetName(span, startWithoutOverlap, end)}";
                         if (types.Contains(testName) || Type.GetType(testName, false) != null)
                         {
                             if (nsSpan.StartsWith("System", StringComparison.Ordinal))
@@ -149,24 +149,24 @@ internal partial class UnsafeBufferSequence
                     }
                     nextStart = PopNextSegment(span, nextStart, end);
                 } while (nextStart < end); //pop the parts of the name
-                shiftPairs.Add((typeStartIndex, endShift));
-                shiftPairs.Add((end + 1, end + 4));
+                shiftPairs.Add((typeStartIndex, endShift - typeStartIndex));
+                shiftPairs.Add((end + 1, 3)); //length of sentinel $$$
                 offset = end + 4;
-                typeStartIndex = span.Slice(offset).IndexOf("global::");
+                typeStartIndex = span.Slice(offset).IndexOf(global);
             }
 
             if (shiftPairs.Count > 0)
             {
                 var pairIndex = 1;
                 var first = shiftPairs[0];
-                var next = shiftPairs.Count > pairIndex ? shiftPairs[pairIndex] : (0, 0);
-                var delta = first.Item2 - first.Item1;
+                (int Start, int Length) next = shiftPairs.Count > pairIndex ? shiftPairs[pairIndex] : (0, 0);
+                var delta = first.Length;
                 span = buffer.Array.AsSpan(0, buffer.Written);
-                for (int i = first.Item1; i + delta < span.Length; i++)
+                for (int i = first.Start; i + delta < span.Length; i++)
                 {
-                    while (i + delta == next.Item1)
+                    while (i + delta == next.Start)
                     {
-                        delta += next.Item2 - next.Item1;
+                        delta += next.Length;
                         next = shiftPairs.Count > ++pairIndex ? shiftPairs[pairIndex] : (0, 0);
                     }
                     if (i + delta >= span.Length)
@@ -178,7 +178,7 @@ internal partial class UnsafeBufferSequence
             int removed = 0;
             foreach (var pair in shiftPairs)
             {
-                removed += pair.Item2 - pair.Item1;
+                removed += pair.Length;
             }
             buffer.Written -= removed;
         }
