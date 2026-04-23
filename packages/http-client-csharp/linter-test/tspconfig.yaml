@@ -1,0 +1,7 @@
+imports:
+  - ./client.tsp
+emit:
+  - "@typespec/http-client-csharp"
+linter:
+  extends:
+    - "@typespec/http-client-csharp/recommended"

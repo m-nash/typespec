@@ -2,6 +2,7 @@ import type { TypeSpecHttpClientCSharpDecorators } from "../../generated-defs/Ty
 import { $dynamicModel } from "./lib/decorators.js";
 
 export { $lib } from "./lib/lib.js";
+export { $linter } from "./linter.js";
 
 /** @internal */
 export const $decorators = {

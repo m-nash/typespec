@@ -21,6 +21,7 @@ export const enum CommandName {
 export const enum CodeActionCommand {
   OpenUrl = "typespec.openUrl",
   NpmInstallPackage = "typespec.npmInstallPackage",
+  SuggestModelName = "typespec.suggestModelName",
 }
 
 export type RestartServerCommandResult = Result<TspLanguageClient>;

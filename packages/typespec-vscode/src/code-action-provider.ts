@@ -4,6 +4,7 @@ import logger from "./log/logger.js";
 import { getDirectoryPath, isPathAbsolute } from "./path-utils.js";
 import { CodeActionCommand } from "./types.js";
 import { searchAndLoadPackageJson } from "./utils.js";
+import { isSingleWordModelNameDiagnostic } from "./vscode-cmd/suggest-model-name/suggest-model-name.js";
 
 export function createCodeActionProvider() {
   return vscode.languages.registerCodeActionsProvider(
@@ -88,6 +89,54 @@ export class TypeSpecCodeActionProvider implements vscode.CodeActionProvider {
             packageJsonFolder,
           ),
         );
+      }
+      // AI-powered rename for single-word model names (C# emitter linter rule)
+      if (isSingleWordModelNameDiagnostic(diagnostic)) {
+        const isClientNameOverride = diagnostic.message.includes("Client name override");
+        const modelName = _document.getText(diagnostic.range);
+
+        if (isClientNameOverride) {
+          // Diagnostic is on a @@clientName line — only offer to update the name
+          const updateAction = new vscode.CodeAction(
+            `Update name with AI suggestions...`,
+            vscode.CodeActionKind.QuickFix,
+          );
+          updateAction.command = {
+            command: CodeActionCommand.SuggestModelName,
+            title: `Update client name override`,
+            arguments: [_document, diagnostic, "updateClientName"],
+          };
+          updateAction.diagnostics = [diagnostic];
+          updateAction.isPreferred = true;
+          actions.unshift(updateAction);
+        } else {
+          // Diagnostic is on the model declaration — offer both approaches
+          const directAction = new vscode.CodeAction(
+            `Rename '${modelName}' directly (AI suggestions)...`,
+            vscode.CodeActionKind.QuickFix,
+          );
+          directAction.command = {
+            command: CodeActionCommand.SuggestModelName,
+            title: `Rename '${modelName}' directly`,
+            arguments: [_document, diagnostic, "direct"],
+          };
+          directAction.diagnostics = [diagnostic];
+          directAction.isPreferred = true;
+          actions.unshift(directAction);
+
+          const clientNameAction = new vscode.CodeAction(
+            `Override '${modelName}' via @@clientName (AI suggestions)...`,
+            vscode.CodeActionKind.QuickFix,
+          );
+          clientNameAction.command = {
+            command: CodeActionCommand.SuggestModelName,
+            title: `Override '${modelName}' via @@clientName`,
+            arguments: [_document, diagnostic, "clientName"],
+          };
+          clientNameAction.diagnostics = [diagnostic];
+          clientNameAction.isPreferred = true;
+          actions.splice(1, 0, clientNameAction);
+        }
       }
     }
 

@@ -1,0 +1,9 @@
+{
+  "name": "linter-test",
+  "private": true,
+  "dependencies": {
+    "@typespec/compiler": "1.8.0",
+    "@typespec/http": "1.8.0",
+    "@typespec/http-client-csharp": "file:.."
+  }
+}

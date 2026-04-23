@@ -111,6 +111,70 @@ export async function activate(context: ExtensionContext) {
         }),
       );
 
+      context.subscriptions.push(
+        commands.registerCommand(
+          CodeActionCommand.SuggestModelName,
+          async (
+            document: vscode.TextDocument,
+            diagnostic: vscode.Diagnostic,
+            approach: string,
+          ) => {
+            const { suggestModelName } = await import(
+              "./vscode-cmd/suggest-model-name/suggest-model-name.js"
+            );
+            await suggestModelName(document, diagnostic, approach as "direct" | "clientName");
+          },
+        ),
+      );
+
+      // When client.tsp is deleted, remove its import from tspconfig.yaml
+      // and nudge open .tsp files to trigger recompilation
+      const clientTspWatcher = vscode.workspace.createFileSystemWatcher("**/client.tsp");
+      clientTspWatcher.onDidDelete(async (uri) => {
+        const dir = vscode.Uri.joinPath(uri, "..");
+        const tspConfigUri = vscode.Uri.joinPath(dir, "tspconfig.yaml");
+        try {
+          const raw = await vscode.workspace.fs.readFile(tspConfigUri);
+          let content = new TextDecoder().decode(raw);
+          const updated = content.replace(/\n\s*-\s*\.\/client\.tsp\s*/g, "\n");
+          const cleaned = updated.replace(/^imports:\s*\n(?=\S|\s*$)/m, "");
+          if (cleaned !== content) {
+            await vscode.workspace.fs.writeFile(tspConfigUri, new TextEncoder().encode(cleaned));
+          }
+        } catch {
+          // tspconfig.yaml doesn't exist or can't be read
+        }
+
+        // Nudge open .tsp editors to trigger recompilation after a short delay
+        setTimeout(async () => {
+          for (const editor of vscode.window.visibleTextEditors) {
+            if (
+              editor.document.languageId === "typespec" &&
+              !editor.document.uri.path.endsWith("client.tsp")
+            ) {
+              // Append and immediately remove a comment to trigger a content change
+              const lastLine = editor.document.lineCount - 1;
+              const lastChar = editor.document.lineAt(lastLine).text.length;
+              const endPos = new vscode.Position(lastLine, lastChar);
+              const applied = await editor.edit(
+                (eb) => eb.insert(endPos, " "),
+                { undoStopBefore: false, undoStopAfter: false },
+              );
+              if (applied) {
+                await editor.edit(
+                  (eb) => {
+                    const newLastChar = editor.document.lineAt(lastLine).text.length;
+                    eb.delete(new vscode.Range(lastLine, newLastChar - 1, lastLine, newLastChar));
+                  },
+                  { undoStopBefore: false, undoStopAfter: false },
+                );
+              }
+            }
+          }
+        }, 500);
+      });
+      context.subscriptions.push(clientTspWatcher);
+
       /* emit command. */
       context.subscriptions.push(
         commands.registerCommand(CommandName.EmitCode, async (uri: vscode.Uri) => {
